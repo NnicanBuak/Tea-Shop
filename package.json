@@ -9,5 +9,13 @@
   },
   "devDependencies": {
     "nuxt": "^3.3.1"
+  },
+  "dependencies": {
+    "@dargmuesli/nuxt-cookie-control": "^5.2.0",
+    "@element-plus/nuxt": "^1.0.4",
+    "@nuxt/image": "^0.7.1",
+    "@nuxtjs/google-fonts": "^3.0.0",
+    "nuxt-swiper": "^1.0.1",
+    "nuxt-typed-router": "^3.0.6"
   }
 }
