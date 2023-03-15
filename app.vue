@@ -3,48 +3,64 @@
 	<main>
 		<section class="container h-screen grid">
 			<aside
-				class="h-full w-full row-start-1 row-end-auto col-start-1 col-end-auto flex space-between p-20"
+				class="h-screen w-full grid gap-x-60 row-start-1 row-end-1 col-start-1 col-end-1 grid-cols-2 grid-rows-3 p-20"
 			>
-				<div id="logo"></div>
-				<div id="title">
-					<nav></nav>
-					<nav></nav>
-					<h1 class="text-6xl text-right flex flex-col">
+				<img
+					class="h-full row-start-1 col-start-1 col-end-1"
+					id="logo"
+					style="grid-row-end: -1"
+					src="/img/logo.png"
+				/>
+				<nav class="flex flex-col row-start-1 col-start-2">
+					<div class="flex">
+						<Icon
+							class="text-lime-800"
+							name="material-symbols:search"
+							size="32"
+						/>
+						<Icon
+							class="text-lime-800"
+							name="material-symbols:shopping-bag-outline"
+							size="32"
+						/>
+					</div>
+					<div class="flex">
+						<span>Магазин</span><span>Скидки(Постоянным клиентам?)</span
+						><span>О нас</span><span>Контакты</span>
+					</div>
+				</nav>
+				<div class="row-start-2 row-end-3 col-start-2 col-end-2" id="title">
+					<h1 class="text-6xl flex flex-col">
 						<span>Аромат&nbsp;на</span>
 						<span>каждый&nbsp;день</span>
 					</h1>
 					<button
-						class="float-right px-6 py-2 border-2 border-black text-3xl rounded-full"
+						class="px-6 py-2 border-2 border-black text-3xl rounded-full"
 						type="button"
 					>
 						<span>выбрать</span>
 					</button>
 				</div>
 			</aside>
-			<div
-				class="swiper-container relative row-start-1 row-end-auto col-start-1 col-end-auto"
+			<Swiper
+				class="h-full w-full row-start-1 row-end-1 col-start-1 col-end-1"
+				style="z-index: -2"
+				:modules="[SwiperAutoplay]"
+				:slides-per-view="1"
+				:loop="true"
+				:autoplay="{
+					delay: 15000,
+					disableOnInteraction: true,
+				}"
 			>
-				<Swiper
-					:modules="[SwiperAutoplay]"
-					:slides-per-view="1"
-					:loop="true"
-					:autoplay="{
-						delay: 15000,
-						disableOnInteraction: true,
-					}"
-				>
-					<SwiperSlide
+				<SwiperSlide class="h-full w-full" v-for="slide in slides" :key="slide">
+					<div
 						class="h-full w-full"
-						v-for="slide in slides"
-						:key="slide"
-					>
-						<div
-							class="h-full w-full"
-							:style="{ background: 'url(' + slide + ')' }"
-						></div>
-					</SwiperSlide>
-				</Swiper>
-			</div>
+						style="background-position: bottom"
+						:style="{ background: 'url(' + slide + ')' }"
+					></div>
+				</SwiperSlide>
+			</Swiper>
 		</section>
 	</main>
 	<footer></footer>
@@ -54,6 +70,9 @@
 	:root {
 		--primary-color: #bfd400;
 	}
+	img {
+		width: 100%;
+	}
 	section {
 		margin-bottom: 15rem;
 	}
@@ -61,23 +80,23 @@
 		color: var(--primary-color);
 		font-family: "Montserrat", sans-serif;
 		font-weight: bold;
+		margin-bottom: 3rem;
 	}
 	p {
-		font-family: sans-serif;
+		font-family: Arial, Helvetica, sans-serif;
 	}
 	button:focus-visible {
 		outline: none;
 	}
-	button > span {
-		transition: all 0.2s ease-out;
-	}
-	button:hover > span {
-		transform: translateY(-0.5rem);
+	button:hover,
+	button:focus-visible {
+		text-transform: uppercase;
+		letter-spacing: -0.058em;
 	}
 	button::after {
 		content: "";
 		position: absolute;
-		transform: translate3D(-8.4rem, -0.1rem, 0);
+		transform: translate3D(-8.4rem, -0.3rem, 0);
 		background-color: var(--primary-color);
 		width: 167px;
 		height: 56px;
@@ -92,11 +111,8 @@
 	}
 	button:active::after {
 		transition: all 0.1s ease-out;
-		transform: translate3d(-8.05rem, -0.6rem, 0) scale(1.25, 1.25);
-		width: 142px;
-	}
-	#title > *:not(:last-child) {
-		margin-bottom: 4rem;
+		transform: translate3d(-8.25rem, -0.63rem, 0) scale(1.2, 1.2);
+		width: 149px;
 	}
 </style>
 
