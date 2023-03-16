@@ -1,3 +1,7 @@
+<script setup>
+	definePageMeta({});
+</script>
+
 <template>
 	<header></header>
 	<main>
