@@ -1,12 +1,11 @@
 <script setup>
-	let hasHeader = false;
-	let hasFooter = false;
+	const route = useRoute();
 </script>
 
 <template>
 	<div>
-		<header v-if="hasHeader">HeaderHeaderHeaderHeaderHeader</header>
+		<header v-if="route.meta.useHeader">HeaderHeaderHeaderHeaderHeader</header>
 		<slot />
-		<footer v-if="hasFooter">FooterFooterFooterFooterFooter</footer>
+		<footer v-if="route.meta.useFooter">FooterFooterFooterFooterFooter</footer>
 	</div>
 </template>

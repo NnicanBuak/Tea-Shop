@@ -1,7 +1,8 @@
 <script setup>
 	definePageMeta({
-		hasHeader: false,
-		hasFooter: true,
+		layout: "main",
+		useHeader: false,
+		useFooter: true,
 	});
 </script>
 
@@ -12,12 +13,12 @@
 				class="h-screen w-full sm:flex md:grid md:gap-x-22 xl:gap-x-60 row-start-1 row-end-1 col-start-1 col-end-1 grid-cols-2 grid-rows-3 p-20"
 			>
 				<img
-					class="sm:hidden md:block h-full md:row-start-1 md:col-start-1 md:col-end-1"
+					class="hidden md:block h-full md:row-start-1 md:col-start-1 md:col-end-1"
 					id="logo"
 					style="grid-row-end: -1"
 					src="/img/logo.png"
 				/>
-				<nav class="sm:hidden flex flex-col md:row-start-1 md:col-start-2">
+				<nav class="hidden flex flex-col md:row-start-1 md:col-start-2">
 					<div class="flex">
 						<NuxtLink to="/shop/catalog">
 							<Icon
