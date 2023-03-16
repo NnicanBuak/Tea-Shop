@@ -1,7 +1,8 @@
 <script setup>
 	definePageMeta({
-		hasHeader: false,
-		hasFooter: true,
+		layout: "main",
+		useHeader: false,
+		useFooter: true,
 	});
 </script>
 

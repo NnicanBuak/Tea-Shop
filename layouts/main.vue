@@ -4,8 +4,8 @@
 
 <template>
 	<div>
-		<header v-if="route.meta.useHeader">HeaderHeaderHeaderHeaderHeader</header>
+		<header v-if="route.meta.hasHeader">HeaderHeaderHeaderHeaderHeader</header>
 		<slot />
-		<footer v-if="route.meta.useFooter">FooterFooterFooterFooterFooter</footer>
+		<footer v-if="route.meta.hasFooter">FooterFooterFooterFooterFooter</footer>
 	</div>
 </template>
