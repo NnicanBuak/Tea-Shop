@@ -3,11 +3,10 @@
 		layout: "main",
 		useHeader: false,
 		useFooter: true,
+		hasNewsletterBlock: false,
 	});
 </script>
 
 <template>
-	<div>
-		<ContentDoc path="/sales" />
-	</div>
+	<ContentDoc path="/sales" />
 </template>

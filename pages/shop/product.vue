@@ -3,6 +3,7 @@
 		layout: "main",
 		useHeader: false,
 		useFooter: true,
+		hasNewsletterBlock: false,
 	});
 </script>
 

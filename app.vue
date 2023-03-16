@@ -21,9 +21,6 @@
 	img {
 		width: 100%;
 	}
-	section {
-		margin-bottom: 15rem;
-	}
 	h1 {
 		font-family: "Montserrat", sans-serif;
 		font-weight: bold;
