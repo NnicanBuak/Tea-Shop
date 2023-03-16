@@ -78,10 +78,13 @@
 			}"
 		>
 			<SwiperSlide
-				class="h-full w-full bg-bottom"
+				class="h-full w-full"
 				v-for="slide in slides"
 				:key="slide"
-				:style="{ background: 'url(' + slide + ')' }"
+				:style="{
+					background:
+						'url(' + slide + ')' + ' ' + 'space' + ' ' + 'bottom left 41%',
+				}"
 			>
 			</SwiperSlide>
 		</Swiper>
