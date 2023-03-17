@@ -94,7 +94,13 @@
 				:key="slide"
 				:style="{
 					background:
-						'url(' + slide + ')' + ' ' + 'cover' + ' ' + 'bottom left 41%',
+						'url(' +
+						slide +
+						')' +
+						' ' +
+						'no-repeat' +
+						' ' +
+						'41% 80% / 100% 200%',
 				}"
 			>
 			</SwiperSlide>
