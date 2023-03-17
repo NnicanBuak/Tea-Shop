@@ -8,17 +8,30 @@
 </script>
 
 <template>
-	<section class="container mb-40 h-screen grid overflow-hidden">
+	<section class="container-fluid mb-40 h-screen grid overflow-hidden">
 		<aside
-			class="h-screen w-full sm:flex md:grid md:gap-x-22 xl:gap-x-60 row-start-1 row-end-1 col-start-1 col-end-1 grid-cols-2 grid-rows-3 p-20"
+			class="h-screen container-xl flex gap-4 flex-col justify-around items-center lg:grid grid-cols-2 grid-rows-3 lg:gap-x-22 xl:gap-x-60 p-14 max-lg:py-32 lg:p-20 row-[1/-1] col-[1/-1]"
 		>
 			<img
-				class="hidden md:block h-full md:row-start-1 md:col-start-1 md:col-end-1"
+				class="hidden lg:block h-full lg:row-[1/-1] lg:col-[1/1]"
 				id="logo"
-				style="grid-row-end: -1"
 				src="/img/logo.png"
+				ast=""
 			/>
-			<nav class="hidden flex flex-col md:row-start-1 md:col-start-2">
+			<div class="flex flex-col gap-16" id="alt-title">
+				<img
+					class="block lg:hidden w-[70vw]"
+					id="logo2"
+					src="/img/logo2.png"
+					alt=""
+				/>
+				<h3
+					class="block lg:hidden w-full text-[4vw] whitespace-nowrap text-center"
+				>
+					порой хочется начать день не с кофе
+				</h3>
+			</div>
+			<nav class="hidden flex flex-col md:row-[1/1] md:col-[2/2]">
 				<div class="flex">
 					<NuxtLink to="/shop/catalog">
 						<Icon
@@ -50,24 +63,22 @@
 					</NuxtLink>
 				</div>
 			</nav>
-			<div
-				class="hidden sm:block row-start-2 row-end-3 col-start-2 col-end-2"
-				id="title"
-			>
-				<h1 class="text-6xl flex flex-col">
+			<div class="max-lg:w-full row-[2/3] col-[2/2]" id="title">
+				<h1 class="hidden lg:block text-6xl flex flex-col">
 					<span>Аромат&nbsp;на</span>
 					<span>каждый&nbsp;день</span>
 				</h1>
 				<button
-					class="px-6 py-2 border-2 border-black text-3xl rounded-full"
+					class="max-lg:w-full lg:px-4 py-2 transition-all border-0 hover:border-4 border-black text-primary hover:text-black text-[6vw] lg:text-4xl font-bold rounded-full"
 					type="button"
 				>
 					<span>выбрать</span>
 				</button>
 			</div>
 		</aside>
+		<!-- применение тега style вместо tailwindcss в данном случае исключение из-за изначально заданного значения z-index библиотекой -->
 		<Swiper
-			class="h-full w-full row-start-1 row-end-1 col-start-1 col-end-1"
+			class="h-full w-full row-[1/-1] col-[1/-1]"
 			style="z-index: -20"
 			:modules="[SwiperAutoplay]"
 			:slides-per-view="1"
@@ -83,7 +94,7 @@
 				:key="slide"
 				:style="{
 					background:
-						'url(' + slide + ')' + ' ' + 'space' + ' ' + 'bottom left 41%',
+						'url(' + slide + ')' + ' ' + 'cover' + ' ' + 'bottom left 41%',
 				}"
 			>
 			</SwiperSlide>
