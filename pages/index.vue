@@ -64,7 +64,7 @@
 				</div>
 			</nav>
 			<div class="max-lg:w-full row-[2/3] col-[2/2]" id="title">
-				<h1 class="hidden lg:block text-6xl flex flex-col">
+				<h1 class="hidden lg:flex text-6xl flex-col">
 					<span>Аромат&nbsp;на</span>
 					<span>каждый&nbsp;день</span>
 				</h1>
