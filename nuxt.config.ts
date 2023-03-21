@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/image-edge', '@nuxt/content', '@nuxtjs/tailwindcss', 'nuxt-icon', '@nuxtjs/google-fonts', '@element-plus/nuxt', 'nuxt-swiper', '@nuxtjs/html-validator'],
   plugins: [{ src: '~/plugins/products.js', ssr: false }, { src: '~/plugins/isCursorAviable.js' }],
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
   icon: {
     size: '32px',
     class: 'icon',
