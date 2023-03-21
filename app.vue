@@ -3,12 +3,6 @@
 </script>
 
 <template>
-	<ClientOnly>
-		<div
-			class="-z-10 absolute top-0 left-0 h-6 w-6 bg-primary rounded-full pointer-events-none"
-			id="cursor"
-		></div>
-	</ClientOnly>
 	<div>
 		<NuxtLayout :name="route.meta.layout">
 			<NuxtPage></NuxtPage>
@@ -19,7 +13,10 @@
 <style>
 	@media (pointer: fine) {
 		/* Стили для устройств с мышью */
-		body {
+		#hero {
+			cursor: none;
+		}
+		#hero button {
 			cursor: none;
 		}
 	}
@@ -46,32 +43,6 @@
 	button:hover,
 	button:focus-visible {
 		text-transform: uppercase;
-		letter-spacing: -0.06em;
+		letter-spacing: -0.15vw;
 	}
 </style>
-
-<script>
-	export default {
-		mounted() {
-			if (process.client) {
-				this.setCursor();
-			}
-		},
-		methods: {
-			setCursor() {
-				const cursor = this.$refs.cursor;
-				if (!cursor) return;
-
-				const offsetX = cursor.offsetWidth / 2;
-				const offsetY = cursor.offsetHeight / 2;
-
-				const setCursorPos = (e) => {
-					cursor.style.left = e.clientX - offsetX + "px";
-					cursor.style.top = e.clientY - offsetY + "px";
-				};
-
-				this.$el.addEventListener("mousemove", _.throttle(setCursorPos, 10));
-			},
-		},
-	};
-</script>

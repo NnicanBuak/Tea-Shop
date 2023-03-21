@@ -1,0 +1,20 @@
+[
+  {
+    "status": "aviable",
+    "category": "Фруктовый чай",
+    "price": "10",
+    "currency": "rub",
+    "name": "Манговый чай",
+    "nameHero": "Мангового чая",
+    "description": "Манговый"
+  },
+  {
+    "status": "aviable",
+    "category": "Фруктовый чай",
+    "price": "10",
+    "currency": "rub",
+    "name": "Манговый чай",
+    "nameHero": "НЕ Мангового чая",
+    "description": "Манговый"
+  }
+]
