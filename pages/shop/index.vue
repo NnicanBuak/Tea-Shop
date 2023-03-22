@@ -83,14 +83,19 @@
 							чая
 						</span>
 						<button
-							class="inline p-2 font-bold text-md text-transparent bg-clip-text bg-gradient-to-r rounded-full"
-							:class="
-								'from-' +
-								randomProduct.gradientColorFrom +
-								' ' +
-								'to-' +
-								randomProduct.gradientColorTo
-							"
+							class="inline p-2 font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r rounded-full"
+							:class="{
+								'from-yellow-300 to-yellow-500':
+									randomProduct.variety === 'Зелёный',
+								'from-white to-gray-200': randomProduct.variety === 'Белый',
+								'from-green-400 to-green-800':
+									randomProduct.variety === 'Травянной',
+								'from-yellow-300 to-yellow-400':
+									randomProduct.variety === 'Улун',
+								'from-orange-400 to-orange-600':
+									randomProduct.variety === 'Чёрный',
+								'from-red-900 to-gray-900': randomProduct.variety === 'Пуэр',
+							}"
 						>
 							<span>{{ randomProduct.shortName }}</span>
 						</button>
@@ -148,20 +153,19 @@
 <script>
 	export default {
 		name: 'Main',
+		data() {
+			return { sliderImages: sliderImages, randomProduct: randomProduct }
+		},
 		async asyncData() {
 			const images = await this.$glob(
 				'~/public/img/slider/*.{jpg,jpeg,png,gif}',
 			)
 			const sliderImages = images.map((image) => image.default)
-			return { sliderImages }
-		},
-		data() {
-			return {
-				randomProduct:
-					this.$products[Math.floor(Math.random() * this.$products.length)],
-			}
-		},
 
+			const randomProduct =
+				this.$products[Math.floor(Math.random() * this.$products.length)]
+			return { sliderImages, randomProduct }
+		},
 		mounted() {
 			if (this.isCursorAviable) {
 				this.useCustomCursor()

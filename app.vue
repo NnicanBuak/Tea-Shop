@@ -1,5 +1,5 @@
 <script setup>
-	const route = useRoute();
+	const route = useRoute()
 </script>
 
 <template>
@@ -13,7 +13,8 @@
 <style>
 	@media (pointer: fine) {
 		/* Стили для устройств с мышью */
-		#hero {
+		#hero,
+		a {
 			cursor: none;
 		}
 		#hero button {
@@ -24,7 +25,7 @@
 		width: 100%;
 	}
 	h1 {
-		font-family: "Montserrat", sans-serif;
+		font-family: 'Montserrat', sans-serif;
 	}
 	p {
 		font-family: Arial, Helvetica, sans-serif;

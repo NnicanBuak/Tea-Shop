@@ -88,11 +88,31 @@ export default defineNuxtConfig({
 	},
 	tailwindcss: {
 		purge: {
+			enable: true,
 			content: ['./src/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
 			options: {
 				whitelist: [
 					...Object.entries(colors).flatMap(([name, values]) =>
-						Object.entries(values).map(([level, value]) => {
+						Object.entries(values).map(({ level }) => {
+							switch (name) {
+								case 'lightBlue':
+									name = 'sky'
+									break
+								case 'warmGray':
+									name = 'stone'
+									break
+								case 'trueGray':
+									name = 'neutral'
+									break
+								case 'coolGray':
+									name = 'gray'
+									break
+								case 'blueGray':
+									name = 'slate'
+									break
+								default:
+									break
+							}
 							if (level === 'DEFAULT') {
 								return [`from-${name}`, `to-${name}`]
 							}
