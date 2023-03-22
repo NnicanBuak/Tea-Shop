@@ -1,10 +1,10 @@
 <script setup>
 	definePageMeta({
-		layout: "main",
+		layout: 'main',
 		hasHeader: false,
 		hasFooter: true,
 		hasNewsletterBlock: true,
-	});
+	})
 </script>
 
 <template>
@@ -17,64 +17,85 @@
 			ref="cursor"
 		></div>
 		<aside
-			class="h-screen container-xl flex gap-4 flex-col justify-around items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 max-lg:py-32 p-12 lg:p-16 xl:p-20 row-[1/-1] col-[1/-1]"
+			class="h-screen container-xl flex gap-4 flex-col justify-around items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 max-lg:py-32 p-8 lg:p-16 xl:p-20 row-[1/-1] col-[1/-1]"
 		>
 			<nav class="hidden lg:block flex flex-col lg:row-[1/1] lg:col-[2/2]">
 				<div class="flex">
 					<NuxtLink to="/shop/catalog">
-						<Icon
-							class="text-lime-800"
-							name="material-symbols:search"
-							size="32"
-						/>
+						<button type="button">
+							<Icon
+								class="text-secondary"
+								name="material-symbols:search"
+								size="32"
+							/>
+						</button>
 					</NuxtLink>
 					<NuxtLink to="">
-						<Icon
-							class="text-lime-800"
-							name="material-symbols:shopping-bag-outline"
-							size="32"
-						/>
+						<button type="button">
+							<Icon
+								class="text-secondary"
+								name="material-symbols:shopping-bag-outline"
+								size="32"
+							/>
+						</button>
 					</NuxtLink>
 				</div>
 				<div class="flex">
 					<NuxtLink to="/">
-						<span><b>Магазин</b></span>
+						<button type="button">
+							<span><b>Магазин</b></span>
+						</button>
 					</NuxtLink>
 					<NuxtLink to="/sales">
-						<span>Скидки</span>
+						<button type="button">
+							<span>Скидки</span>
+						</button>
 					</NuxtLink>
 					<NuxtLink to="/about">
-						<span>О нас</span>
+						<button type="button">
+							<span>О нас</span>
+						</button>
 					</NuxtLink>
 					<NuxtLink to="/contacts">
-						<span>Контакты</span>
+						<button type="button">
+							<span>Контакты</span>
+						</button>
 					</NuxtLink>
 				</div>
 			</nav>
-			<nuxt-img
+			<nuxt-picture
 				class="hidden lg:block h-full w-fit self-center lg:row-[1/-1] lg:col-[1/1]"
-				id="logo"
-				src="/img/logo-16 1.png"
+				id="alt-logo"
+				src="/img/logo-14.svg"
 				alt=""
 			/>
 			<div class="flex flex-col justify-center items-center gap-4" id="title">
-				<nuxt-img
+				<nuxt-picture
 					class="block lg:hidden w-[75vw]"
-					id="logo2"
-					src="/img/logo2.png"
+					id="logo"
+					src="/img/logo-10.svg"
 					alt=""
 				/>
-				<h3 class="block lg:hidden w-full text-[4vw] text-center">
-					<span class="text-white mix-blend-difference">
-						Порой&nbsp;просто&nbsp;хочется&nbsp;начать&nbsp;день&nbsp;с&nbsp;чашечки
-					</span>
-					<div class="py-6">
-						<span
-							class="px-6 py-3 font-bold text-md text-secondary2 bg-primary2 rounded-full"
-							>{{ randomProduct.nameHero }}</span
+				<NuxtLink to="/shop/product">
+					<h3 class="block lg:hidden w-full text-[4.1vw] text-center">
+						<span class="mb-4 text-black mix-blend-difference">
+							Порой&nbsp;просто&nbsp;хочется&nbsp;начать&nbsp;день&nbsp;с&nbsp;чашечки
+							чая
+						</span>
+						<button
+							class="inline p-2 font-bold text-md text-transparent bg-clip-text bg-gradient-to-r rounded-full"
+							:class="
+								'from-' +
+								randomProduct.gradientColorFrom +
+								' ' +
+								'to-' +
+								randomProduct.gradientColorTo
+							"
 						>
-					</div>
-				</h3>
+							<span>{{ randomProduct.shortName }}</span>
+						</button>
+					</h3>
+				</NuxtLink>
 			</div>
 			<div
 				class="max-lg:w-full lg:h-full lg:row-[2/-1] lg:col-[2/2]"
@@ -86,14 +107,15 @@
 					<span>Аромат&nbsp;на</span>
 					<span>каждый&nbsp;день</span>
 				</h1>
-				<button
-					class="lg:absolute max-lg:w-full hover:px-4 focus-visible:px-4 py-2 transition border-0 hover:border-[3px] focus-visible:border-[3px] border-black text-black text-[6vw] lg:text-4xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full focus-visible:bg-primary"
-					type="button"
-					data-pointer-type="highlight"
-				>
-					<span class="hidden lg:inline">выбрать</span>
-					<span class="inline lg:hidden">хочу</span>
-				</button>
+				<NuxtLink to="/shop/catalog">
+					<button
+						class="lg:absolute max-lg:w-full hover:px-4 transition-all focus-visible:px-4 py-2 transition border-0 hover:border-[3px] focus-visible:border-[3px] border-black text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full focus-visible:bg-primary"
+						type="button"
+						data-pointer-type="highlight"
+					>
+						<span>выбрать чай</span>
+					</button>
+				</NuxtLink>
 			</div>
 		</aside>
 		<!-- применение тега style вместо tailwindcss в данном случае исключение из-за изначально заданного значения z-index библиотекой -->
@@ -125,47 +147,47 @@
 
 <script>
 	export default {
-		name: "Main",
+		name: 'Main',
 		async asyncData() {
 			const images = await this.$glob(
-				"~/public/img/slider/*.{jpg,jpeg,png,gif}"
-			);
-			const sliderImages = images.map((image) => image.default);
-			return { sliderImages };
+				'~/public/img/slider/*.{jpg,jpeg,png,gif}',
+			)
+			const sliderImages = images.map((image) => image.default)
+			return { sliderImages }
 		},
 		data() {
 			return {
 				randomProduct:
 					this.$products[Math.floor(Math.random() * this.$products.length)],
-			};
+			}
 		},
 
 		mounted() {
 			if (this.isCursorAviable) {
-				this.useCustomCursor();
+				this.useCustomCursor()
 			}
 		},
 		methods: {
 			useCustomCursor() {
-				const cursor = this.$refs.cursor;
+				const cursor = this.$refs.cursor
 				if (cursor) {
-					const offsetX = cursor.offsetWidth / 2;
-					const offsetY = cursor.offsetHeight / 2;
+					const offsetX = cursor.offsetWidth / 2
+					const offsetY = cursor.offsetHeight / 2
 
 					const setCursorPos = (e) => {
 						requestAnimationFrame(() => {
-							const x = e.clientX - offsetX;
-							const y = e.clientY + window.scrollY - offsetY;
-							const maxY = document.body.clientHeight - cursor.offsetHeight;
+							const x = e.clientX - offsetX
+							const y = e.clientY + window.scrollY - offsetY
+							const maxY = document.body.clientHeight - cursor.offsetHeight
 
-							cursor.style.left = `${x}px`;
-							cursor.style.top = `${Math.min(y, maxY)}px`;
-						});
-					};
+							cursor.style.left = `${x}px`
+							cursor.style.top = `${Math.min(y, maxY)}px`
+						})
+					}
 
-					window.addEventListener("mousemove", setCursorPos);
+					window.addEventListener('mousemove', setCursorPos)
 				}
 			},
 		},
-	};
+	}
 </script>
