@@ -22,17 +22,20 @@ export default defineNuxtConfig({
   },
   image: {
     placeholder: {
-      format: 'png',
-      width: 20,
-      height: 20,
+      format: 'webp',
+      width: 10,
+      height: 10,
       fit: 'cover',
       quality: 100,
-      webp: false,
+      webp: true,
       generate: {
-        format: 'png',
+        format: 'webp',
         width: 100,
         height: 100,
-        colors: ['#bfd400', '#4f501d']
+        colors: ['#bfd400', '#4f501d'],
+        quality: 100,
+        webp: true
+      }
     }
   },
   pwa: {
