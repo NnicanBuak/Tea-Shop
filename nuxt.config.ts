@@ -50,23 +50,13 @@ export default defineNuxtConfig({
           sizes: '128x128'
         }
       ],
-      start_url: '/',
+      start_url: '/shop',
       display: 'standalone',
       background_color: '#ffffff',
       theme_color: '#ffffff'
     },
     workbox: {
       runtimeCaching: [
-        {
-          urlPattern: /^https:\/\/api\.myapp\.com/,
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'api-cache',
-            expiration: {
-              maxAgeSeconds: 60 * 60 * 24 * 7 // 1 week
-            }
-          }
-        },
         {
           urlPattern: /\.(png|jpg|jpeg|svg|gif)$/,
           handler: 'CacheFirst',
