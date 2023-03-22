@@ -19,7 +19,7 @@
 		<aside
 			class="h-screen container-xl flex gap-4 flex-col justify-around items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 max-lg:py-32 p-12 lg:p-16 xl:p-20 row-[1/-1] col-[1/-1]"
 		>
-			<nav class="hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
+			<nav class="hidden lg:block flex flex-col lg:row-[1/1] lg:col-[2/2]">
 				<div class="flex">
 					<NuxtLink to="/shop/catalog">
 						<Icon
@@ -41,7 +41,7 @@
 						<span><b>Магазин</b></span>
 					</NuxtLink>
 					<NuxtLink to="/sales">
-						<span>Скидки(Постоянным клиентам?)</span>
+						<span>Скидки</span>
 					</NuxtLink>
 					<NuxtLink to="/about">
 						<span>О нас</span>
@@ -87,7 +87,7 @@
 					<span>каждый&nbsp;день</span>
 				</h1>
 				<button
-					class="lg:absolute max-lg:w-full hover:px-4 focus-visible:px-4 py-2 transition border-0 hover:border-[4px] focus-visible:border-[4px] border-black text-black text-[6vw] lg:text-4xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full focus-visible:bg-primary"
+					class="lg:absolute max-lg:w-full hover:px-4 focus-visible:px-4 py-2 transition border-0 hover:border-[3px] focus-visible:border-[3px] border-black text-black text-[6vw] lg:text-4xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full focus-visible:bg-primary"
 					type="button"
 					data-pointer-type="highlight"
 				>
@@ -105,7 +105,6 @@
 			:loop="true"
 			:autoplay="{
 				delay: 15000,
-				disableOnInteraction: true,
 			}"
 		>
 			<SwiperSlide
