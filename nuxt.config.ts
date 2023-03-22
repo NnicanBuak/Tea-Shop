@@ -54,7 +54,6 @@ export default defineNuxtConfig({
       display: 'standalone',
       background_color: '#ffffff',
       theme_color: '#ffffff'
-    }
     },
     workbox: {
       runtimeCaching: [
