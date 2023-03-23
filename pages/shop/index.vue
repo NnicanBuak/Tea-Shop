@@ -139,7 +139,7 @@
 				v-for="(image, index) in sliderImages"
 				:key="index"
 				:style="{
-					backgroundImage: 'url(' + '~' + image + ')',
+					backgroundImage: 'url(' + '/img/slider/' + image + ')',
 					backgroundRepeat: 'no-repeat',
 					backgroundPosition: 'left 59% bottom',
 					backgroundSize: 'cover',
@@ -154,18 +154,19 @@
 	import products from '@/assets/products.json'
 
 	export default {
-		name: 'Main',
+		name: 'Shop',
 		data() {
-			return { products: products, sliderImages: [], randomProduct: {} }
+			return {
+				products: products,
+				sliderImages: ['slide.png'],
+				randomProduct: {},
+			}
 		},
 		async asyncData() {
-			const images = await this.$glob(
-				'~/public/img/slider/*.{jpg,jpeg,png,gif}',
-			)
 			const sliderImages = images.map((image) => image.default)
 
 			const randomProduct =
-				this.$products[Math.floor(Math.random() * this.$products.length)]
+				products[Math.floor(Math.random() * products.length)]
 			return { sliderImages, randomProduct }
 		},
 		mounted() {
