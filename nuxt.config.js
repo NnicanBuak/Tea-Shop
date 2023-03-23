@@ -12,9 +12,7 @@ export default defineNuxtConfig({
 		'nuxt-swiper',
 		'@nuxtjs/html-validator',
 	],
-	plugins: [
-		{ src: '~/plugins/products.js', ssr: false },
-	],
+	plugins: [{ src: '~/plugins/products.js', ssr: false }],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
@@ -86,41 +84,6 @@ export default defineNuxtConfig({
 		},
 	},
 	tailwindcss: {
-		purge: {
-			enable: true,
-			content: ['./src/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
-			options: {
-				whitelist: [
-					...Object.entries(colors).flatMap(([name, values]) =>
-						Object.entries(values).map(({ level }) => {
-							switch (name) {
-								case 'lightBlue':
-									name = 'sky'
-									break
-								case 'warmGray':
-									name = 'stone'
-									break
-								case 'trueGray':
-									name = 'neutral'
-									break
-								case 'coolGray':
-									name = 'gray'
-									break
-								case 'blueGray':
-									name = 'slate'
-									break
-								default:
-									break
-							}
-							if (level === 'DEFAULT') {
-								return [`from-${name}`, `to-${name}`]
-							}
-							return [`from-${name}-${level}`, `to-${name}-${level}`]
-						}),
-					),
-				].flat(), // добавляем классы для градиента в список исключений
-			},
-		},
 		theme: {
 			extend: {
 				colors: {
