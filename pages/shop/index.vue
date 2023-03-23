@@ -151,10 +151,12 @@
 </template>
 
 <script>
+	import products from '@/assets/products.json'
+
 	export default {
 		name: 'Main',
 		data() {
-			return { sliderImages: sliderImages, randomProduct: randomProduct }
+			return { products: products, sliderImages: [], randomProduct: {} }
 		},
 		async asyncData() {
 			const images = await this.$glob(
@@ -167,7 +169,7 @@
 			return { sliderImages, randomProduct }
 		},
 		mounted() {
-			if (this.isCursorAviable) {
+			if (process.client ? 'onmousemove' in window : true) {
 				this.useCustomCursor()
 			}
 		},

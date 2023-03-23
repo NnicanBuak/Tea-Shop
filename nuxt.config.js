@@ -14,7 +14,6 @@ export default defineNuxtConfig({
 	],
 	plugins: [
 		{ src: '~/plugins/products.js', ssr: false },
-		{ src: '~/plugins/isCursorAviable.js' },
 	],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
