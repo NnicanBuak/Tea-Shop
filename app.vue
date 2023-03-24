@@ -5,10 +5,22 @@
 <template>
 	<div>
 		<NuxtLayout :name="route.meta.layout">
-			<NuxtPage></NuxtPage>
+			<NuxtPage :products="products"></NuxtPage>
 		</NuxtLayout>
 	</div>
 </template>
+
+<script>
+	import productsData from '~/assets/products.json'
+	export default {
+		name: 'App',
+		data() {
+			return {
+				products: productsData,
+			}
+		},
+	}
+</script>
 
 <style>
 	@media (pointer: fine) {
@@ -30,7 +42,8 @@
 	p {
 		font-family: Arial, Helvetica, sans-serif;
 	}
-	button:focus-visible {
+	button:focus-visible,
+	a:focus-visible {
 		outline: none;
 	}
 

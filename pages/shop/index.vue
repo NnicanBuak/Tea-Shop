@@ -12,14 +12,14 @@
 		class="container-fluid mb-40 h-screen grid overflow-hidden"
 		id="hero"
 	>
-		<div
-			class="-z-10 absolute top-[-100%] left-[-100%] h-6 w-6 bg-primary rounded-full pointer-events-none"
-			ref="cursor"
-		></div>
 		<aside
 			class="h-screen container-xl flex gap-4 flex-col justify-around items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 max-lg:py-32 p-8 lg:p-16 xl:p-20 row-[1/-1] col-[1/-1]"
 		>
-			<nav class="hidden lg:block flex flex-col lg:row-[1/1] lg:col-[2/2]">
+			<div
+				class="-z-10 absolute top-[-100%] left-[-100%] h-6 w-6 bg-primary rounded-full pointer-events-none"
+				ref="cursor"
+			></div>
+			<nav class="hidden lg:flex flex-col lg:row-[1/1] lg:col-[2/2]">
 				<div class="flex">
 					<NuxtLink to="/shop/catalog">
 						<button type="button">
@@ -76,14 +76,15 @@
 					src="/img/logo-10.svg"
 					alt=""
 				/>
-				<NuxtLink to="/shop/product">
-					<h3 class="block lg:hidden w-full text-[4.1vw] text-center">
-						<span class="mb-4 text-black mix-blend-difference">
+				<NuxtLink to="/shop/product" tabindex="-1">
+					<h3
+						class="block lg:hidden w-full text-[4.1vw] text-center text-black"
+					>
+						<span>
 							Порой&nbsp;просто&nbsp;хочется&nbsp;начать&nbsp;день&nbsp;с&nbsp;чашечки
-							чая
 						</span>
 						<button
-							class="inline p-2 font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r rounded-full"
+							class="inline p-1 font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r rounded-full"
 							:class="{
 								'from-yellow-300 to-yellow-500':
 									randomProduct.variety === 'Зелёный',
@@ -96,8 +97,9 @@
 									randomProduct.variety === 'Чёрный',
 								'from-red-900 to-gray-900': randomProduct.variety === 'Пуэр',
 							}"
+							tabindex="-1"
 						>
-							<span>{{ randomProduct.shortName }}</span>
+							<span>чая {{ randomProduct.shortName }}</span>
 						</button>
 					</h3>
 				</NuxtLink>
@@ -112,9 +114,9 @@
 					<span>Аромат&nbsp;на</span>
 					<span>каждый&nbsp;день</span>
 				</h1>
-				<NuxtLink to="/shop/catalog">
+				<NuxtLink to="/shop/catalog" tabindex="-1">
 					<button
-						class="lg:absolute max-lg:w-full hover:px-4 transition-all focus-visible:px-4 py-2 transition border-0 hover:border-[3px] focus-visible:border-[3px] border-black text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full focus-visible:bg-primary"
+						class="lg:absolute max-lg:w-full hover:px-4 transition-all focus-visible:px-4 py-2 border-0 hover:border-[3px] focus-visible:border-[3px] border-black text-primary lg:text-primary2 hover:text-black focus-visible:text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full focus-visible:"
 						type="button"
 						data-pointer-type="highlight"
 					>
@@ -123,7 +125,6 @@
 				</NuxtLink>
 			</div>
 		</aside>
-		<!-- применение тега style вместо tailwindcss в данном случае исключение из-за изначально заданного значения z-index библиотекой -->
 		<Swiper
 			class="h-full w-full row-[1/-1] col-[1/-1]"
 			style="z-index: -20"
@@ -141,7 +142,7 @@
 				:style="{
 					backgroundImage: 'url(' + '/img/slider/' + image + ')',
 					backgroundRepeat: 'no-repeat',
-					backgroundPosition: 'left 59% bottom',
+					backgroundPosition: 'left 62% bottom',
 					backgroundSize: 'cover',
 				}"
 			>
@@ -151,28 +152,46 @@
 </template>
 
 <script>
-	import products from '@/assets/products.json'
+	const defaultProduct = {
+		status: false,
+		category: 'Неизвестно',
+		variety: 'Неизвестно',
+		price: '0',
+		name: 'Default Product',
+		shortName: 'Default',
+		description: 'Описание отсутствует',
+	}
 
 	export default {
 		name: 'Shop',
+		props: {
+			products: {
+				type: Array,
+				required: false,
+			},
+		},
+		setup() {
+			const isClient = useClient()
+
+			onMounted(() => {
+				if (isClient && 'onmousemove' in window) {
+					this.useCustomCursor()
+				}
+			})
+		},
 		data() {
 			return {
-				products: products,
 				sliderImages: ['slide.png'],
-				randomProduct: {},
 			}
 		},
-		async asyncData() {
-			const sliderImages = images.map((image) => image.default)
-
-			const randomProduct =
-				products[Math.floor(Math.random() * products.length)]
-			return { sliderImages, randomProduct }
-		},
-		mounted() {
-			if (process.client ? 'onmousemove' in window : true) {
-				this.useCustomCursor()
-			}
+		computed: {
+			randomProduct() {
+				if (!this.products) {
+					return defaultProduct
+				}
+				const randomIndex = Math.floor(Math.random() * this.products.length)
+				return this.products[randomIndex]
+			},
 		},
 		methods: {
 			useCustomCursor() {

@@ -12,7 +12,6 @@ export default defineNuxtConfig({
 		'nuxt-swiper',
 		'@nuxtjs/html-validator',
 	],
-	plugins: [{ src: '~/plugins/products.js', ssr: false }],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
@@ -81,18 +80,6 @@ export default defineNuxtConfig({
 					},
 				},
 			],
-		},
-	},
-	tailwindcss: {
-		theme: {
-			extend: {
-				colors: {
-					primary: '#BFD400',
-					primary2: '#BB66A5',
-					secondary: '#4F501D',
-					secondary2: '#56184A',
-				},
-			},
 		},
 	},
 	icon: {
