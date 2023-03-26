@@ -17,3 +17,9 @@
 		<footer v-if="route.meta.hasFooter">FooterFooterFooterFooterFooter</footer>
 	</div>
 </template>
+
+<script>
+	export default {
+		defer: true,
+	}
+</script>

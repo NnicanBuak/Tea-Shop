@@ -169,16 +169,16 @@
 			}
 		},
 		mounted() {
-			window.addEventListener('resize', this.handleResize)
-			this.handleResize()
+			if ('onmousemove' in window) {
+				this.useCustomCursor()
+			}
+		},
+		watch: {
+			windowWidth(newValue) {
+				this.windowWidth = newValue > 1024
+			},
 		},
 		methods: {
-			handleResize() {
-				this.togglePageHeader()
-			},
-			togglePageHeader() {
-				this.$route.meta.hasHeader = !(window.innerWidth > 1024)
-			},
 			nameToParentheses(teaName) {
 				return teaName
 			},

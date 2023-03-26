@@ -1,10 +1,8 @@
-<script setup>
-	const route = useRoute()
-</script>
+<script setup></script>
 
 <template>
 	<NuxtLayout>
-		<NuxtPage :products="products"></NuxtPage>
+		<NuxtPage :products="productsData"></NuxtPage>
 	</NuxtLayout>
 </template>
 
@@ -14,8 +12,17 @@
 		name: 'app',
 		data() {
 			return {
-				products: productsData,
+				productsData: productsData,
+				windowWidth: window.innerWidth,
 			}
+		},
+		setup() {
+			provide('windowWidth', this.windowWidth)
+		},
+		mounted() {
+			window.addEventListener('resize', () => {
+				this.windowWidth = window.innerWidth
+			})
 		},
 	}
 </script>
