@@ -77,7 +77,11 @@
 				/>
 				<h3 class="lg:hidden w-full text-2xl font-serif text-center text-black">
 					<span>Порой просто хочется начать день с чашечки чая&nbsp;</span>
-					<NuxtLink v-if="randomTea" to="/shop/product" tabindex="-1">
+					<NuxtLink
+						v-if="randomTea?.parenthesesShortName"
+						to="/shop/product"
+						tabindex="-1"
+					>
 						<button
 							class="px-4 py-1 inline text-transparent font-bold bg-clip-text bg-gradient-to-r rounded-full relative"
 							:class="{
@@ -93,7 +97,7 @@
 							data-pointer-type="highlight"
 							tabindex="-1"
 						>
-							<span>{{ nameToParentheses(randomTea.shortName) }}</span>
+							<span>{{ randomTea.parenthesesShortName }}</span>
 							<span class="-z-10 absolute inset-0 bg-white rounded-full"></span>
 						</button>
 					</NuxtLink>
@@ -179,9 +183,6 @@
 			},
 		},
 		methods: {
-			nameToParentheses(teaName) {
-				return teaName
-			},
 			getRandomProductByCategory(category) {
 				if (!this.products) {
 					return null
