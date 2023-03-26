@@ -3,17 +3,15 @@
 </script>
 
 <template>
-	<div>
-		<NuxtLayout :name="route.meta.layout">
-			<NuxtPage :products="products"></NuxtPage>
-		</NuxtLayout>
-	</div>
+	<NuxtLayout>
+		<NuxtPage :products="products"></NuxtPage>
+	</NuxtLayout>
 </template>
 
 <script>
 	import productsData from '~/assets/products.json'
 	export default {
-		name: 'App',
+		name: 'app',
 		data() {
 			return {
 				products: productsData,
@@ -25,6 +23,9 @@
 <style>
 	@media (pointer: fine) {
 		/* Стили для устройств с мышью */
+		#cursor {
+			background-color: #bfd400;
+		}
 		#hero,
 		a {
 			cursor: none;

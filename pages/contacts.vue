@@ -1,10 +1,9 @@
 <script setup>
 	definePageMeta({
-		layout: "main",
-		useHeader: false,
+		useHeader: true,
 		useFooter: true,
 		hasNewsletterBlock: false,
-	});
+	})
 </script>
 
 <template>

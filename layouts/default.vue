@@ -1,10 +1,13 @@
 <script setup>
-	const route = useRoute();
+	const route = useRoute()
 </script>
 
 <template>
 	<div>
-		<header v-if="route.meta.hasHeader">HeaderHeaderHeaderHeaderHeader</header>
+		<header v-if="route.meta.hasHeader && window.innerWidth > 1024">
+			HeaderHeaderHeaderHeaderHeader
+		</header>
+		<header v-if="route.meta.hasHeader && window.innerWidth <= 1024"></header>
 		<main>
 			<slot />
 			<section v-if="route.meta.hasNewsletterBlock">

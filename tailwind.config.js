@@ -1,5 +1,8 @@
 export default {
 	theme: {
+		fontFamily: {
+			serif: ['EB Garamond', 'serif'],
+		},
 		extend: {
 			colors: {
 				primary: '#BFD400',

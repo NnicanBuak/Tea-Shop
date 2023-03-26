@@ -89,6 +89,10 @@ export default defineNuxtConfig({
 	},
 	googleFonts: {
 		families: {
+			'EB+Garamond': {
+				wght: [400, 700],
+				ital: [400],
+			},
 			Montserrat: {
 				wght: [400, 700],
 				ital: [400],
