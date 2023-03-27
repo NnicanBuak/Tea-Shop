@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+	const { productsData } = await useFetch('/api/products')
+</script>
 
 <template>
 	<NuxtLayout>
@@ -7,16 +9,18 @@
 </template>
 
 <script>
-	import productsData from '~/assets/products.json'
 	export default {
 		name: 'app',
 		data() {
 			return {
-				productsData: productsData,
-				windowWidth: window.innerWidth,
+				productsData: null,
+				windowWidth: null,
 			}
 		},
-		setup() {
+		asyncData() {
+			return productsData
+		},
+		created() {
 			provide('windowWidth', this.windowWidth)
 		},
 		mounted() {

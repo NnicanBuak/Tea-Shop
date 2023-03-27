@@ -196,24 +196,18 @@
 				return ProductsByCategory[randomIndex]
 			},
 			useCustomCursor() {
-				const cursor = this.$refs.cursor
-				if (cursor) {
+				const cursor = document.querySelector('.cursor')
+				if (!cursor) return
+
+				const setCursorPos = (e) => {
 					const offsetX = cursor.offsetWidth / 2
 					const offsetY = cursor.offsetHeight / 2
-
-					const setCursorPos = (e) => {
-						requestAnimationFrame(() => {
-							const x = e.clientX - offsetX
-							const y = e.clientY + window.scrollY - offsetY
-							// const maxY = document.body.clientHeight - cursor.offsetHeight
-
-							cursor.style.left = `${x}px`
-							cursor.style.top = `${y}px`
-						})
-					}
-
-					window.addEventListener('mousemove', setCursorPos)
+					const x = e.clientX - offsetX
+					const y = e.clientY + window.scrollY - offsetY
+					cursor.style.transform = translate3d(`${x}px`, `${y}px`, 0)
 				}
+
+				window.addEventListener('mousemove', setCursorPos)
 			},
 		},
 	}
