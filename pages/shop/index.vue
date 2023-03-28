@@ -17,7 +17,7 @@
 			ref="cursor"
 		></div>
 		<aside
-			class="h-screen container-xl flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-12 max-lg:py-[16vh] lg:p-16 xl:p-20 row-[1/-1] col-[1/-1]"
+			class="h-screen container-xl max-lg:container-sm flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-16 max-lg:py-[16vh] xl:p-20 row-[1/-1] col-[1/-1]"
 		>
 			<nav class="max-lg:hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
 				<div class="flex">
@@ -76,7 +76,9 @@
 					src="/img/logo-10.svg"
 					alt=""
 				/>
-				<h3 class="lg:hidden w-full text-2xl font-serif text-center text-black">
+				<h3
+					class="lg:hidden w-full text-[5vw] font-serif text-center text-black"
+				>
 					<span>Порой просто хочется начать день с чашечки&nbsp;</span>
 					<NuxtLink
 						v-if="randomTea?.parenthesesName"
@@ -165,7 +167,7 @@
 
 <script>
 	export default {
-		name: 'Shop',
+		name: 'shop',
 		props: {
 			products: {
 				type: Array,

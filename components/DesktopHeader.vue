@@ -5,5 +5,5 @@
 </template>
 
 <script>
-	export default { name: 'desktopHeader' }
+	export default { name: 'DesktopHeader' }
 </script>

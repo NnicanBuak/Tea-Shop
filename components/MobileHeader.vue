@@ -4,8 +4,8 @@
 			class="fixed inset-0 h-screen w-screen transition transition-all transform translate-x-full bg-white"
 		>
 			<Icon
-				class="absolute left-0 top-0"
-				:name="{ 'material-symbols:menu-rounded': true }"
+				class="absolute left-0 top-0 transform -translate-x-full"
+				name="material-symbols:menu-rounded"
 			></Icon>
 		</nav>
 	</header>
