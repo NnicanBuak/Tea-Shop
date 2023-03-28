@@ -1,24 +1,22 @@
 <script setup>
-	const { productsData } = await useFetch('/api/products')
+	// const { productsData } = await useFetch('/api/products')
+	import productsData from '~/assets/products.json'
 </script>
 
 <template>
 	<NuxtLayout>
-		<NuxtPage :products="productsData"></NuxtPage>
+		<NuxtPage :products="products"></NuxtPage>
 	</NuxtLayout>
 </template>
 
 <script>
 	export default {
-		name: 'app',
+		name: 'App',
 		data() {
 			return {
-				productsData: null,
+				products: productsData,
 				windowWidth: null,
 			}
-		},
-		asyncData() {
-			return productsData
 		},
 		created() {
 			provide('windowWidth', this.windowWidth)
@@ -27,6 +25,7 @@
 			window.addEventListener('resize', () => {
 				this.windowWidth = window.innerWidth
 			})
+			this.windowWidth = window.innerWidth
 		},
 	}
 </script>

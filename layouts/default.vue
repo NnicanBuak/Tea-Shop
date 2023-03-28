@@ -1,33 +1,28 @@
 <template>
-	<div>
-		<template v-if="hasHeader">
-			<header v-if="hasDesktopHeader">HeaderHeaderHeaderHeaderHeader</header>
-			<header v-if="hasMobileHeader"></header>
-		</template>
-		<main>
-			<slot />
-			<section v-if="hasNewsletterBlock">Подпишись на рассылку</section>
-		</main>
-		<footer v-if="hasFooter">FooterFooterFooterFooterFooter</footer>
-	</div>
+	<DesktopHeader v-if="hasDesktopHeader"></DesktopHeader>
+	<MobileHeader v-if="hasMobileHeader"></MobileHeader>
+	<main>
+		<slot />
+		<section v-if="hasNewsletterBlock">Подпишись на рассылку</section>
+	</main>
+	<footer v-if="hasFooter">FooterFooterFooterFooterFooter</footer>
 </template>
 
 <script>
 	export default {
 		defer: true,
 		data() {
-			const { hasNewsletterBlock, hasFooter } = this.$route.meta
-			return { hasNewsletterBlock, hasFooter }
+			const { hasNewsletterBlock, hasFooter, hasHeader } = this.$route.meta
+			return { hasNewsletterBlock, hasFooter, hasHeader }
 		},
 		computed: {
-			hasHeader() {
-				return this.$route.meta.hasHeader
-			},
 			hasDesktopHeader() {
-				return this.$route.meta.hasHeader && this.windowWidth > 1024
+				return false
+				// return this.hasHeader && this.windowWidth > 1024
 			},
 			hasMobileHeader() {
-				return this.$route.meta.hasHeader && this.windowWidth <= 1024
+				return true
+				// return this.hasHeader && this.windowWidth <= 1024
 			},
 		},
 	}

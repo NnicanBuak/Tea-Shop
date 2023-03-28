@@ -1,6 +1,7 @@
 export default {
 	theme: {
 		fontFamily: {
+			sans: ['Montserrat', 'sans-serif'],
 			serif: ['EB Garamond', 'serif'],
 		},
 		extend: {

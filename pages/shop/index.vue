@@ -1,5 +1,6 @@
 <script setup>
 	definePageMeta({
+		hasHeader: true,
 		hasFooter: true,
 		hasNewsletterBlock: true,
 	})
@@ -16,7 +17,7 @@
 			ref="cursor"
 		></div>
 		<aside
-			class="h-screen container-xl flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-12 max-lg:py-32 lg:p-16 xl:p-20 row-[1/-1] col-[1/-1]"
+			class="h-screen container-xl flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-12 max-lg:py-[16vh] lg:p-16 xl:p-20 row-[1/-1] col-[1/-1]"
 		>
 			<nav class="max-lg:hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
 				<div class="flex">
@@ -68,7 +69,7 @@
 				src="/img/logo-14.svg"
 				alt=""
 			/>
-			<div class="flex flex-col justify-center items-center gap-4" id="title">
+			<div class="flex flex-col justify-center items-center gap-10" id="title">
 				<nuxt-picture
 					class="lg:hidden w-[75vw]"
 					id="logo"
@@ -76,16 +77,16 @@
 					alt=""
 				/>
 				<h3 class="lg:hidden w-full text-2xl font-serif text-center text-black">
-					<span>Порой просто хочется начать день с чашечки чая&nbsp;</span>
+					<span>Порой просто хочется начать день с чашечки&nbsp;</span>
 					<NuxtLink
-						v-if="randomTea?.parenthesesShortName"
+						v-if="randomTea?.parenthesesName"
 						to="/shop/product"
 						tabindex="-1"
 					>
 						<button
-							class="px-4 py-1 inline text-transparent font-bold bg-clip-text bg-gradient-to-r rounded-full relative"
+							class="px-4 py-1 inline transition transition-all font-bold bg-white hover:bg-gradient-to-r focus-visible:bg-gradient-to-r text-transparent hover:text-white focus-visible:text-white rounded-full"
 							:class="{
-								'from-yellow-300 to-yellow-500':
+								'hover:from-yellow-300 focus-visible:from-yellow-300 hover:to-yellow-500 focus-visible:to-yellow-500':
 									randomTea.variety === 'Зелёный',
 								'from-white to-gray-200': randomTea.variety === 'Белый',
 								'from-green-400 to-green-800':
@@ -95,10 +96,22 @@
 								'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
 							}"
 							data-pointer-type="highlight"
-							tabindex="-1"
 						>
-							<span>{{ randomTea.parenthesesShortName }}</span>
-							<span class="-z-10 absolute inset-0 bg-white rounded-full"></span>
+							<span
+								class="bg-clip-text bg-gradient-to-r"
+								:class="{
+									'from-yellow-300 to-yellow-500':
+										randomTea.variety === 'Зелёный',
+									'from-white to-gray-200': randomTea.variety === 'Белый',
+									'from-green-400 to-green-800':
+										randomTea.variety === 'Травянной',
+									'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
+									'from-orange-400 to-orange-600':
+										randomTea.variety === 'Чёрный',
+									'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
+								}"
+								>{{ randomTea.parenthesesName }}</span
+							>
 						</button>
 					</NuxtLink>
 				</h3>
@@ -115,7 +128,7 @@
 				</h1>
 				<NuxtLink to="/shop/catalog" tabindex="-1">
 					<button
-						class="lg:absolute max-lg:w-full hover:px-4 transition-all focus-visible:px-4 py-2 border-[3px] focus-visible:border-[3px] border-primary2 hover:border-black focus-visible:border-black text-primary2 hover:text-black focus-visible:text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full focus-visible:"
+						class="lg:absolute max-lg:w-full transition transition-all hover:px-4 focus-visible:px-4 py-2 lg:border-[3px] focus-visible:border-[3px] border-black text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full max-lg:bg-primary"
 						type="button"
 						data-pointer-type="highlight"
 					>
@@ -152,12 +165,18 @@
 
 <script>
 	export default {
-		name: 'shop',
+		name: 'Shop',
 		props: {
 			products: {
 				type: Array,
 				required: false,
 			},
+		},
+		data() {
+			return {
+				sliderImages: ['slide.png'],
+				randomTea: null,
+			}
 		},
 		setup() {
 			onMounted(() => {
@@ -166,21 +185,13 @@
 				}
 			})
 		},
-		data() {
-			return {
-				sliderImages: ['slide.png'],
-				randomTea: this.getRandomProductByCategory('Чай'),
-			}
+		created() {
+			this.randomTea = this.getRandomProductByCategory('Чай')
 		},
 		mounted() {
 			if ('onmousemove' in window) {
 				this.useCustomCursor()
 			}
-		},
-		watch: {
-			windowWidth(newValue) {
-				this.windowWidth = newValue > 1024
-			},
 		},
 		methods: {
 			getRandomProductByCategory(category) {
@@ -196,7 +207,7 @@
 				return ProductsByCategory[randomIndex]
 			},
 			useCustomCursor() {
-				const cursor = document.querySelector('.cursor')
+				const cursor = this.$refs.cursor
 				if (!cursor) return
 
 				const setCursorPos = (e) => {
@@ -214,7 +225,7 @@
 </script>
 
 <style>
-	@media not all and (min-width: 1024px) {
+	@media not all and (min-width: 600px) {
 		.swiper-slide {
 			background-position: left 59% bottom !important;
 			background-size: 250% !important;

@@ -17,6 +17,7 @@ export default defineNuxtConfig({
 		head: {
 			title: 'Соцветие • Интернет-магазин',
 			link: [{ rel: 'canonical', href: 'https://<SITE.COM>/shop' }],
+			lang: 'ru',
 			meta: [
 				{ name: 'robots', content: 'index, follow' },
 				{ property: 'og:title', content: 'Соцветие • Интернет-магазин' },
@@ -29,24 +30,6 @@ export default defineNuxtConfig({
 				{ name: 'publisher', content: 'Raccoon IT Group' },
 				{ name: 'language', content: 'ru' },
 			],
-		},
-	},
-	image: {
-		placeholder: {
-			format: 'webp',
-			width: 10,
-			height: 10,
-			fit: 'cover',
-			quality: 100,
-			webp: true,
-			generate: {
-				format: 'webp',
-				width: 100,
-				height: 100,
-				colors: ['#bfd400', '#4f501d'],
-				quality: 100,
-				webp: true,
-			},
 		},
 	},
 	pwa: {

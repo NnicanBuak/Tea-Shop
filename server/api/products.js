@@ -1,4 +1,7 @@
-import products from '~/assets/products.json'
-export default defineEventHandler(() => {
-	return products
-})
+import productsData from '~/assets/products.json'
+
+const getProducts = async () => {
+	return productsData
+}
+
+export default defineEventHandler(getProducts)
