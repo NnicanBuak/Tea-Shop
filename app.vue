@@ -5,7 +5,7 @@
 
 <template>
 	<NuxtLayout>
-		<NuxtPage :products="products"></NuxtPage>
+		<NuxtPage :products="productsData"></NuxtPage>
 	</NuxtLayout>
 </template>
 
@@ -14,18 +14,23 @@
 		name: 'app',
 		data() {
 			return {
-				products: productsData,
 				windowWidth: null,
+				isAppAtTop: true,
 			}
 		},
-		created() {
+		setup() {
+			provide('isAppAtTop', this.isAppAtTop)
 			provide('windowWidth', this.windowWidth)
 		},
 		mounted() {
+			this.windowWidth = window.innerWidth
+
+			window.addEventListener('scroll', () => {
+				this.isPageAtTop = window.pageYOffset === 0
+			})
 			window.addEventListener('resize', () => {
 				this.windowWidth = window.innerWidth
 			})
-			this.windowWidth = window.innerWidth
 		},
 	}
 </script>

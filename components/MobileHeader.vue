@@ -1,13 +1,15 @@
 <template>
-	<header>
-		<nav
-			class="fixed inset-0 h-screen w-screen transition transition-all transform translate-x-full bg-white"
-		>
+	<header
+		class="fixed h-screen w-screen inset-0 transform translate-x-full transition transition-all bg-white"
+	>
+		<button type="button">
 			<Icon
-				class="absolute left-0 top-0 transform -translate-x-full"
+				class="absolute -left-4 top-16 transform -translate-x-full"
 				name="material-symbols:menu-rounded"
+				size="10vw"
 			></Icon>
-		</nav>
+		</button>
+		<nav class=""></nav>
 	</header>
 </template>
 

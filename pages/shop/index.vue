@@ -130,7 +130,7 @@
 				</h1>
 				<NuxtLink to="/shop/catalog" tabindex="-1">
 					<button
-						class="lg:absolute max-lg:w-full transition transition-all hover:px-4 focus-visible:px-4 py-2 lg:border-[3px] focus-visible:border-[3px] border-black text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full max-lg:bg-primary"
+						class="lg:absolute max-lg:w-full transition transition-all hover:px-4 focus-visible:px-4 py-[1vw] lg:border-[3px] hover:border-[3px] focus-visible:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
 						type="button"
 						data-pointer-type="highlight"
 					>
@@ -213,11 +213,12 @@
 				if (!cursor) return
 
 				const setCursorPos = (e) => {
+					console.log('test')
 					const offsetX = cursor.offsetWidth / 2
 					const offsetY = cursor.offsetHeight / 2
 					const x = e.clientX - offsetX
 					const y = e.clientY + window.scrollY - offsetY
-					cursor.style.transform = translate3d(`${x}px`, `${y}px`, 0)
+					cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`
 				}
 
 				window.addEventListener('mousemove', setCursorPos)

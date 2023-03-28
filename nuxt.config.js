@@ -7,17 +7,19 @@ export default defineNuxtConfig({
 		'@nuxt/image-edge',
 		'@nuxt/content',
 		'@nuxtjs/tailwindcss',
-		'nuxt-icon',
 		'@nuxtjs/google-fonts',
-		'nuxt-swiper',
 		'@nuxtjs/html-validator',
+		'nuxt-icon',
+		'nuxt-swiper',
 	],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
 			title: 'Соцветие • Интернет-магазин',
 			link: [{ rel: 'canonical', href: 'https://<SITE.COM>/shop' }],
-			lang: 'ru',
+			htmlAttrs: {
+				lang: 'ru',
+			},
 			meta: [
 				{ name: 'robots', content: 'index, follow' },
 				{ property: 'og:title', content: 'Соцветие • Интернет-магазин' },
