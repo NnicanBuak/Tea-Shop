@@ -1,4 +1,9 @@
 <template>
+	<div
+		class="-z-10 absolute h-6 w-6 rounded-full"
+		id="cursor"
+		ref="cursor"
+	></div>
 	<DesktopHeader v-if="hasDesktopHeader"></DesktopHeader>
 	<MobileHeader v-if="hasMobileHeader"></MobileHeader>
 	<main>

@@ -15,7 +15,7 @@
 		data() {
 			return {
 				windowWidth: null,
-				isAppAtTop: true,
+				isAppAtTop: null,
 			}
 		},
 		setup() {
@@ -24,13 +24,32 @@
 		},
 		mounted() {
 			this.windowWidth = window.innerWidth
+			this.isAppAtTop = window.pageYOffset === 0
 
+			// эти обработчики событий не обрабатывают события нихуя ._.
 			window.addEventListener('scroll', () => {
-				this.isPageAtTop = window.pageYOffset === 0
+				this.isAppAtTop = window.pageYOffset === 0
 			})
 			window.addEventListener('resize', () => {
 				this.windowWidth = window.innerWidth
 			})
+
+			if ('onmousemove' in window) {
+				this.useCustomCursor(this.$refs.cursor)
+			}
+		},
+		methods: {
+			useCustomCursor(cursor) {
+				const setCursorPos = (e) => {
+					const offsetX = cursor.offsetWidth / 2
+					const offsetY = cursor.offsetHeight / 2
+					const x = e.clientX - offsetX
+					const y = e.clientY + window.scrollY - offsetY
+					cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`
+				}
+
+				window.addEventListener('mousemove', setCursorPos)
+			},
 		},
 	}
 </script>

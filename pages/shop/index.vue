@@ -7,15 +7,7 @@
 </script>
 
 <template>
-	<section
-		class="container-fluid mb-40 h-screen grid overflow-hidden"
-		id="hero"
-	>
-		<div
-			class="-z-10 absolute h-6 w-6 rounded-full"
-			id="cursor"
-			ref="cursor"
-		></div>
+	<section class="container-fluid mb-40 h-screen grid" id="hero">
 		<aside
 			class="h-screen container-xl max-lg:container-sm flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-16 max-lg:py-[16vh] xl:p-20 row-[1/-1] col-[1/-1]"
 		>
@@ -190,11 +182,6 @@
 		created() {
 			this.randomTea = this.getRandomProductByCategory('Чай')
 		},
-		mounted() {
-			if ('onmousemove' in window) {
-				this.useCustomCursor()
-			}
-		},
 		methods: {
 			getRandomProductByCategory(category) {
 				if (!this.products) {
@@ -207,21 +194,6 @@
 					Math.random() * ProductsByCategory.length,
 				)
 				return ProductsByCategory[randomIndex]
-			},
-			useCustomCursor() {
-				const cursor = this.$refs.cursor
-				if (!cursor) return
-
-				const setCursorPos = (e) => {
-					console.log('test')
-					const offsetX = cursor.offsetWidth / 2
-					const offsetY = cursor.offsetHeight / 2
-					const x = e.clientX - offsetX
-					const y = e.clientY + window.scrollY - offsetY
-					cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`
-				}
-
-				window.addEventListener('mousemove', setCursorPos)
 			},
 		},
 	}
