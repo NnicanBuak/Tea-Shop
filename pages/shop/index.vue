@@ -22,7 +22,7 @@
 							/>
 						</button>
 					</NuxtLink>
-					<NuxtLink to="">
+					<NuxtLink to="/shop/cart">
 						<button type="button">
 							<Icon
 								class="text-secondary"
@@ -33,7 +33,7 @@
 					</NuxtLink>
 				</div>
 				<div class="flex">
-					<NuxtLink to="/">
+					<NuxtLink to="/shop">
 						<button type="button">
 							<span><b>Магазин</b></span>
 						</button>
@@ -78,9 +78,9 @@
 						tabindex="-1"
 					>
 						<button
-							class="px-4 py-1 inline transition transition-all font-bold bg-white hover:bg-gradient-to-r focus-visible:bg-gradient-to-r text-transparent hover:text-white focus-visible:text-white rounded-full"
+							class="px-4 py-1 inline transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
 							:class="{
-								'hover:from-yellow-300 focus-visible:from-yellow-300 hover:to-yellow-500 focus-visible:to-yellow-500':
+								'from-yellow-300 to-yellow-500':
 									randomTea.variety === 'Зелёный',
 								'from-white to-gray-200': randomTea.variety === 'Белый',
 								'from-green-400 to-green-800':
@@ -122,7 +122,7 @@
 				</h1>
 				<NuxtLink to="/shop/catalog" tabindex="-1">
 					<button
-						class="lg:absolute max-lg:w-full transition transition-all hover:px-4 focus-visible:px-4 py-[1vw] lg:border-[3px] hover:border-[3px] focus-visible:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
+						class="lg:absolute max-lg:w-full transition-all hover:px-4 focus-visible:px-4 py-[1vw] lg:border-[3px] hover:border-[3px] focus-visible:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
 						type="button"
 						data-pointer-type="highlight"
 					>

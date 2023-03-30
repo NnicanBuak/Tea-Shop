@@ -5,6 +5,7 @@
 
 <template>
 	<NuxtLayout>
+		<NuxtLoadingIndicator />
 		<NuxtPage :products="productsData"></NuxtPage>
 	</NuxtLayout>
 </template>
@@ -18,9 +19,8 @@
 				isAppAtTop: null,
 			}
 		},
-		setup() {
-			provide('isAppAtTop', this.isAppAtTop)
-			provide('windowWidth', this.windowWidth)
+		provide() {
+			return { isAppAtTop: this.isAppAtTop, windowWidth: this.windowWidth }
 		},
 		mounted() {
 			this.windowWidth = window.innerWidth
@@ -33,23 +33,6 @@
 			window.addEventListener('resize', () => {
 				this.windowWidth = window.innerWidth
 			})
-
-			if ('onmousemove' in window) {
-				this.useCustomCursor(this.$refs.cursor)
-			}
-		},
-		methods: {
-			useCustomCursor(cursor) {
-				const setCursorPos = (e) => {
-					const offsetX = cursor.offsetWidth / 2
-					const offsetY = cursor.offsetHeight / 2
-					const x = e.clientX - offsetX
-					const y = e.clientY + window.scrollY - offsetY
-					cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`
-				}
-
-				window.addEventListener('mousemove', setCursorPos)
-			},
 		},
 	}
 </script>
@@ -60,11 +43,9 @@
 		#cursor {
 			background-color: #bfd400;
 		}
-		#hero,
+		#__nuxt,
+		button,
 		a {
-			cursor: none;
-		}
-		#hero button {
 			cursor: none;
 		}
 	}
