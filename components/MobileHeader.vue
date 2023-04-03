@@ -3,16 +3,16 @@
 		<header
 			class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
 			:class="{
-				'translate-x-[calc(100%-8vw-24px)]': !isMobileMenuOpen,
-				'translate-x-[calc(30%-8vw-24px)]': isMobileMenuOpen,
+				'translate-x-[calc(100%-8vw-36px)]': !isMobileMenuOpen,
+				'translate-x-[calc(30%-8vw-36px)]': isMobileMenuOpen,
 			}"
 			ref="header"
 		>
 			<button
 				class="transition transition-all p-3 bg-white border-l-2 border-t-2 border-b-2 border-gray-300 shadow-md rounded-l-full"
 				:class="{
-					'mt-8 pr-5': isWindowScrollAtTop,
-					'ml-1 mt-32 pr-4': !isWindowScrollAtTop,
+					'mt-8 pr-6': isWindowScrollAtTop,
+					'ml-4 mt-32 pr-6': !isWindowScrollAtTop,
 				}"
 				type="button"
 				@click="toggleMobileHeader"
