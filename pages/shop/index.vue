@@ -17,7 +17,7 @@
 		>
 			<nav class="max-lg:hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
 				<div class="flex">
-					<NuxtLink to="/shop/catalog">
+					<NuxtLink to="/shop/products">
 						<button type="button">
 							<Icon
 								class="text-secondary"
@@ -76,25 +76,21 @@
 					class="lg:hidden w-full text-[5vw] font-serif text-center text-black"
 				>
 					<span>Порой просто хочется начать день с чашечки&nbsp;</span>
-					<NuxtLink
-						v-if="randomTea?.parenthesesName"
-						to="/shop/product"
-						tabindex="-1"
+					<button
+						class="px-4 py-1 inline transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent lg:hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
+						:class="{
+							'from-yellow-300 to-yellow-500': randomTea.variety === 'Зелёный',
+							'from-white to-gray-200': randomTea.variety === 'Белый',
+							'from-green-400 to-green-800': randomTea.variety === 'Травянной',
+							'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
+							'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
+							'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
+						}"
+						type="button"
+						data-pointer-type="highlight"
+						v-if="randomTea?.parenthesesTitle"
 					>
-						<button
-							class="px-4 py-1 inline transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent lg:hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
-							:class="{
-								'from-yellow-300 to-yellow-500':
-									randomTea.variety === 'Зелёный',
-								'from-white to-gray-200': randomTea.variety === 'Белый',
-								'from-green-400 to-green-800':
-									randomTea.variety === 'Травянной',
-								'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
-								'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
-								'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
-							}"
-							data-pointer-type="highlight"
-						>
+						<NuxtLink :to="'/shop/products/' + randomTea.id" tabindex="-1">
 							<span
 								class="bg-clip-text bg-gradient-to-r"
 								:class="{
@@ -108,10 +104,11 @@
 										randomTea.variety === 'Чёрный',
 									'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
 								}"
-								>{{ randomTea.parenthesesName }}</span
-							>
-						</button>
-					</NuxtLink>
+								>{{ randomTea.parenthesesTitle }}
+							</span>
+						</NuxtLink>
+					</button>
+					<span v-else>чая</span>
 				</h1>
 			</div>
 			<div
@@ -124,15 +121,15 @@
 					<span>Аромат&nbsp;на</span>
 					<span>каждый&nbsp;день</span>
 				</h1>
-				<NuxtLink to="/shop/catalog" tabindex="-1">
-					<button
-						class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
-						type="button"
-						data-pointer-type="highlight"
-					>
+				<button
+					class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
+					type="button"
+					data-pointer-type="highlight"
+				>
+					<NuxtLink to="/shop/products" tabindex="-1">
 						<span>выбрать</span>
-					</button>
-				</NuxtLink>
+					</NuxtLink>
+				</button>
 			</div>
 		</aside>
 		<Swiper

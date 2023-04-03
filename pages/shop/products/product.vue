@@ -1,6 +1,6 @@
 <script setup>
 	definePageMeta({
-		useHeader: false,
+		useHeader: true,
 		useFooter: true,
 		hasNewsletterBlock: false,
 	})

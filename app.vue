@@ -1,6 +1,8 @@
 <script setup>
 	// const { productsData } = await useFetch('/api/products')
 	import productsData from '~/assets/products.json'
+
+	const { orientaion } = useScreenOrientation
 </script>
 
 <template>
@@ -49,8 +51,6 @@
 		outline: none;
 	}
 
-	@media device {
-	}
 	.page-enter-active,
 	.page-leave-active {
 		transition: all 0.4s;
@@ -59,5 +59,15 @@
 	.page-leave-to {
 		opacity: 0;
 		filter: blur(1rem);
+	}
+
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: opacity 1s ease-in;
+	}
+
+	.fade-enter-from,
+	.fade-leave-to {
+		opacity: 0;
 	}
 </style>

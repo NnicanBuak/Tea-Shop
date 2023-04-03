@@ -1,5 +1,5 @@
 <template>
-	<div class="fixed">
+	<div class="z-10 fixed">
 		<header
 			class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
 			:class="{
@@ -38,14 +38,14 @@
 						<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
 							Другое
 						</h1>
-						<ul class="space-y-4">
-							<li class="text-2xl">
+						<ul class="space-y-4 text-2xl">
+							<li>
 								<NuxtLink to="/shop/cart">Скидки</NuxtLink>
 							</li>
-							<li class="text-2xl">
+							<li>
 								<NuxtLink to="/shop/cart">О нас</NuxtLink>
 							</li>
-							<li class="text-2xl">
+							<li>
 								<NuxtLink to="/shop/cart">Контакты</NuxtLink>
 							</li>
 						</ul>
@@ -54,12 +54,12 @@
 						<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
 							Магазин
 						</h1>
-						<ul class="space-y-4">
-							<li class="text-2xl">
+						<ul class="space-y-4 text-2xl">
+							<li>
 								<NuxtLink to="/shop/cart">Корзина</NuxtLink>
 							</li>
-							<li class="text-2xl">
-								<NuxtLink to="/shop/catalog">Каталог</NuxtLink>
+							<li>
+								<NuxtLink to="/shop/products">Товары</NuxtLink>
 							</li>
 						</ul>
 					</div>
