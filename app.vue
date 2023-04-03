@@ -5,7 +5,6 @@
 
 <template>
 	<NuxtLayout>
-		<NuxtLoadingIndicator />
 		<NuxtPage :products="productsData"></NuxtPage>
 	</NuxtLayout>
 </template>
@@ -13,25 +12,6 @@
 <script>
 	export default {
 		name: 'app',
-		data() {
-			const isAppDesktop = useMediaQuery('(min-width: 1024px)')
-			const isAppMobile = useMediaQuery('not all and (min-width: 1024px)')
-			const appScroll = useWindowScroll()
-
-			return { isAppDesktop, isAppMobile, appScroll }
-		},
-		computed: {
-			isAppAtTop() {
-				return this.appScroll.y.value === 0
-			},
-		},
-		provide() {
-			return {
-				isAppDesktop: this.isAppDesktop,
-				isAppMobile: this.isAppMobile,
-				isAppAtTop: this.isAppAtTop,
-			}
-		},
 		mounted() {
 			let vh = window.innerHeight * 0.01
 			document.documentElement.style.setProperty('--vh', `${vh}px`)

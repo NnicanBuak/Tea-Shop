@@ -1,22 +1,25 @@
 <template>
 	<header
-		class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition transition-all"
+		class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
 		:class="{
-			'translate-x-[calc(100%-8vw-24px)]': !mobileMenuIsOpen,
-			'translate-x-[calc(30%-8vw-24px)]': mobileMenuIsOpen,
+			'translate-x-[calc(100%-8vw-24px)]': !isMobileMenuOpen,
+			'translate-x-[calc(30%-8vw-24px)]': isMobileMenuOpen,
 		}"
 		style="height: 100vh; height: calc(100 * var(--vh, 1vh))"
 		ref="header"
 	>
 		<button
 			class="transition transition-all p-3 bg-white rounded-l-full"
-			:class="{ 'ml-2 mt-6 pr-3': isAppAtTop, 'mt-16 pr-5': !isAppAtTop }"
+			:class="{
+				'ml-2 mt-6 pr-3': isWindowScrollAtTop,
+				'mt-16 pr-5': !isWindowScrollAtTop,
+			}"
 			type="button"
 			@click="toggleMobileHeader"
 		>
 			<Icon
 				:name="
-					mobileMenuIsOpen
+					isMobileMenuOpen
 						? 'material-symbols:menu-open-rounded'
 						: 'material-symbols:menu-rounded'
 				"
@@ -25,7 +28,6 @@
 		</button>
 		<nav
 			class="h-full w-[70vw] p-10 flex flex-col justify-around bg-white"
-			v-show="mobileMenuIsOpen"
 			@click="toggleMobileHeader"
 		>
 			<NuxtLink to="/shop"
@@ -64,7 +66,7 @@
 		class="absolute h-screen w-screen bg-black bg-opacity-25"
 		style="height: 100vh; height: calc(var(--vh, 1vh) * 100)"
 		@click="toggleMobileHeader"
-		v-show="mobileMenuIsOpen"
+		v-show="isMobileMenuOpen"
 	></div>
 </template>
 
@@ -72,16 +74,22 @@
 	export default {
 		name: 'MobileHeader',
 		props: {
-			isAppAtTop: {
-				type: Boolean,
-				required: true,
+			windowScrollY: {
+				type: Number,
+				required: false,
 			},
 		},
 		data() {
-			return { mobileMenuIsOpen: false }
+			return { isMobileMenuOpen: false }
+		},
+		computed: {
+			isWindowScrollAtTop() {
+				if (!this.windowScrollY) return true
+				return this.windowScrollY < 100
+			},
 		},
 		watch: {
-			mobileMenuIsOpen: (newValue) => {
+			isMobileMenuOpen: (newValue) => {
 				const scrollbarWidth =
 					window.innerWidth - document.documentElement.clientWidth
 				if (newValue === true) {
@@ -96,10 +104,9 @@
 				}
 			},
 		},
-		mounted() {},
 		methods: {
 			toggleMobileHeader() {
-				this.mobileMenuIsOpen = !this.mobileMenuIsOpen
+				this.isMobileMenuOpen = !this.isMobileMenuOpen
 			},
 		},
 	}

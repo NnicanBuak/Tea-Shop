@@ -4,17 +4,25 @@
 		id="cursor"
 		ref="cursor"
 	></div>
-	<DesktopHeader v-if="hasHeader && isAppDesktop"></DesktopHeader>
-	<MobileHeader v-if="hasHeader && isAppMobile" :isAppAtTop="isAppAtTop" />
+	<DesktopHeader
+		v-if="hasHeader && useMediaQuery('(min-width: 1024px)') === true"
+	></DesktopHeader>
+	<MobileHeader
+		v-else-if="hasHeader"
+		:windowScrollY="useWindowScroll().y.value"
+	/>
 	<main class="overflow-auto">
-		<slot @click="toggleMobileHeader" />
+		<slot />
 		<section v-if="hasNewsletterBlock">Подпишись на рассылку</section>
 	</main>
-	<footer v-if="hasFooter">FooterFooterFooterFooterFooter</footer>
+	<DesktopFooter
+		v-if="hasFooter && useMediaQuery('(min-width: 1024px)') === true"
+	></DesktopFooter>
+	<MobileFooter v-else-if="hasFooter"></MobileFooter>
 </template>
 
 <script>
-	export default { 
+	export default {
 		defer: true,
 		data() {
 			const { hasNewsletterBlock, hasFooter, hasHeader } = this.$route.meta
