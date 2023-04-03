@@ -21,5 +21,8 @@
     "nuxt": "^3.3.1",
     "nuxt-icon": "^0.3.3",
     "nuxt-swiper": "^1.0.1"
+  },
+  "dependencies": {
+    "glob-parent": ">=5.1.2"
   }
 }
