@@ -5,11 +5,12 @@ export default defineNuxtConfig({
 	modules: [
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
-		'@nuxt/image-edge',
 		'@nuxt/content',
+		'@nuxt/image-edge',
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/google-fonts',
 		'@nuxtjs/html-validator',
+		'@nuxtjs/device',
 		'nuxt-icon',
 		'nuxt-swiper',
 	],
@@ -67,6 +68,9 @@ export default defineNuxtConfig({
 				},
 			],
 		},
+	},
+	device: {
+		refreshOnResize: true,
 	},
 	icon: {
 		size: '32px',

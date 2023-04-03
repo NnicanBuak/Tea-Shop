@@ -4,7 +4,7 @@
 </script>
 
 <template>
-	<NuxtLayout>
+	<NuxtLayout :name="layout">
 		<NuxtPage :products="productsData"></NuxtPage>
 	</NuxtLayout>
 </template>
@@ -12,6 +12,10 @@
 <script>
 	export default {
 		name: 'app',
+		data() {
+			const layout = this.$device.isMobile ? 'mobile' : 'default'
+			return { layout }
+		},
 		mounted() {
 			let vh = window.innerHeight * 0.01
 			document.documentElement.style.setProperty('--vh', `${vh}px`)

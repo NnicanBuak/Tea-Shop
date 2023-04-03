@@ -9,7 +9,7 @@
 <template>
 	<section
 		class="container-fluid mb-40 h-screen grid"
-		style="height: 100vh; height: calc(100 * var(--vh, 1vh))"
+		style="height: calc(100 * var(--vh, 1vh))"
 		id="hero"
 	>
 		<aside
@@ -175,13 +175,6 @@
 				sliderImages: ['slide.png'],
 				randomTea: null,
 			}
-		},
-		setup() {
-			onMounted(() => {
-				if ('onmousemove' in window) {
-					this.useCustomCursor()
-				}
-			})
 		},
 		created() {
 			this.randomTea = this.getRandomProductByCategory('Чай')

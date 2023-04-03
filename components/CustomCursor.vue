@@ -9,7 +9,7 @@
 <script>
 	export default {
 		mounted() {
-			if ('onmousemove' in window) {
+			if ('mousemove' in window) {
 				this.useCustomCursor(this.$refs.cursor)
 			}
 		},

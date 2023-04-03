@@ -1,11 +1,11 @@
 <template>
 	<CustomCursor />
-	<DesktopHeader v-if="hasHeader"></DesktopHeader>
+	<MobileHeader v-if="hasHeader" :windowScrollY="useWindowScroll().y.value" />
 	<main class="overflow-auto">
 		<slot />
 		<section v-if="hasNewsletterBlock">Подпишись на рассылку</section>
 	</main>
-	<DesktopFooter v-if="hasFooter" />
+	<MobileFooter v-if="hasFooter" />
 </template>
 
 <script>
