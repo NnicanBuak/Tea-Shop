@@ -1,6 +1,6 @@
 <script setup>
 	definePageMeta({
-		hasHeader: true,
+		hasHeader: false,
 		hasFooter: true,
 		hasNewsletterBlock: true,
 	})
@@ -82,7 +82,7 @@
 						tabindex="-1"
 					>
 						<button
-							class="px-4 py-1 inline transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
+							class="px-4 py-1 inline transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent lg:hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
 							:class="{
 								'from-yellow-300 to-yellow-500':
 									randomTea.variety === 'Зелёный',
@@ -126,7 +126,7 @@
 				</h1>
 				<NuxtLink to="/shop/catalog" tabindex="-1">
 					<button
-						class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] max-lg:interact:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
+						class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
 						type="button"
 						data-pointer-type="highlight"
 					>
@@ -176,7 +176,7 @@
 				randomTea: null,
 			}
 		},
-		created() {
+		mounted() {
 			this.randomTea = this.getRandomProductByCategory('Чай')
 		},
 		methods: {

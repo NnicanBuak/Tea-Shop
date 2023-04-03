@@ -1,11 +1,11 @@
 <template>
-	<CustomCursor />
-	<MobileHeader v-if="hasHeader" :windowScrollY="useWindowScroll().y.value" />
+	<!-- <CustomCursor /> -->
+	<MobileHeader :windowScrollY="useWindowScroll().y.value" />
 	<main class="overflow-auto">
 		<slot />
 		<section v-if="hasNewsletterBlock">Подпишись на рассылку</section>
 	</main>
-	<MobileFooter v-if="hasFooter" />
+	<Footer v-if="hasFooter" />
 </template>
 
 <script>

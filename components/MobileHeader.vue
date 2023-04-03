@@ -12,7 +12,7 @@
 			class="transition transition-all p-3 bg-white rounded-l-full"
 			:class="{
 				'ml-2 mt-6 pr-3': isWindowScrollAtTop,
-				'mt-16 pr-5': !isWindowScrollAtTop,
+				'ml-1 mt-16 pr-5': !isWindowScrollAtTop,
 			}"
 			type="button"
 			@click="toggleMobileHeader"
@@ -33,28 +33,32 @@
 			<NuxtLink to="/shop"
 				><nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture
 			></NuxtLink>
-			<div class="wrapper flex flex-col gap-10">
+			<div class="container flex flex-col gap-10">
 				<div class="wrapper">
-					<h1 class="-ml-2 mb-3 font-serif text-3xl uppercase">Другое</h1>
+					<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
+						Другое
+					</h1>
 					<ul class="space-y-4">
-						<li class="text-2xl capitalize-first">
+						<li class="text-2xl">
 							<NuxtLink to="/shop/cart">Скидки</NuxtLink>
 						</li>
-						<li class="text-2xl capitalize-first">
+						<li class="text-2xl">
 							<NuxtLink to="/shop/cart">О нас</NuxtLink>
 						</li>
-						<li class="text-2xl capitalize-first">
+						<li class="text-2xl">
 							<NuxtLink to="/shop/cart">Контакты</NuxtLink>
 						</li>
 					</ul>
 				</div>
 				<div class="wrapper">
-					<h1 class="-ml-2 mb-3 font-serif text-3xl uppercase">Магазин</h1>
+					<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
+						Магазин
+					</h1>
 					<ul class="space-y-4">
-						<li class="text-2xl capitalize-first">
+						<li class="text-2xl">
 							<NuxtLink to="/shop/cart">Корзина</NuxtLink>
 						</li>
-						<li class="text-2xl capitalize-first">
+						<li class="text-2xl">
 							<NuxtLink to="/shop/catalog">Каталог</NuxtLink>
 						</li>
 					</ul>

@@ -29,11 +29,11 @@
 		#cursor {
 			background-color: #bfd400;
 		}
-		#__nuxt,
+		/* #__nuxt,
 		button,
 		a {
 			cursor: none;
-		}
+		} */
 	}
 	img {
 		width: 100%;

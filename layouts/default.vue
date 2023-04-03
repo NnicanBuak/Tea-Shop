@@ -1,11 +1,11 @@
 <template>
-	<CustomCursor />
+	<!-- <CustomCursor /> -->
 	<DesktopHeader v-if="hasHeader"></DesktopHeader>
 	<main class="overflow-auto">
 		<slot />
 		<section v-if="hasNewsletterBlock">Подпишись на рассылку</section>
 	</main>
-	<DesktopFooter v-if="hasFooter" />
+	<Footer v-if="hasFooter" />
 </template>
 
 <script>
