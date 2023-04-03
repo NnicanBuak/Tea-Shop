@@ -7,9 +7,13 @@
 </script>
 
 <template>
-	<section class="container-fluid mb-40 h-screen grid" id="hero">
+	<section
+		class="container-fluid mb-40 h-screen grid"
+		style="height: 100vh; height: calc(100 * var(--vh, 1vh))"
+		id="hero"
+	>
 		<aside
-			class="h-screen container-xl max-lg:container-sm flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-16 max-lg:py-[16vh] xl:p-20 row-[1/-1] col-[1/-1]"
+			class="h-full container-xl max-lg:container-sm flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-[calc(8vw+24px)] max-lg:py-[16vh] xl:p-20 row-[1/-1] col-[1/-1]"
 		>
 			<nav class="max-lg:hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
 				<div class="flex">
@@ -63,12 +67,12 @@
 			/>
 			<div class="flex flex-col justify-center items-center gap-10" id="title">
 				<nuxt-picture
-					class="lg:hidden w-[75vw]"
+					class="lg:hidden w-full"
 					id="logo"
 					src="/img/logo-10.svg"
 					alt=""
 				/>
-				<h3
+				<h1
 					class="lg:hidden w-full text-[5vw] font-serif text-center text-black"
 				>
 					<span>Порой просто хочется начать день с чашечки&nbsp;</span>
@@ -108,7 +112,7 @@
 							>
 						</button>
 					</NuxtLink>
-				</h3>
+				</h1>
 			</div>
 			<div
 				class="max-lg:w-full lg:h-full lg:row-[2/-1] lg:col-[2/2]"
@@ -122,7 +126,7 @@
 				</h1>
 				<NuxtLink to="/shop/catalog" tabindex="-1">
 					<button
-						class="lg:absolute max-lg:w-full transition-all hover:px-4 focus-visible:px-4 py-[1vw] lg:border-[3px] hover:border-[3px] focus-visible:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
+						class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] max-lg:interact:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
 						type="button"
 						data-pointer-type="highlight"
 					>
@@ -202,6 +206,7 @@
 <style>
 	@media not all and (min-width: 600px) {
 		.swiper-slide {
+			/* !impartant для того что бы встроенные стили элемента переопределялись */
 			background-position: left 59% bottom !important;
 			background-size: 250% !important;
 		}

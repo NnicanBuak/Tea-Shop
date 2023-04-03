@@ -3,6 +3,7 @@ const colors = require('tailwindcss/colors')
 
 export default defineNuxtConfig({
 	modules: [
+		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
 		'@nuxt/image-edge',
 		'@nuxt/content',

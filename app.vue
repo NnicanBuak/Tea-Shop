@@ -14,25 +14,27 @@
 	export default {
 		name: 'app',
 		data() {
-			return {
-				windowWidth: null,
-				isAppAtTop: null,
-			}
+			const isAppDesktop = useMediaQuery('(min-width: 1024px)')
+			const isAppMobile = useMediaQuery('not all and (min-width: 1024px)')
+			const appScroll = useWindowScroll()
+
+			return { isAppDesktop, isAppMobile, appScroll }
+		},
+		computed: {
+			isAppAtTop() {
+				return this.appScroll.y.value === 0
+			},
 		},
 		provide() {
-			return { isAppAtTop: this.isAppAtTop, windowWidth: this.windowWidth }
+			return {
+				isAppDesktop: this.isAppDesktop,
+				isAppMobile: this.isAppMobile,
+				isAppAtTop: this.isAppAtTop,
+			}
 		},
 		mounted() {
-			this.windowWidth = window.innerWidth
-			this.isAppAtTop = window.pageYOffset === 0
-
-			// эти обработчики событий не обрабатывают события нихуя ._.
-			window.addEventListener('scroll', () => {
-				this.isAppAtTop = window.pageYOffset === 0
-			})
-			window.addEventListener('resize', () => {
-				this.windowWidth = window.innerWidth
-			})
+			let vh = window.innerHeight * 0.01
+			document.documentElement.style.setProperty('--vh', `${vh}px`)
 		},
 	}
 </script>
