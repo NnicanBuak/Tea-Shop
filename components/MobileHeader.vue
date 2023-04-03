@@ -1,77 +1,77 @@
 <template>
-	<header
-		class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
-		:class="{
-			'translate-x-[calc(100%-8vw-24px)]': !isMobileMenuOpen,
-			'translate-x-[calc(30%-8vw-24px)]': isMobileMenuOpen,
-		}"
-		style="height: 100vh; height: calc(100 * var(--vh, 1vh))"
-		ref="header"
-	>
-		<button
-			class="transition transition-all p-3 bg-white rounded-l-full"
+	<div class="fixed">
+		<header
+			class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
 			:class="{
-				'ml-2 mt-6 pr-3': isWindowScrollAtTop,
-				'ml-1 mt-16 pr-5': !isWindowScrollAtTop,
+				'translate-x-[calc(100%-8vw-24px)]': !isMobileMenuOpen,
+				'translate-x-[calc(30%-8vw-24px)]': isMobileMenuOpen,
 			}"
-			type="button"
-			@click="toggleMobileHeader"
+			ref="header"
 		>
-			<Icon
-				:name="
-					isMobileMenuOpen
-						? 'material-symbols:menu-open-rounded'
-						: 'material-symbols:menu-rounded'
-				"
-				size="6vw"
-			></Icon>
-		</button>
-		<nav
-			class="h-full w-[70vw] p-10 flex flex-col justify-around bg-white"
+			<button
+				class="transition transition-all p-3 bg-white border-l-2 border-t-2 border-b-2 border-gray-300 shadow-md rounded-l-full"
+				:class="{
+					'mt-8 pr-5': isWindowScrollAtTop,
+					'ml-1 mt-32 pr-4': !isWindowScrollAtTop,
+				}"
+				type="button"
+				@click="toggleMobileHeader"
+			>
+				<Icon
+					:name="
+						isMobileMenuOpen
+							? 'material-symbols:menu-open-rounded'
+							: 'material-symbols:menu-rounded'
+					"
+					size="8vw"
+				></Icon>
+			</button>
+			<nav
+				class="h-full w-[70vw] p-10 flex flex-col justify-around bg-white"
+				@click="toggleMobileHeader"
+			>
+				<NuxtLink to="/shop"
+					><nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture
+				></NuxtLink>
+				<div class="container flex flex-col gap-10">
+					<div class="wrapper">
+						<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
+							Другое
+						</h1>
+						<ul class="space-y-4">
+							<li class="text-2xl">
+								<NuxtLink to="/shop/cart">Скидки</NuxtLink>
+							</li>
+							<li class="text-2xl">
+								<NuxtLink to="/shop/cart">О нас</NuxtLink>
+							</li>
+							<li class="text-2xl">
+								<NuxtLink to="/shop/cart">Контакты</NuxtLink>
+							</li>
+						</ul>
+					</div>
+					<div class="wrapper">
+						<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
+							Магазин
+						</h1>
+						<ul class="space-y-4">
+							<li class="text-2xl">
+								<NuxtLink to="/shop/cart">Корзина</NuxtLink>
+							</li>
+							<li class="text-2xl">
+								<NuxtLink to="/shop/catalog">Каталог</NuxtLink>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<div
+			class="-z-10 absolute h-screen w-screen bg-black bg-opacity-25"
+			v-show="isMobileMenuOpen"
 			@click="toggleMobileHeader"
-		>
-			<NuxtLink to="/shop"
-				><nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture
-			></NuxtLink>
-			<div class="container flex flex-col gap-10">
-				<div class="wrapper">
-					<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
-						Другое
-					</h1>
-					<ul class="space-y-4">
-						<li class="text-2xl">
-							<NuxtLink to="/shop/cart">Скидки</NuxtLink>
-						</li>
-						<li class="text-2xl">
-							<NuxtLink to="/shop/cart">О нас</NuxtLink>
-						</li>
-						<li class="text-2xl">
-							<NuxtLink to="/shop/cart">Контакты</NuxtLink>
-						</li>
-					</ul>
-				</div>
-				<div class="wrapper">
-					<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
-						Магазин
-					</h1>
-					<ul class="space-y-4">
-						<li class="text-2xl">
-							<NuxtLink to="/shop/cart">Корзина</NuxtLink>
-						</li>
-						<li class="text-2xl">
-							<NuxtLink to="/shop/catalog">Каталог</NuxtLink>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
-	<div
-		class="absolute h-screen w-screen bg-black bg-opacity-25"
-		style="height: 100vh; height: calc(var(--vh, 1vh) * 100)"
-		@click="toggleMobileHeader"
-		v-show="isMobileMenuOpen"
-	></div>
+		></div>
+	</div>
 </template>
 
 <script>
@@ -89,7 +89,7 @@
 		computed: {
 			isWindowScrollAtTop() {
 				if (!this.windowScrollY) return true
-				return this.windowScrollY < 100
+				return this.windowScrollY < 50
 			},
 		},
 		watch: {
@@ -97,12 +97,12 @@
 				const scrollbarWidth =
 					window.innerWidth - document.documentElement.clientWidth
 				if (newValue === true) {
-					document.body.classList.add('overflow-hidden')
+					document.body.classList.add('overflow-clip')
 
 					if (scrollbarWidth !== 0)
 						document.body.style.marginRight = `${scrollbarWidth}px`
 				} else {
-					document.body.classList.remove('overflow-hidden')
+					document.body.classList.remove('overflow-clip')
 
 					document.body.style.marginRight = null
 				}

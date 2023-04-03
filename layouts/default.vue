@@ -3,7 +3,7 @@
 	<DesktopHeader v-if="hasHeader"></DesktopHeader>
 	<main class="overflow-auto">
 		<slot />
-		<section v-if="hasNewsletterBlock">Подпишись на рассылку</section>
+		<subscribeNewsletter v-if="hasNewsletterBlock" />
 	</main>
 	<Footer v-if="hasFooter" />
 </template>
