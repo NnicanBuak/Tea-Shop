@@ -3,7 +3,7 @@
 	<DesktopHeader v-if="hasHeader"></DesktopHeader>
 	<main class="overflow-auto">
 		<slot />
-		<subscribeNewsletter v-if="hasNewsletterBlock" />
+		<SubscribeNewsletter v-if="hasNewsletterBlock" />
 	</main>
 	<Footer v-if="hasFooter" />
 </template>

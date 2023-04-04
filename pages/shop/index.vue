@@ -88,7 +88,7 @@
 						}"
 						type="button"
 						data-pointer-type="highlight"
-						v-if="randomTea?.parenthesesTitle"
+						v-if="randomTea?.parenthesesName"
 					>
 						<NuxtLink :to="'/shop/products/' + randomTea.id" tabindex="-1">
 							<span
@@ -104,7 +104,7 @@
 										randomTea.variety === 'Чёрный',
 									'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
 								}"
-								>{{ randomTea.parenthesesTitle }}
+								>{{ randomTea.parenthesesName }}
 							</span>
 						</NuxtLink>
 					</button>
@@ -174,7 +174,7 @@
 			}
 		},
 		mounted() {
-			this.randomTea = this.getRandomProductByCategory('Чай')
+			this.randomTea = this.getRandomProductByCategory('🍵')
 		},
 		methods: {
 			getRandomProductByCategory(category) {
@@ -182,7 +182,10 @@
 					return null
 				}
 				const ProductsByCategory = this.products.filter(
-					(product) => product.category === category,
+					(product) =>
+						product.inStock &&
+						product.aviableQuantity > 0 &&
+						product.category === category,
 				)
 				const randomIndex = Math.floor(
 					Math.random() * ProductsByCategory.length,

@@ -2,7 +2,7 @@
 	<!-- <CustomCursor /> -->
 	<Transition name="fade" v-if="$device.isMobile">
 		<div
-			class="z-10 fixed h-screen w-screen p-20 grid place-content-center gap-16 grid-rows-2 bg-black bg-opacity-70"
+			class="z-20 fixed h-screen w-screen p-20 grid place-content-center gap-16 grid-rows-2 bg-black bg-opacity-70"
 			v-show="useScreenOrientation().orientation.value === 'landscape-primary'"
 		>
 			<Icon
@@ -20,7 +20,7 @@
 	<main class="overflow-auto">
 		{{ orientation }}
 		<slot />
-		<subscribeNewsletter v-if="hasNewsletterBlock" />
+		<SubscribeNewsletter v-if="hasNewsletterBlock" />
 	</main>
 	<Footer v-if="hasFooter" />
 </template>
