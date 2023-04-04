@@ -16,7 +16,7 @@
 			</h1>
 		</div>
 	</Transition>
-	<MobileHeader :windowScrollY="useWindowScroll().y.value" />
+	<MobileHeader :isWindowScrollAtTop="isWindowScrollAtTop" />
 	<main class="space-y-40 overflow-auto">
 		{{ orientation }}
 		<slot />
@@ -30,12 +30,17 @@
 		defer: true,
 		data() {
 			const { hasNewsletterBlock, hasFooter, hasHeader } = this.$route.meta
-
 			return {
 				hasNewsletterBlock,
 				hasFooter,
 				hasHeader,
 			}
+		},
+		computed: {
+			isWindowScrollAtTop() {
+				const windowScroll = useWindowScroll()
+				return windowScroll.y.value < 100
+			},
 		},
 	}
 </script>

@@ -78,19 +78,13 @@
 	export default {
 		name: 'MobileHeader',
 		props: {
-			windowScrollY: {
-				type: Number,
+			isWindowScrollAtTop: {
+				type: Boolean,
 				required: false,
 			},
 		},
 		data() {
 			return { isMobileMenuOpen: false }
-		},
-		computed: {
-			isWindowScrollAtTop() {
-				if (!this.windowScrollY) return true
-				return this.windowScrollY < 50
-			},
 		},
 		watch: {
 			isMobileMenuOpen: (newValue) => {
@@ -107,6 +101,9 @@
 					document.body.style.marginRight = null
 				}
 			},
+		},
+		updated() {
+			console.log('MobileHeader updated')
 		},
 		methods: {
 			toggleMobileHeader() {
