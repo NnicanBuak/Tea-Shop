@@ -63,11 +63,21 @@
 
 	.fade-enter-active,
 	.fade-leave-active {
-		transition: opacity 1s ease-in;
+		transition: opacity 0.2s ease;
 	}
 
 	.fade-enter-from,
 	.fade-leave-to {
+		opacity: 0;
+	}
+
+	.long-fade-enter-active,
+	.long-fade-leave-active {
+		transition: opacity 1s ease-in;
+	}
+
+	.long-fade-enter-from,
+	.long-fade-leave-to {
 		opacity: 0;
 	}
 </style>

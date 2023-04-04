@@ -156,15 +156,29 @@
 			</SwiperSlide>
 		</Swiper>
 	</section>
-	<section class="text-secondary text-3xl">
-		<h1 class="my-4 font-serif text-center">Как мы это делаем?</h1>
-		<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+	<section>
+		<h1 class="my-4 font-serif text-center text-secondary text-3xl">
+			Ассортимент
+		</h1>
+		<div class="wrapper my-8">
+			<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		</div>
+		<MenuSwiper><MenuCard></MenuCard></MenuSwiper>
+		<div class="wrapper my-8">
+			<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		</div>
+	</section>
+	<section class="text-secondary">
+		<h1 class="font-serif text-center text-3xl">Как мы это делаем?</h1>
+		<div class="wrapper my-8">
+			<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		</div>
 		<h2 class="my-4 font-sans font-bold text-4xl text-center text-primary">
 			Главный секрет приготовления
 		</h2>
 		<div class="p-6 mx-8 mt-16 bg-primary rounded-xl">
 			<nuxt-img
-				class="h-40 w-40 mx-auto -mt-16 mb-8 rounded-full"
+				class="h-44 w-44 mx-auto -mt-16 border-[16px] border-primary rounded-full"
 				src="/img/bg.png"
 			/>
 			<h3 class="font-bold font-serif text-xl">
@@ -179,11 +193,15 @@
 			</p>
 			<NuxtLink to="/about"></NuxtLink>
 		</div>
+		<div class="wrapper my-8">
+			<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		</div>
 	</section>
 </template>
 
 <script>
 	export default {
+		name: 'shop',
 		props: {
 			products: {
 				type: Array,
@@ -201,19 +219,18 @@
 		},
 		methods: {
 			getRandomProductByCategory(category) {
-				if (!this.products) {
-					return null
+				if (this.products) {
+					const ProductsByCategory = this.products.filter(
+						(product) =>
+							product.inStock &&
+							product.aviableQuantity > 0 &&
+							product.category === category,
+					)
+					const randomIndex = Math.floor(
+						Math.random() * ProductsByCategory.length,
+					)
+					return ProductsByCategory[randomIndex]
 				}
-				const ProductsByCategory = this.products.filter(
-					(product) =>
-						product.inStock &&
-						product.aviableQuantity > 0 &&
-						product.category === category,
-				)
-				const randomIndex = Math.floor(
-					Math.random() * ProductsByCategory.length,
-				)
-				return ProductsByCategory[randomIndex]
 			},
 		},
 	}

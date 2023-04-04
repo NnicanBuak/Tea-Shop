@@ -1,11 +1,13 @@
 <template>
-	<!-- <CustomCursor /> -->
-	<DesktopHeader v-if="hasHeader"></DesktopHeader>
-	<main class="space-y-40 overflow-auto">
-		<slot />
-		<SubscribeNewsletter v-if="hasNewsletterBlock" />
-	</main>
-	<Footer v-if="hasFooter" />
+	<div>
+		<!-- <CustomCursor /> -->
+		<DesktopHeader v-if="hasHeader"></DesktopHeader>
+		<main class="space-y-40 overflow-auto">
+			<slot />
+			<SubscribeNewsletter v-if="hasNewsletterBlock" />
+		</main>
+		<Footer v-if="hasFooter" />
+	</div>
 </template>
 
 <script>

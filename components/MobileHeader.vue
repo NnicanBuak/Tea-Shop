@@ -1,82 +1,89 @@
 <template>
-	<div class="z-10 fixed">
-		<header
-			class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
-			:class="{
-				'translate-x-[calc(100%-8vw-36px)]': !isMobileMenuOpen,
-				'translate-x-[calc(30%-8vw-36px)]': isMobileMenuOpen,
-			}"
-			ref="header"
-		>
-			<button
-				class="transition transition-all p-3 bg-white border-l-2 border-t-2 border-b-2 border-gray-300 shadow-md rounded-l-full"
+	<div>
+		<div class="z-10 fixed">
+			<header
+				class="z-10 absolute h-screen w-screen inset-0 flex items-start transform transition-all touch-pan-x snap-x"
 				:class="{
-					'mt-8 pr-6': isWindowScrollAtTop,
-					'ml-4 mt-[15vh] pr-6': !isWindowScrollAtTop,
+					'translate-x-[calc(100%-8vw-36px)]': !isMobileMenuOpen,
+					'translate-x-[calc(30%-8vw-36px)]': isMobileMenuOpen,
 				}"
-				type="button"
-				@click="toggleMobileHeader"
+				ref="header"
 			>
-				<Icon
-					:name="
-						isMobileMenuOpen
-							? 'material-symbols:menu-open-rounded'
-							: 'material-symbols:menu-rounded'
-					"
-					size="8vw"
-				></Icon>
-			</button>
-			<nav
-				class="h-full w-[70vw] p-10 flex flex-col justify-around bg-white"
+				<button
+					class="transition transition-all p-3 bg-white border-l-2 border-t-2 border-b-2 border-gray-300 shadow-md rounded-l-full snap-end"
+					:class="{
+						'mt-8 pr-6': isWindowScrollAtTop,
+						'ml-4 mt-[15vh] pr-6': !isWindowScrollAtTop,
+					}"
+					type="button"
+					@click="toggleMobileHeader"
+				>
+					<Icon
+						:name="
+							isMobileMenuOpen
+								? 'material-symbols:menu-open-rounded'
+								: 'material-symbols:menu-rounded'
+						"
+						size="8vw"
+					></Icon>
+				</button>
+				<nav
+					class="h-full w-[70vw] p-10 flex flex-col justify-around bg-white snap-end"
+					@click="toggleMobileHeader"
+				>
+					<NuxtLink to="/shop"
+						><nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture
+					></NuxtLink>
+					<div class="container flex flex-col gap-10">
+						<div class="wrapper">
+							<h1
+								class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase"
+							>
+								Другое
+							</h1>
+							<ul class="space-y-4 text-2xl">
+								<li>
+									<NuxtLink to="/shop/cart">Скидки</NuxtLink>
+								</li>
+								<li>
+									<NuxtLink to="/shop/cart">О нас</NuxtLink>
+								</li>
+								<li>
+									<NuxtLink to="/shop/cart">Контакты</NuxtLink>
+								</li>
+							</ul>
+						</div>
+						<div class="wrapper">
+							<h1
+								class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase"
+							>
+								Магазин
+							</h1>
+							<ul class="space-y-4 text-2xl">
+								<li>
+									<NuxtLink to="/shop/cart">Корзина</NuxtLink>
+								</li>
+								<li>
+									<NuxtLink to="/shop/products">Товары</NuxtLink>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</header>
+		</div>
+		<Transition name="fade">
+			<div
+				class="absolute h-screen w-screen bg-black bg-opacity-25"
+				v-show="isMobileMenuOpen"
 				@click="toggleMobileHeader"
-			>
-				<NuxtLink to="/shop"
-					><nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture
-				></NuxtLink>
-				<div class="container flex flex-col gap-10">
-					<div class="wrapper">
-						<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
-							Другое
-						</h1>
-						<ul class="space-y-4 text-2xl">
-							<li>
-								<NuxtLink to="/shop/cart">Скидки</NuxtLink>
-							</li>
-							<li>
-								<NuxtLink to="/shop/cart">О нас</NuxtLink>
-							</li>
-							<li>
-								<NuxtLink to="/shop/cart">Контакты</NuxtLink>
-							</li>
-						</ul>
-					</div>
-					<div class="wrapper">
-						<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
-							Магазин
-						</h1>
-						<ul class="space-y-4 text-2xl">
-							<li>
-								<NuxtLink to="/shop/cart">Корзина</NuxtLink>
-							</li>
-							<li>
-								<NuxtLink to="/shop/products">Товары</NuxtLink>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</header>
-		<div
-			class="-z-10 absolute h-screen w-screen bg-black bg-opacity-25"
-			v-show="isMobileMenuOpen"
-			@click="toggleMobileHeader"
-		></div>
+			></div>
+		</Transition>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: 'MobileHeader',
 		props: {
 			isWindowScrollAtTop: {
 				type: Boolean,
@@ -101,9 +108,6 @@
 					document.body.style.marginRight = null
 				}
 			},
-		},
-		updated() {
-			console.log('MobileHeader updated')
 		},
 		methods: {
 			toggleMobileHeader() {
