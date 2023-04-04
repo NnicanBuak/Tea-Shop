@@ -1,7 +1,7 @@
 <template>
 	<!-- <CustomCursor /> -->
 	<DesktopHeader v-if="hasHeader"></DesktopHeader>
-	<main class="overflow-auto">
+	<main class="space-y-40 overflow-auto">
 		<slot />
 		<SubscribeNewsletter v-if="hasNewsletterBlock" />
 	</main>

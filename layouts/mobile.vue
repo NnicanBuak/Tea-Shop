@@ -17,7 +17,7 @@
 		</div>
 	</Transition>
 	<MobileHeader :windowScrollY="useWindowScroll().y.value" />
-	<main class="overflow-auto">
+	<main class="space-y-40 overflow-auto">
 		{{ orientation }}
 		<slot />
 		<SubscribeNewsletter v-if="hasNewsletterBlock" />

@@ -8,7 +8,7 @@
 
 <template>
 	<section
-		class="container-fluid mb-40 h-screen grid"
+		class="container-fluid h-screen grid"
 		style="height: calc(100 * var(--vh, 1vh))"
 		id="hero"
 	>
@@ -155,6 +155,32 @@
 			>
 			</SwiperSlide>
 		</Swiper>
+	</section>
+	<section class="text-secondary text-3xl">
+		<h1 class="my-4 font-serif text-center">Как мы это делаем?</h1>
+		<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		<h2
+			class="my-4 font-serif font-bold text-4xl text-center text-primary drop-shadow-xl"
+		>
+			Главный секрет приготовления
+		</h2>
+		<div class="p-6 mx-8 mt-16 bg-primary rounded-xl">
+			<nuxt-img
+				class="h-40 w-40 mx-auto -mt-16 mb-8 rounded-full"
+				src="/img/bg.png"
+			/>
+			<h3 class="font-bold font-serif text-lg">
+				Мы не скрываем того, из чего именно собран наш чай. Сейчас расскажем
+				поподробней.
+			</h3>
+			<Divider class="w-[60vw]" />
+			<p class="text-base">
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non
+				debitis nam rem esse at voluptates accusamus quod libero sint? Expedita
+				quod odio voluptas praesentium quas illum laborum amet voluptatibus?
+			</p>
+			<NuxtLink to="/about"></NuxtLink>
+		</div>
 	</section>
 </template>
 
