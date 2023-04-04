@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="menu-swiper">
 		<slot />
 	</div>
 </template>

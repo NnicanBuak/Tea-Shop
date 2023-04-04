@@ -1,12 +1,10 @@
 <template>
 	<div>
 		<!-- <CustomCursor /> -->
-		<Transition name="long-fade" v-if="$device.isMobile">
+		<Transition name="long-fade">
 			<div
 				class="z-20 fixed h-screen w-screen p-20 grid place-content-center gap-16 grid-rows-2 bg-black bg-opacity-70"
-				v-show="
-					useScreenOrientation().orientation.value === 'landscape-primary'
-				"
+				v-show="isScreenOrientationLandscape"
 			>
 				<Icon
 					class="h-full w-full animate-pulse text-white"
@@ -14,17 +12,17 @@
 					size="20vh"
 				></Icon>
 				<h1 class="font-bold text-center text-white text-2xl">
-					Для лучшего пользовательсокого опыта рекомендуем использовать сайт в
+					Для лучшего пользовательского опыта рекомендуем использовать сайт в
 					портретном режиме
 				</h1>
 			</div>
 		</Transition>
-		<MobileHeader :isWindowScrollAtTop="isWindowScrollAtTop" />
+		<MobileHeader v-once :isWindowScrollAtTop="isWindowScrollAtTop" />
 		<main class="space-y-40 overflow-auto">
 			<slot />
-			<SubscribeNewsletter v-if="hasNewsletterBlock" />
+			<SubscribeNewsletter v-once v-if="hasNewsletterBlock" />
 		</main>
-		<Footer v-if="hasFooter" />
+		<Footer v-once v-if="hasFooter" />
 	</div>
 </template>
 
@@ -40,6 +38,9 @@
 			}
 		},
 		computed: {
+			isScreenOrientationLandscape() {
+				return useScreenOrientation().orientation.value === 'landscape-primary'
+			},
 			isWindowScrollAtTop() {
 				const windowScroll = useWindowScroll()
 				return windowScroll.y.value < 100

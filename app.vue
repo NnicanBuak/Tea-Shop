@@ -1,8 +1,6 @@
 <script setup>
 	// const { productsData } = await useFetch('/api/products')
 	import productsData from '~/assets/products.json'
-
-	const { orientaion } = useScreenOrientation
 </script>
 
 <template>

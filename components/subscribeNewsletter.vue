@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="relative p-12 space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
+		class="relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
 	>
 		<nuxt-picture
 			class="absolute inset-0 left-4 w-[5vw]"

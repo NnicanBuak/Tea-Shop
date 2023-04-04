@@ -7,6 +7,7 @@ export default defineNuxtConfig({
 		'@vite-pwa/nuxt',
 		'@nuxt/content',
 		'@nuxt/image-edge',
+		'@nuxt/devtools',
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/google-fonts',
 		'@nuxtjs/html-validator',
@@ -69,13 +70,9 @@ export default defineNuxtConfig({
 			],
 		},
 	},
-	device: {
-		refreshOnResize: true,
-	},
 	icon: {
 		size: '32px',
 		class: 'icon',
-		aliases: {},
 	},
 	googleFonts: {
 		families: {

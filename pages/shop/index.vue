@@ -156,31 +156,50 @@
 			</SwiperSlide>
 		</Swiper>
 	</section>
-	<section>
+	<section class="px-[calc(8vw+24px)]">
 		<h1 class="my-4 font-serif text-center text-secondary text-3xl">
 			Ассортимент
 		</h1>
-		<div class="wrapper my-8">
-			<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		<div class="wrapper h-1 my-8">
+			<nuxt-picture
+				class="absolute left-0 w-screen"
+				src="/img/decoration-horizontal.svg"
+			/>
 		</div>
-		<MenuSwiper><MenuCard></MenuCard></MenuSwiper>
-		<div class="wrapper my-8">
-			<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		<MenuSwiper>
+			<MenuCard
+				class="h-36 rounded-xl"
+				linkTo=""
+				title="Новинки"
+				backgroundImage="url(/img/bg.png)"
+				backgroundPosition="bottom"
+				gradientOnBackground="linear-gradient(360deg, rgba(79,89,0,0.8) 10%, rgba(255,255,255,0) 50%)"
+			>
+			</MenuCard>
+		</MenuSwiper>
+		<div class="wrapper h-1 my-8">
+			<nuxt-picture
+				class="absolute left-0 w-screen"
+				src="/img/decoration-horizontal.svg"
+			/>
 		</div>
 	</section>
-	<section class="text-secondary">
+	<section class="px-[calc(8vw+24px)] text-secondary">
 		<h1 class="font-serif text-center text-3xl">Как мы это делаем?</h1>
-		<div class="wrapper my-8">
-			<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		<div class="wrapper h-1 my-8">
+			<nuxt-picture
+				class="absolute left-0 w-screen"
+				src="/img/decoration-horizontal.svg"
+			/>
 		</div>
 		<h2 class="my-4 font-sans font-bold text-4xl text-center text-primary">
 			Главный секрет приготовления
 		</h2>
-		<div class="p-6 mx-8 mt-16 bg-primary rounded-xl">
-			<nuxt-img
-				class="h-44 w-44 mx-auto -mt-16 border-[16px] border-primary rounded-full"
-				src="/img/bg.png"
-			/>
+		<nuxt-img
+			class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
+			src="/img/bg.png"
+		/>
+		<div class="p-6 bg-primary rounded-xl">
 			<h3 class="font-bold font-serif text-xl">
 				Мы не скрываем того, из чего именно собран наш чай. Сейчас расскажем
 				поподробней.
@@ -193,8 +212,11 @@
 			</p>
 			<NuxtLink to="/about"></NuxtLink>
 		</div>
-		<div class="wrapper my-8">
-			<nuxt-picture class="w-full" src="/img/decoration-horizontal.svg" />
+		<div class="wrapper h-1 my-8">
+			<nuxt-picture
+				class="absolute left-0 w-screen"
+				src="/img/decoration-horizontal.svg"
+			/>
 		</div>
 	</section>
 </template>
