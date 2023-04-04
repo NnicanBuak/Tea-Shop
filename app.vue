@@ -12,9 +12,10 @@
 <script>
 	export default {
 		name: 'app',
-		data() {
-			const layout = this.$device.isMobile ? 'mobile' : 'default'
-			return { layout }
+		computed: {
+			layout() {
+				return this.$device.isMobile ? 'mobile' : 'default'
+			},
 		},
 		mounted() {
 			let vh = window.innerHeight * 0.01

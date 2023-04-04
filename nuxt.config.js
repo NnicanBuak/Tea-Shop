@@ -70,6 +70,9 @@ export default defineNuxtConfig({
 			],
 		},
 	},
+	device: {
+		refreshOnResize: true,
+	},
 	icon: {
 		size: '32px',
 		class: 'icon',
