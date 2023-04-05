@@ -4,11 +4,36 @@
 </script>
 
 <template>
-	<NuxtLoadingIndicator color="#bfd400" height="6" />
-	<NuxtLayout :name="layout">
+	<NuxtLoadingIndicator class="w-screen" color="#bfd400" />
+	<NuxtLayout :name="layout" :hasHeader="hasHeader" :hasFooter="hasFooter">
 		<main class="space-y-40 overflow-auto">
 			<NuxtPage :products="productsData"></NuxtPage>
-			<SubscribeNewsletter v-once v-if="hasNewsletterBlock" />
+			<section
+				class="relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
+				v-if="hasNewsletterBlock"
+			>
+				<nuxt-picture
+					class="absolute inset-0 left-4 w-[5vw]"
+					src="/img/decoration.svg"
+				></nuxt-picture>
+				<h1 class="font-bold font-serif text-4xl">
+					Подпишись на&nbsp;рассылку
+				</h1>
+				<form class="space-y-4" action="newsletterSubscribing">
+					<input
+						class="px-4 p-2 shadow-inner rounded-full"
+						type="email"
+						placeholder="Ваш email"
+						required
+					/>
+					<button
+						class="px-4 p-2 text-white bg-primary2 rounded-full"
+						type="submit"
+					>
+						Подписаться
+					</button>
+				</form>
+			</section>
 		</main>
 	</NuxtLayout>
 </template>
@@ -16,6 +41,14 @@
 <script>
 	export default {
 		name: 'app',
+		data() {
+			const { hasNewsletterBlock, hasFooter, hasHeader } = this.$route.meta
+			return {
+				hasNewsletterBlock,
+				hasFooter,
+				hasHeader,
+			}
+		},
 		computed: {
 			layout() {
 				return this.$device.isMobile ? 'mobile' : 'default'

@@ -17,23 +17,18 @@
 				</h1>
 			</div>
 		</Transition>
-		<DesktopHeader v-once v-if="hasHeader"></DesktopHeader>
+		<DesktopHeader v-if="hasHeader"></DesktopHeader>
 		<slot />
-		<Footer v-once v-if="hasFooter" />
+		<Footer v-if="hasFooter" />
 	</div>
 </template>
 
 <script>
 	export default {
 		defer: true,
-		data() {
-			const { hasNewsletterBlock, hasFooter, hasHeader } = this.$route.meta
-
-			return {
-				hasNewsletterBlock,
-				hasFooter,
-				hasHeader,
-			}
+		props: {
+			hasHeader: { type: Boolean, required: true },
+			hasFooter: { type: Boolean, required: true },
 		},
 		computed: {
 			isWindowWidthNarrow() {

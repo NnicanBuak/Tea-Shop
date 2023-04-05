@@ -9,17 +9,16 @@
 			backgroundPosition: backgroundPosition ? backgroundPosition : 'unset',
 			backgroundSize: backgroundSize ? backgroundSize : 'cover',
 		}"
+		@click="navigateTo(linkTo)"
 	>
-		<NuxtLink :to="linkTo" >
-			<h1
-				class="absolute left-6 bottom-4 font-serif font-bold text-2xl"
-				:style="{ color: titleColor }"
-				v-if="title"
-			>
-				{{ title }}
-			</h1>
-			<slot />
-		</NuxtLink>
+		<h1
+			class="absolute left-6 bottom-4 font-serif font-bold text-2xl"
+			:style="{ color: titleColor }"
+			v-if="title"
+		>
+			{{ title }}
+		</h1>
+		<slot />
 	</div>
 </template>
 

@@ -17,7 +17,8 @@
 				</h1>
 			</div>
 		</Transition>
-		<MobileHeader v-once :isWindowScrollAtTop="isWindowScrollAtTop">
+
+		<MobileHeader :isWindowScrollAtTop="isWindowScrollAtTop">
 			<NuxtLink to="/shop">
 				<nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture>
 			</NuxtLink>
@@ -28,13 +29,13 @@
 					</h1>
 					<ul class="space-y-4 text-2xl">
 						<li>
-							<NuxtLink to="/shop/cart">Скидки</NuxtLink>
+							<NuxtLink to="/sales">Скидки</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink to="/shop/cart">О нас</NuxtLink>
+							<NuxtLink to="/about">О нас</NuxtLink>
 						</li>
 						<li>
-							<NuxtLink to="/shop/cart">Контакты</NuxtLink>
+							<NuxtLink to="/contacts">Контакты</NuxtLink>
 						</li>
 					</ul>
 				</div>
@@ -53,21 +54,18 @@
 				</div>
 			</div>
 		</MobileHeader>
+		<div class="wrapper h-32" v-if="hasHeader"></div>
 		<slot />
-		<Footer class="mt-40" v-once v-if="hasFooter" />
+		<Footer class="mt-40" v-if="hasFooter" />
 	</div>
 </template>
 
 <script>
 	export default {
 		defer: true,
-		data() {
-			const { hasNewsletterBlock, hasFooter, hasHeader } = this.$route.meta
-			return {
-				hasNewsletterBlock,
-				hasFooter,
-				hasHeader,
-			}
+		props: {
+			hasHeader: { type: Boolean, required: false },
+			hasFooter: { type: Boolean, required: true },
 		},
 		computed: {
 			isScreenOrientationLandscape() {

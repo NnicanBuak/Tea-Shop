@@ -17,46 +17,34 @@
 		>
 			<nav class="max-lg:hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
 				<div class="flex">
-					<NuxtLink to="/shop/products">
-						<button type="button">
-							<Icon
-								class="text-secondary"
-								name="material-symbols:search"
-								size="32"
-							/>
-						</button>
-					</NuxtLink>
-					<NuxtLink to="/shop/cart">
-						<button type="button">
-							<Icon
-								class="text-secondary"
-								name="material-symbols:shopping-bag-outline"
-								size="32"
-							/>
-						</button>
-					</NuxtLink>
+					<button type="button" @click="navigateTo('/shop/products')">
+						<Icon
+							class="text-secondary"
+							name="material-symbols:search"
+							size="32"
+						/>
+					</button>
+					<button type="button" @click="navigateTo('/shop/cart')">
+						<Icon
+							class="text-secondary"
+							name="material-symbols:shopping-bag-outline"
+							size="32"
+						/>
+					</button>
 				</div>
 				<div class="flex">
-					<NuxtLink to="/shop">
-						<button type="button">
-							<span><b>Магазин</b></span>
-						</button>
-					</NuxtLink>
-					<NuxtLink to="/sales">
-						<button type="button">
-							<span>Скидки</span>
-						</button>
-					</NuxtLink>
-					<NuxtLink to="/about">
-						<button type="button">
-							<span>О нас</span>
-						</button>
-					</NuxtLink>
-					<NuxtLink to="/contacts">
-						<button type="button">
-							<span>Контакты</span>
-						</button>
-					</NuxtLink>
+					<button type="button" @click="navigateTo('/shop')">
+						<span><b>Магазин</b></span>
+					</button>
+					<button type="button" @click="navigateTo('/sales')">
+						<span>Скидки</span>
+					</button>
+					<button type="button" @click="navigateTo('/about')">
+						<span>О нас</span>
+					</button>
+					<button type="button" @click="navigateTo('/contacts')">
+						<span>Контакты</span>
+					</button>
 				</div>
 			</nav>
 			<nuxt-picture
@@ -125,10 +113,9 @@
 					class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
 					type="button"
 					data-pointer-type="highlight"
+					@click="navigateTo('/shop/products')"
 				>
-					<NuxtLink to="/shop/products" tabindex="-1">
-						<span>выбрать</span>
-					</NuxtLink>
+					<span>выбрать</span>
 				</button>
 			</div>
 		</aside>
@@ -166,15 +153,35 @@
 				src="/img/decoration-horizontal.svg"
 			/>
 		</div>
-		<MenuSwiper>
+		<MenuSwiper class="space-y-10">
+			<MenuCard
+				class="h-40 w-max-80 rounded-xl"
+				linkTo="/shop/products"
+				title="Ассортимент"
+				titleColor="#4f501d"
+				backgroundImage="url(/img/tea1.png)"
+				backgroundPosition="bottom"
+				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 35%, rgba(0,0,0,0) 80%)"
+			>
+			</MenuCard>
+			<MenuCard
+				class="h-40 w-max-80 rounded-xl"
+				linkTo="/shop/products"
+				title="Акции"
+				titleColor="#4f501d"
+				backgroundImage="url(/img/tea2.png)"
+				backgroundPosition="bottom"
+				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 35%, rgba(0,0,0,0) 80%)"
+			>
+			</MenuCard>
 			<MenuCard
 				class="h-40 w-max-80 rounded-xl"
 				linkTo="/shop/products"
 				title="Новинки"
 				titleColor="#4f501d"
-				backgroundImage="url(/img/bg.png)"
+				backgroundImage="url(/img/tea3.png)"
 				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 40%, rgba(0,0,0,0) 80%)"
+				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 35%, rgba(0,0,0,0) 80%)"
 			>
 			</MenuCard>
 		</MenuSwiper>
@@ -194,7 +201,7 @@
 			class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
 			src="/img/bg.png"
 		/>
-		<div class="p-6 bg-primary rounded-xl">
+		<div class="p-6 bg-primary rounded-xl" @click="navigateTo('/about')">
 			<h3 class="font-bold font-serif text-xl">
 				Мы не скрываем того, из чего именно собран наш чай. Сейчас расскажем
 				поподробней.
@@ -205,7 +212,9 @@
 				debitis nam rem esse at voluptates accusamus quod libero sint? Expedita
 				quod odio voluptas praesentium quas illum laborum amet voluptatibus?
 			</p>
-			<NuxtLink to="/about"></NuxtLink>
+			<p class="mt-4 font-sans text-right underline decoration-4">
+				Читать дальше
+			</p>
 		</div>
 	</section>
 </template>
