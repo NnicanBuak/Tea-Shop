@@ -18,10 +18,7 @@
 			</div>
 		</Transition>
 		<DesktopHeader v-once v-if="hasHeader"></DesktopHeader>
-		<main class="space-y-40 overflow-auto">
-			<slot />
-			<SubscribeNewsletter v-once v-if="hasNewsletterBlock" />
-		</main>
+		<slot />
 		<Footer v-once v-if="hasFooter" />
 	</div>
 </template>

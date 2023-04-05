@@ -10,9 +10,10 @@
 			backgroundSize: backgroundSize ? backgroundSize : 'cover',
 		}"
 	>
-		<NuxtLink :to="linkTo">
+		<NuxtLink :to="linkTo" >
 			<h1
-				class="absolute left-6 bottom-4 font-serif text-white text-2xl"
+				class="absolute left-6 bottom-4 font-serif font-bold text-2xl"
+				:style="{ color: titleColor }"
 				v-if="title"
 			>
 				{{ title }}
@@ -27,6 +28,7 @@
 		props: {
 			linkTo: { type: String, required: true },
 			title: { type: String, required: false },
+			titleColor: { type: String, required: false },
 			gradientOnBackground: { type: String, required: false },
 			backgroundImage: { type: String, required: false },
 			backgroundRepeat: { type: String, required: false },

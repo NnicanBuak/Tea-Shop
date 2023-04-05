@@ -168,21 +168,16 @@
 		</div>
 		<MenuSwiper>
 			<MenuCard
-				class="h-36 rounded-xl"
-				linkTo=""
+				class="h-40 w-max-80 rounded-xl"
+				linkTo="/shop/products"
 				title="Новинки"
+				titleColor="#4f501d"
 				backgroundImage="url(/img/bg.png)"
 				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(79,89,0,0.8) 10%, rgba(255,255,255,0) 50%)"
+				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 40%, rgba(0,0,0,0) 80%)"
 			>
 			</MenuCard>
 		</MenuSwiper>
-		<div class="wrapper h-1 my-8">
-			<nuxt-picture
-				class="absolute left-0 w-screen"
-				src="/img/decoration-horizontal.svg"
-			/>
-		</div>
 	</section>
 	<section class="px-[calc(8vw+24px)] text-secondary">
 		<h1 class="font-serif text-center text-3xl">Как мы это делаем?</h1>
@@ -211,12 +206,6 @@
 				quod odio voluptas praesentium quas illum laborum amet voluptatibus?
 			</p>
 			<NuxtLink to="/about"></NuxtLink>
-		</div>
-		<div class="wrapper h-1 my-8">
-			<nuxt-picture
-				class="absolute left-0 w-screen"
-				src="/img/decoration-horizontal.svg"
-			/>
 		</div>
 	</section>
 </template>

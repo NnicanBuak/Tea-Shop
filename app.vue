@@ -4,8 +4,12 @@
 </script>
 
 <template>
+	<NuxtLoadingIndicator color="#bfd400" height="6" />
 	<NuxtLayout :name="layout">
-		<NuxtPage :products="productsData"></NuxtPage>
+		<main class="space-y-40 overflow-auto">
+			<NuxtPage :products="productsData"></NuxtPage>
+			<SubscribeNewsletter v-once v-if="hasNewsletterBlock" />
+		</main>
 	</NuxtLayout>
 </template>
 

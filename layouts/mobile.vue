@@ -17,12 +17,44 @@
 				</h1>
 			</div>
 		</Transition>
-		<MobileHeader v-once :isWindowScrollAtTop="isWindowScrollAtTop" />
-		<main class="space-y-40 overflow-auto">
-			<slot />
-			<SubscribeNewsletter v-once v-if="hasNewsletterBlock" />
-		</main>
-		<Footer v-once v-if="hasFooter" />
+		<MobileHeader v-once :isWindowScrollAtTop="isWindowScrollAtTop">
+			<NuxtLink to="/shop">
+				<nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture>
+			</NuxtLink>
+			<div class="container flex flex-col gap-10">
+				<div class="wrapper">
+					<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
+						Другое
+					</h1>
+					<ul class="space-y-4 text-2xl">
+						<li>
+							<NuxtLink to="/shop/cart">Скидки</NuxtLink>
+						</li>
+						<li>
+							<NuxtLink to="/shop/cart">О нас</NuxtLink>
+						</li>
+						<li>
+							<NuxtLink to="/shop/cart">Контакты</NuxtLink>
+						</li>
+					</ul>
+				</div>
+				<div class="wrapper">
+					<h1 class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase">
+						Магазин
+					</h1>
+					<ul class="space-y-4 text-2xl">
+						<li>
+							<NuxtLink to="/shop/cart">Корзина</NuxtLink>
+						</li>
+						<li>
+							<NuxtLink to="/shop/products">Товары</NuxtLink>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</MobileHeader>
+		<slot />
+		<Footer class="mt-40" v-once v-if="hasFooter" />
 	</div>
 </template>
 
