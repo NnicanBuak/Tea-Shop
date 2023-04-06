@@ -4,6 +4,10 @@
 		hasFooter: true,
 		hasNewsletterBlock: true,
 	})
+
+	const { data } = await useAsyncData('about', () =>
+		queryContent('/about').findOne(),
+	)
 </script>
 
 <template>
@@ -65,6 +69,7 @@
 				>
 					<span>Порой просто хочется начать день с чашечки&nbsp;</span>
 					<button
+						type="button"
 						class="px-4 py-1 inline transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent lg:hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
 						:class="{
 							'from-yellow-300 to-yellow-500': randomTea.variety === 'Зелёный',
@@ -74,7 +79,6 @@
 							'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
 							'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
 						}"
-						type="button"
 						data-pointer-type="highlight"
 						v-if="randomTea?.parenthesesName"
 					>
@@ -110,12 +114,12 @@
 					<span>каждый&nbsp;день</span>
 				</h1>
 				<button
-					class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
 					type="button"
+					class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
 					data-pointer-type="highlight"
 					@click="navigateTo('/shop/products')"
 				>
-					<span>выбрать</span>
+					выбрать
 				</button>
 			</div>
 		</aside>
@@ -187,16 +191,16 @@
 		</MenuSwiper>
 	</section>
 	<section class="px-[calc(8vw+24px)] text-secondary">
-		<h1 class="font-serif text-center text-3xl">Как мы это делаем?</h1>
+		<h2 class="font-serif text-center text-3xl">Как мы это делаем?</h2>
 		<div class="wrapper h-1 my-8">
 			<nuxt-picture
 				class="absolute left-0 w-screen"
 				src="/img/decoration-horizontal.svg"
 			/>
 		</div>
-		<h2 class="my-4 font-sans font-bold text-4xl text-center text-primary">
+		<h1 class="my-4 font-sans font-bold text-4xl text-center text-primary">
 			Главный секрет приготовления
-		</h2>
+		</h1>
 		<nuxt-img
 			class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
 			src="/img/bg.png"
@@ -207,10 +211,13 @@
 				поподробней.
 			</h3>
 			<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
-			<p class="text-base">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non
-				debitis nam rem esse at voluptates accusamus quod libero sint? Expedita
-				quod odio voluptas praesentium quas illum laborum amet voluptatibus?
+			<p class="max-h-40 overflow-auto">
+				<ContentRendererMarkdown :value="data">
+					<template #empty>
+						<p>Содержимое не найдено.</p>
+						{{ data }}
+					</template>
+				</ContentRendererMarkdown>
 			</p>
 			<p class="mt-4 font-sans text-right underline decoration-4">
 				Читать дальше

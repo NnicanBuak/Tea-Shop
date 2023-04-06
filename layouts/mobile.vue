@@ -56,7 +56,7 @@
 		</MobileHeader>
 		<div class="wrapper h-32" v-if="hasHeader"></div>
 		<slot />
-		<Footer class="mt-40" v-if="hasFooter" />
+		<Footer class="mt-40" v-once />
 	</div>
 </template>
 
@@ -65,7 +65,6 @@
 		defer: true,
 		props: {
 			hasHeader: { type: Boolean, required: false },
-			hasFooter: { type: Boolean, required: true },
 		},
 		computed: {
 			isScreenOrientationLandscape() {

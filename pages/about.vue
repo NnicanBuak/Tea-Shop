@@ -7,7 +7,7 @@
 </script>
 
 <template>
-	<ContentDoc path="/about"></ContentDoc>
+	<ContentDoc :path="$route.path" />
 </template>
 
 <script>

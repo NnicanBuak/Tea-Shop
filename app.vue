@@ -5,7 +5,7 @@
 
 <template>
 	<NuxtLoadingIndicator class="w-screen" color="#bfd400" />
-	<NuxtLayout :name="layout" :hasHeader="hasHeader" :hasFooter="hasFooter">
+	<NuxtLayout :name="layout" :hasHeader="hasHeader">
 		<main class="space-y-40 overflow-auto">
 			<NuxtPage :products="productsData"></NuxtPage>
 			<section
@@ -42,10 +42,9 @@
 	export default {
 		name: 'app',
 		data() {
-			const { hasNewsletterBlock, hasFooter, hasHeader } = this.$route.meta
+			const { hasNewsletterBlock, hasHeader } = this.$route.meta
 			return {
 				hasNewsletterBlock,
-				hasFooter,
 				hasHeader,
 			}
 		},

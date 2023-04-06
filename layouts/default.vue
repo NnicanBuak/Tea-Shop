@@ -19,7 +19,7 @@
 		</Transition>
 		<DesktopHeader v-if="hasHeader"></DesktopHeader>
 		<slot />
-		<Footer v-if="hasFooter" />
+		<Footer v-once />
 	</div>
 </template>
 
