@@ -63,13 +63,10 @@
 					src="/img/logo-10.svg"
 					alt=""
 				/>
-				<h1
-					class="lg:hidden w-full text-[5vw] font-serif text-center text-black"
-				>
-					<span>Порой просто хочется начать день с чашечки&nbsp;</span>
-					<button
-						type="button"
-						class="px-4 py-1 inline transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent lg:hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
+				<h5 class="lg:hidden w-full text-[5vw] text-center font-normal">
+					<span>Порой просто хочется начать день с чашечки </span>
+					<NuxtLink
+						class="px-4 py-1 inline-block transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent lg:hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
 						:class="{
 							'from-yellow-300 to-yellow-500': randomTea.variety === 'Зелёный',
 							'from-white to-gray-200': randomTea.variety === 'Белый',
@@ -80,27 +77,27 @@
 						}"
 						data-pointer-type="highlight"
 						v-if="randomTea?.parenthesesName"
+						:to="'/shop/products/' + randomTea.id"
+						tabindex="-1"
 					>
-						<NuxtLink :to="'/shop/products/' + randomTea.id" tabindex="-1">
-							<span
-								class="bg-clip-text bg-gradient-to-r"
-								:class="{
-									'from-yellow-300 to-yellow-500':
-										randomTea.variety === 'Зелёный',
-									'from-white to-gray-200': randomTea.variety === 'Белый',
-									'from-green-400 to-green-800':
-										randomTea.variety === 'Травянной',
-									'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
-									'from-orange-400 to-orange-600':
-										randomTea.variety === 'Чёрный',
-									'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
-								}"
-								>{{ randomTea.parenthesesName }}
-							</span>
-						</NuxtLink>
-					</button>
+						<span
+							class="bg-clip-text bg-gradient-to-r"
+							:class="{
+								'from-yellow-300 to-yellow-500':
+									randomTea.variety === 'Зелёный',
+								'from-white to-gray-200': randomTea.variety === 'Белый',
+								'from-green-400 to-green-800':
+									randomTea.variety === 'Травянной',
+								'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
+								'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
+								'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
+							}"
+							>{{ randomTea.parenthesesName }}
+						</span>
+					</NuxtLink>
+
 					<span v-else>чая</span>
-				</h1>
+				</h5>
 			</div>
 			<div
 				class="max-lg:w-full lg:h-full lg:row-[2/-1] lg:col-[2/2]"

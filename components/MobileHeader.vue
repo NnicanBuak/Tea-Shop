@@ -1,5 +1,8 @@
+<script setup>
+	const isMounted = useMounted()
+</script>
 <template>
-	<div class="z-10 fixed">
+	<div class="z-10 fixed" v-show="isMounted">
 		<header
 			class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
 			:class="{
@@ -70,6 +73,7 @@
 
 					document.body.style.marginRight = null
 				}
+				this.$emit('isMobileMenuOpenned', true)
 			},
 		},
 		methods: {
