@@ -82,6 +82,12 @@
 	p {
 		font-family: Arial, Helvetica, sans-serif;
 	}
+	hr {
+		margin-top: 0.25rem;
+		margin-bottom: 1rem;
+		border: none;
+		border-radius: 9999px;
+	}
 	button:focus-visible,
 	a:focus-visible {
 		outline: none;

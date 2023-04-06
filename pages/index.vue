@@ -1,7 +1,3 @@
-<script>
-	export default {
-		created() {
-			navigateTo('/shop')
-		},
-	}
+<script setup>
+	await navigateTo('/shop')
 </script>

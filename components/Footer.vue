@@ -45,10 +45,14 @@
 			</div>
 		</div>
 		<div class="wrapper">
-			<NuxtLink to="/shop">
-				<nuxt-picture src="/img/logo-10.svg" alt=""></nuxt-picture>
-			</NuxtLink>
+			<nuxt-picture
+				src="/img/logo-10.svg"
+				alt=""
+				@click="navigateTo('/shop')"
+			></nuxt-picture>
 		</div>
-		<h1 class="font-bold text-center">&copy; 2023 Raccoon IT Group</h1>
+		<h1 class="font-bold text-center">
+			<a href="">&copy; 2023 Raccoon IT Group</a>
+		</h1>
 	</footer>
 </template>

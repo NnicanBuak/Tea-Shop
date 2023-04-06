@@ -1,11 +1,17 @@
 <script setup>
 	definePageMeta({
-		useHeader: true,
-		useFooter: true,
-		hasNewsletterBlock: false,
+		hasHeader: true,
+		hasFooter: true,
+		hasNewsletterBlock: true,
 	})
 </script>
 
 <template>
-	<ContentDoc path="/sales" />
+	<ContentDoc path="/sales"></ContentDoc>
 </template>
+
+<script>
+	export default {
+		name: 'sales',
+	}
+</script>

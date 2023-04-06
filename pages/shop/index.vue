@@ -145,7 +145,7 @@
 	</section>
 	<section class="px-[calc(8vw+24px)]">
 		<h1 class="my-4 font-serif text-center text-secondary text-3xl">
-			Ассортимент
+			Категории
 		</h1>
 		<div class="wrapper h-1 my-8">
 			<nuxt-picture
@@ -206,7 +206,7 @@
 				Мы не скрываем того, из чего именно собран наш чай. Сейчас расскажем
 				поподробней.
 			</h3>
-			<Divider class="w-[55vw]" />
+			<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
 			<p class="text-base">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non
 				debitis nam rem esse at voluptates accusamus quod libero sint? Expedita
