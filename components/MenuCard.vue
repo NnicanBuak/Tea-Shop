@@ -11,13 +11,13 @@
 		}"
 		@click="navigateTo(linkTo)"
 	>
-		<h1
-			class="absolute left-6 bottom-4 font-serif font-bold text-2xl"
+		<h3
+			class="absolute left-6 bottom-4 font-serif font-bold"
 			:style="{ color: titleColor }"
 			v-if="title"
 		>
 			{{ title }}
-		</h1>
+		</h3>
 		<slot />
 	</div>
 </template>

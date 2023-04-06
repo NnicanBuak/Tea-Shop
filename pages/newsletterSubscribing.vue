@@ -1,7 +1,7 @@
 <script setup>
 	definePageMeta({
 		hasHeader: true,
-		hasNewsletterBlock: true,
+		hasNewsletterBlock: false,
 	})
 </script>
 

@@ -147,9 +147,7 @@
 		</Swiper>
 	</section>
 	<section class="px-[calc(8vw+24px)]">
-		<h1 class="my-4 font-serif text-center text-secondary text-3xl">
-			Категории
-		</h1>
+		<h2 class="my-4 text-center text-secondary">Категории</h2>
 		<div class="wrapper h-1 my-8">
 			<nuxt-picture
 				class="absolute left-0 w-screen"
@@ -164,7 +162,7 @@
 				titleColor="#4f501d"
 				backgroundImage="url(/img/tea1.png)"
 				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 35%, rgba(0,0,0,0) 80%)"
+				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 30%, rgba(0,0,0,0) 80%)"
 			>
 			</MenuCard>
 			<MenuCard
@@ -190,14 +188,14 @@
 		</MenuSwiper>
 	</section>
 	<section class="px-[calc(8vw+24px)] text-secondary">
-		<h2 class="font-serif text-center text-3xl">Как мы это делаем?</h2>
+		<h2 class="font-serif text-center">Как мы это делаем?</h2>
 		<div class="wrapper h-1 my-8">
 			<nuxt-picture
 				class="absolute left-0 w-screen"
 				src="/img/decoration-horizontal.svg"
 			/>
 		</div>
-		<h1 class="my-4 font-sans font-bold text-4xl text-center text-primary">
+		<h1 class="my-4 font-sans font-bold text-center text-primary">
 			Главный секрет приготовления
 		</h1>
 		<nuxt-img
@@ -205,18 +203,14 @@
 			src="/img/bg.png"
 		/>
 		<div class="p-6 bg-primary rounded-xl" @click="navigateTo('/about')">
-			<h3 class="font-bold font-serif text-xl">
-				Мы не скрываем того, из чего именно собран наш чай. Сейчас расскажем
-				поподробней.
-			</h3>
+			<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
 			<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
 			<p class="max-h-40 overflow-auto">
-				<ContentRendererMarkdown :value="data">
+				<ContentRenderer :value="data">
 					<template #empty>
-						<p>Содержимое не найдено.</p>
-						{{ data }}
+						<p>Содержимое страницы не найдено.</p>
 					</template>
-				</ContentRendererMarkdown>
+				</ContentRenderer>
 			</p>
 			<p class="mt-4 font-sans text-right underline decoration-4">
 				Читать дальше
