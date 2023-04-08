@@ -1,54 +1,32 @@
 <script setup>
-	// const { productsData } = await useFetch('/api/products')
 	import productsData from '~/assets/products.json'
+
+	const emit = defineEmits(['isMobileMenuOpen'])
 </script>
 
 <template>
-	<NuxtLoadingIndicator
-		class="fixed inset-0 w-screen"
-		color="#bfd400"
-		height="6"
-		duration="2000"
-		throttle="1000"
-	/>
-	<NuxtLayout :name="layout" :hasHeader="hasHeader">
-		<main class="space-y-40 overflow-auto">
-			<NuxtPage :products="productsData"></NuxtPage>
-			<section
-				class="relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
-				v-if="hasNewsletterBlock"
-			>
-				<nuxt-picture
-					class="absolute inset-0 left-4 w-[5vw]"
-					src="/img/decoration.svg"
-				></nuxt-picture>
-				<h1>Подпишись на&nbsp;рассылку</h1>
-				<form class="space-y-4" action="newsletterSubscribing">
-					<input
-						class="px-4 p-2 shadow-inner rounded-full"
-						type="email"
-						placeholder="Ваш email"
-						required
-					/>
-					<button
-						class="px-4 p-2 text-white bg-primary2 rounded-full"
-						type="submit"
-					>
-						Подписаться
-					</button>
-				</form>
-			</section>
-		</main>
-	</NuxtLayout>
+	<div>
+		<NuxtLoadingIndicator
+			class="fixed inset-0 w-screen"
+			color="#bfd400"
+			:height="6"
+			:throttle="2000"
+		/>
+		<NuxtLayout :name="layout" :hasHeader="hasHeader">
+			<NuxtPage
+				:class="{ '-translate-x-[70%]': emit.isMobileMenuOpen }"
+				:products="productsData"
+			/>
+		</NuxtLayout>
+	</div>
 </template>
 
 <script>
 	export default {
 		name: 'app',
 		data() {
-			const { hasNewsletterBlock, hasHeader } = this.$route.meta
+			const { hasHeader } = this.$route.meta
 			return {
-				hasNewsletterBlock,
 				hasHeader,
 			}
 		},

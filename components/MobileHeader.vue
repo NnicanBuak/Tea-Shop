@@ -1,4 +1,6 @@
 <script setup>
+	import { emit } from 'process'
+
 	const isMounted = useMounted()
 </script>
 <template>
@@ -60,20 +62,23 @@
 			return { isMobileMenuOpen: false }
 		},
 		watch: {
-			isMobileMenuOpen: (newValue) => {
+			isMobileMenuOpen: (newValue, oldValue) => {
 				const scrollbarWidth =
 					window.innerWidth - document.documentElement.clientWidth
 				if (newValue === true) {
+					if (newValue !== oldValue) emit('isMobileMenuOpen', true)
+
 					document.body.classList.add('overflow-clip')
 
 					if (scrollbarWidth !== 0)
 						document.body.style.marginRight = `${scrollbarWidth}px`
 				} else {
+					if (newValue !== oldValue) emit('isMobileMenuOpen', false)
+
 					document.body.classList.remove('overflow-clip')
 
 					document.body.style.marginRight = null
 				}
-				this.$emit('isMobileMenuOpenned', true)
 			},
 		},
 		methods: {

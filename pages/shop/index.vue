@@ -1,7 +1,6 @@
 <script setup>
 	definePageMeta({
 		hasHeader: false,
-		hasNewsletterBlock: true,
 	})
 
 	const { data } = await useAsyncData('about', () =>
@@ -14,78 +13,67 @@
 </script>
 
 <template>
-	<section
-		class="6ontainer-fluid h-screen grid"
-		style="height: calc(100 * var(--vh, 1vh))"
-		id="hero"
-	>
-		<aside
-			class="h-full container-xl max-lg:container-sm flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-[calc(8vw+24px)] max-lg:py-[16vh] xl:p-20 row-[1/-1] col-[1/-1]"
+	<main class="space-y-40 overflow-auto">
+		<section
+			class="6ontainer-fluid h-screen grid"
+			style="height: calc(100 * var(--vh, 1vh))"
+			id="hero"
 		>
-			<nav class="max-lg:hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
-				<div class="flex">
-					<button type="button" @click="navigateTo('/shop/products')">
-						<Icon
-							class="text-secondary"
-							name="material-symbols:search"
-							size="32"
-						/>
-					</button>
-					<button type="button" @click="navigateTo('/shop/cart')">
-						<Icon
-							class="text-secondary"
-							name="material-symbols:shopping-bag-outline"
-							size="32"
-						/>
-					</button>
-				</div>
-				<div class="flex">
-					<button type="button" @click="navigateTo('/shop')">
-						<span><b>Магазин</b></span>
-					</button>
-					<button type="button" @click="navigateTo('/sales')">
-						<span>Скидки</span>
-					</button>
-					<button type="button" @click="navigateTo('/about')">
-						<span>О нас</span>
-					</button>
-					<button type="button" @click="navigateTo('/contacts')">
-						<span>Контакты</span>
-					</button>
-				</div>
-			</nav>
-			<nuxt-picture
-				class="max-lg:hidden h-full w-fit self-center lg:row-[1/-1] lg:col-[1/1]"
-				id="alt-logo"
-				src="/img/logo-14.svg"
-				alt=""
-			/>
-			<div class="flex flex-col justify-center items-center gap-10" id="title">
+			<aside
+				class="h-full container-xl max-lg:container-sm flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-[calc(8vw+24px)] max-lg:py-[16vh] xl:p-20 row-[1/-1] col-[1/-1]"
+			>
+				<nav class="max-lg:hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
+					<div class="flex">
+						<button type="button" @click="navigateTo('/shop/products')">
+							<Icon
+								class="text-secondary"
+								name="material-symbols:search"
+								size="32"
+							/>
+						</button>
+						<button type="button" @click="navigateTo('/shop/cart')">
+							<Icon
+								class="text-secondary"
+								name="material-symbols:shopping-bag-outline"
+								size="32"
+							/>
+						</button>
+					</div>
+					<div class="flex">
+						<button type="button" @click="navigateTo('/shop')">
+							<span><b>Магазин</b></span>
+						</button>
+						<button type="button" @click="navigateTo('/sales')">
+							<span>Скидки</span>
+						</button>
+						<button type="button" @click="navigateTo('/about')">
+							<span>О нас</span>
+						</button>
+						<button type="button" @click="navigateTo('/contacts')">
+							<span>Контакты</span>
+						</button>
+					</div>
+				</nav>
 				<nuxt-picture
-					class="lg:hidden w-full"
-					id="logo"
-					src="/img/logo-10.svg"
+					class="max-lg:hidden h-full w-fit self-center lg:row-[1/-1] lg:col-[1/1]"
+					id="alt-logo"
+					src="/img/logo-14.svg"
 					alt=""
 				/>
-				<h4 class="lg:hidden w-full font-normal text-center">
-					<span> Порой просто хочется начать день с чашечки </span>
-					<NuxtLink
-						class="transition-all font-bold text-transparent"
-						:class="{
-							'from-yellow-300 to-yellow-500': randomTea.variety === 'Зелёный',
-							'from-white to-gray-200': randomTea.variety === 'Белый',
-							'from-green-400 to-green-800': randomTea.variety === 'Травянной',
-							'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
-							'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
-							'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
-						}"
-						data-pointer-type="highlight"
-						v-if="randomTea?.parenthesesName"
-						:to="'/shop/products/' + randomTea.id"
-						tabindex="-1"
-					>
-						<span
-							class="bg-clip-text bg-gradient-to-r"
+				<div
+					class="flex flex-col justify-center items-center gap-10"
+					id="title"
+				>
+					<nuxt-picture
+						class="lg:hidden w-full"
+						id="logo"
+						src="/img/logo-10.svg"
+						alt=""
+					/>
+					<h4 class="lg:hidden w-full font-normal text-center">
+						<span> Порой просто хочется начать день с чашечки </span>
+						<NuxtLink
+							class="transition-all font-bold text-transparent"
 							:class="{
 								'from-yellow-300 to-yellow-500':
 									randomTea.variety === 'Зелёный',
@@ -96,129 +84,169 @@
 								'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
 								'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
 							}"
-							>{{ randomTea.parenthesesName }}
-						</span>
-					</NuxtLink>
+							data-pointer-type="highlight"
+							v-if="randomTea?.parenthesesName"
+							:to="('/shop/products', { query: randomTea.id })"
+							tabindex="-1"
+						>
+							<span
+								class="bg-clip-text bg-gradient-to-r"
+								:class="{
+									'from-yellow-300 to-yellow-500':
+										randomTea.variety === 'Зелёный',
+									'from-white to-gray-200': randomTea.variety === 'Белый',
+									'from-green-400 to-green-800':
+										randomTea.variety === 'Травянной',
+									'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
+									'from-orange-400 to-orange-600':
+										randomTea.variety === 'Чёрный',
+									'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
+								}"
+								>{{ randomTea.parenthesesName }}
+							</span>
+						</NuxtLink>
 
-					<span v-else>чая</span>
-				</h4>
-			</div>
-			<div
-				class="max-lg:w-full lg:h-full lg:row-[2/-1] lg:col-[2/2]"
-				id="alt-title"
-			>
-				<h1
-					class="max-lg:hidden flex flex-col font-bold text-[5vw] text-primary leading-none"
+						<span v-else>чая</span>
+					</h4>
+				</div>
+				<div
+					class="max-lg:w-full lg:h-full lg:row-[2/-1] lg:col-[2/2]"
+					id="alt-title"
 				>
-					<span>Аромат&nbsp;на</span>
-					<span>каждый&nbsp;день</span>
-				</h1>
-				<button
-					type="button"
-					class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
-					data-pointer-type="highlight"
-					@click="navigateTo('/shop/products')"
-				>
-					выбрать
-				</button>
-			</div>
-		</aside>
-		<Swiper
-			class="h-full w-full row-[1/-1] col-[1/-1]"
-			style="z-index: -20"
-			:modules="[SwiperAutoplay]"
-			:slides-per-view="1"
-			:loop="true"
-			:autoplay="{
-				delay: 15000,
-			}"
-		>
-			<SwiperSlide
-				class="h-full w-full max-lg:slideBGscale"
-				v-for="(image, index) in sliderImages"
-				:key="index"
-				:style="{
-					backgroundImage: 'url(' + '/img/slider/' + image + ')',
-					backgroundRepeat: 'no-repeat',
-					backgroundPosition: 'left 62% bottom',
-					backgroundSize: 'cover',
+					<h1
+						class="max-lg:hidden flex flex-col font-bold text-[5vw] text-primary leading-none"
+					>
+						<span>Аромат&nbsp;на</span>
+						<span>каждый&nbsp;день</span>
+					</h1>
+					<button
+						type="button"
+						class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
+						data-pointer-type="highlight"
+						@click="navigateTo('/shop/products')"
+					>
+						выбрать
+					</button>
+				</div>
+			</aside>
+			<Swiper
+				class="h-full w-full row-[1/-1] col-[1/-1]"
+				style="z-index: -20"
+				:modules="[SwiperAutoplay]"
+				:slides-per-view="1"
+				:loop="true"
+				:autoplay="{
+					delay: 15000,
 				}"
 			>
-			</SwiperSlide>
-		</Swiper>
-	</section>
-	<section class="px-[calc(8vw+24px)]">
-		<h2 class="my-4 text-center text-secondary">Категории</h2>
-		<div class="wrapper h-1 my-8">
-			<nuxt-picture
-				class="absolute left-0 w-screen"
-				src="/img/decoration-horizontal.svg"
+				<SwiperSlide
+					class="h-full w-full max-lg:slideBGscale"
+					v-for="(image, index) in sliderImages"
+					:key="index"
+					:style="{
+						backgroundImage: 'url(' + '/img/slider/' + image + ')',
+						backgroundRepeat: 'no-repeat',
+						backgroundPosition: 'left 62% bottom',
+						backgroundSize: 'cover',
+					}"
+				>
+				</SwiperSlide>
+			</Swiper>
+		</section>
+		<section class="px-[calc(8vw+24px)]">
+			<h2 class="my-4 text-center text-secondary">Категории</h2>
+			<div class="wrapper h-1 my-8">
+				<nuxt-picture
+					class="absolute left-0 w-screen"
+					src="/img/decoration-horizontal.svg"
+				/>
+			</div>
+			<MenuSwiper class="space-y-10">
+				<MenuCard
+					class="w-max-80 aspect-[3.75/2] rounded-xl"
+					linkTo="/shop/products"
+					title="Ассортимент"
+					titleColor="#4f501d"
+					backgroundImage="url(/img/tea1.png)"
+					backgroundPosition="bottom"
+					gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
+				>
+				</MenuCard>
+				<MenuCard
+					class="w-max-80 aspect-[3.75/2] rounded-xl"
+					linkTo="/shop/products"
+					title="Акции"
+					titleColor="#4f501d"
+					backgroundImage="url(/img/tea2.png)"
+					backgroundPosition="bottom"
+					gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
+				>
+				</MenuCard>
+				<MenuCard
+					class="w-max-80 aspect-[3.75/2] rounded-xl"
+					1
+					linkTo="/shop/products"
+					title="Новинки"
+					titleColor="#4f501d"
+					backgroundImage="url(/img/tea3.png)"
+					backgroundPosition="bottom"
+					gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
+				>
+				</MenuCard>
+			</MenuSwiper>
+		</section>
+		<section class="px-[calc(8vw+24px)] text-secondary">
+			<h2 class="font-serif text-center">Как мы это делаем?</h2>
+			<div class="wrapper h-1 my-8">
+				<nuxt-picture
+					class="absolute left-0 w-screen"
+					src="/img/decoration-horizontal.svg"
+				/>
+			</div>
+			<h1 class="my-4 font-sans font-bold text-center text-primary">
+				Главный секрет приготовления
+			</h1>
+			<nuxt-img
+				class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
+				src="/img/bg.png"
 			/>
-		</div>
-		<MenuSwiper class="space-y-10">
-			<MenuCard
-				class="w-max-80 aspect-[3.75/2] rounded-xl"
-				linkTo="/shop/products"
-				title="Ассортимент"
-				titleColor="#4f501d"
-				backgroundImage="url(/img/tea1.png)"
-				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
-			>
-			</MenuCard>
-			<MenuCard
-				class="w-max-80 aspect-[3.75/2] rounded-xl"
-				linkTo="/shop/products"
-				title="Акции"
-				titleColor="#4f501d"
-				backgroundImage="url(/img/tea2.png)"
-				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
-			>
-			</MenuCard>
-			<MenuCard
-				class="w-max-80 aspect-[3.75/2] rounded-xl"
-				1
-				linkTo="/shop/products"
-				title="Новинки"
-				titleColor="#4f501d"
-				backgroundImage="url(/img/tea3.png)"
-				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
-			>
-			</MenuCard>
-		</MenuSwiper>
-	</section>
-	<section class="px-[calc(8vw+24px)] text-secondary">
-		<h2 class="font-serif text-center">Как мы это делаем?</h2>
-		<div class="wrapper h-1 my-8">
-			<nuxt-picture
-				class="absolute left-0 w-screen"
-				src="/img/decoration-horizontal.svg"
-			/>
-		</div>
-		<h1 class="my-4 font-sans font-bold text-center text-primary">
-			Главный секрет приготовления
-		</h1>
-		<nuxt-img
-			class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
-			src="/img/bg.png"
-		/>
-		<div class="p-6 bg-primary rounded-xl" @click="navigateTo('/about')">
-			<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
-			<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
-			<p class="max-h-40 overflow-auto">
-				<ContentRenderer :value="data">
+			<div class="p-6 bg-primary rounded-xl" @click="navigateTo('/about')">
+				<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
+				<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
+				<ContentRenderer class="max-h-40 overflow-auto" :value="data">
 					<template #empty>
 						<p>Содержимое страницы не найдено.</p>
 					</template>
 				</ContentRenderer>
-			</p>
-			<p class="mt-4 font-sans text-right underline decoration-4">
-				Читать дальше
-			</p>
-		</div>
-	</section>
+				<p class="mt-4 font-sans text-right underline decoration-4">
+					Читать дальше
+				</p>
+			</div>
+		</section>
+		<section
+			class="relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
+		>
+			<nuxt-picture
+				class="absolute inset-0 left-4 w-[5vw]"
+				src="/img/decoration.svg"
+			></nuxt-picture>
+			<h1>Подпишись на&nbsp;рассылку</h1>
+			<form class="space-y-4" action="newsletterSubscribing">
+				<input
+					class="px-4 p-2 shadow-inner rounded-full"
+					type="email"
+					placeholder="Ваш email"
+					required
+				/>
+				<button
+					class="px-4 p-2 text-white bg-primary2 rounded-full"
+					type="submit"
+				>
+					Подписаться
+				</button>
+			</form>
+		</section>
+	</main>
 </template>
 
 <script>

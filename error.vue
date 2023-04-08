@@ -20,7 +20,9 @@
 			class="mt-7 p-4 space-y-8 max-w-sm mx-auto text-center text-white bg-primary2 bg-opacity-75 shadow-xl rounded-3xl"
 		>
 			<h1 class="text-7xl font-bold">{{ error.statusCode }}</h1>
-			<span class="text-2xl">{{ error.url }}</span>
+			<span class="text-2xl" v-if="error.statusCode === 404">{{
+				error.url
+			}}</span>
 			<p class="font-sans text-2xl">{{ error.message }}</p>
 			<button
 				class="p-2 px-4 text-2xl text-black bg-primary rounded-full"
