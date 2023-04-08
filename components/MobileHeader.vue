@@ -12,7 +12,7 @@
 			ref="header"
 		>
 			<button
-				class="transition transition-all p-3 bg-white border-l-2 border-t-2 border-b-2 border-gray-300 shadow-md rounded-l-full"
+				class="transition-all p-3 bg-white border-l-2 border-t-2 border-b-2 border-gray-300 shadow-md rounded-l-full"
 				:class="{
 					'mt-8 pr-6': isWindowScrollAtTop === true,
 					'ml-4 mt-[15vh] pr-6': isWindowScrollAtTop === false,

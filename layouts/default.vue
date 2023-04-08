@@ -11,10 +11,10 @@
 					name="material-symbols:width-rounded"
 					size="20vh"
 				></Icon>
-				<h1 class="font-bold text-center text-white text-xl">
+				<h2 class="text-center text-white">
 					Для лучшего пользовательского опыта рекомендуем использовать сайт в
 					широкоформатном режиме
-				</h1>
+				</h2>
 			</div>
 		</Transition>
 		<DesktopHeader v-if="hasHeader"></DesktopHeader>

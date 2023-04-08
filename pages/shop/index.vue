@@ -7,11 +7,15 @@
 	const { data } = await useAsyncData('about', () =>
 		queryContent('/about').findOne(),
 	)
+	// const = get() {
+	// 	link =
+	// 	return data
+	// }
 </script>
 
 <template>
 	<section
-		class="container-fluid h-screen grid"
+		class="6ontainer-fluid h-screen grid"
 		style="height: calc(100 * var(--vh, 1vh))"
 		id="hero"
 	>
@@ -63,10 +67,10 @@
 					src="/img/logo-10.svg"
 					alt=""
 				/>
-				<h5 class="lg:hidden w-full text-[5vw] text-center font-normal">
-					<span>Порой просто хочется начать день с чашечки </span>
+				<h4 class="lg:hidden w-full font-normal text-center">
+					<span> Порой просто хочется начать день с чашечки </span>
 					<NuxtLink
-						class="px-4 py-1 inline-block transition transition-all font-bold max-lg:bg-white max-lg:hover:bg-gradient-to-r max-lg:focus-visible:bg-gradient-to-r text-transparent lg:hover:text-white focus-visible:text-white lg:hover:text-black lg:focus-visible:text-black rounded-full"
+						class="transition-all font-bold text-transparent"
 						:class="{
 							'from-yellow-300 to-yellow-500': randomTea.variety === 'Зелёный',
 							'from-white to-gray-200': randomTea.variety === 'Белый',
@@ -97,7 +101,7 @@
 					</NuxtLink>
 
 					<span v-else>чая</span>
-				</h5>
+				</h4>
 			</div>
 			<div
 				class="max-lg:w-full lg:h-full lg:row-[2/-1] lg:col-[2/2]"
@@ -153,33 +157,34 @@
 		</div>
 		<MenuSwiper class="space-y-10">
 			<MenuCard
-				class="h-40 w-max-80 rounded-xl"
+				class="w-max-80 aspect-[3.75/2] rounded-xl"
 				linkTo="/shop/products"
 				title="Ассортимент"
 				titleColor="#4f501d"
 				backgroundImage="url(/img/tea1.png)"
 				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 30%, rgba(0,0,0,0) 80%)"
+				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
 			>
 			</MenuCard>
 			<MenuCard
-				class="h-40 w-max-80 rounded-xl"
+				class="w-max-80 aspect-[3.75/2] rounded-xl"
 				linkTo="/shop/products"
 				title="Акции"
 				titleColor="#4f501d"
 				backgroundImage="url(/img/tea2.png)"
 				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 35%, rgba(0,0,0,0) 80%)"
+				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
 			>
 			</MenuCard>
 			<MenuCard
-				class="h-40 w-max-80 rounded-xl"
+				class="w-max-80 aspect-[3.75/2] rounded-xl"
+				1
 				linkTo="/shop/products"
 				title="Новинки"
 				titleColor="#4f501d"
 				backgroundImage="url(/img/tea3.png)"
 				backgroundPosition="bottom"
-				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 35%, rgba(0,0,0,0) 80%)"
+				gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
 			>
 			</MenuCard>
 		</MenuSwiper>

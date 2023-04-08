@@ -4,7 +4,13 @@
 </script>
 
 <template>
-	<NuxtLoadingIndicator class="w-screen" color="#bfd400" />
+	<NuxtLoadingIndicator
+		class="fixed inset-0 w-screen"
+		color="#bfd400"
+		height="6"
+		duration="2000"
+		throttle="1000"
+	/>
 	<NuxtLayout :name="layout" :hasHeader="hasHeader">
 		<main class="space-y-40 overflow-auto">
 			<NuxtPage :products="productsData"></NuxtPage>

@@ -32,7 +32,7 @@
 			id="socials"
 		>
 			<span class="font-serif text-xl">подписывайтесь!</span>
-			<div class="wrapper space-x-4">
+			<div class="wrapper space-x-4 text-primary2">
 				<a href="https://instagram.com/chaisotsvetie">
 					<Icon name="uil:instagram-alt" size="32px"></Icon>
 				</a>
@@ -51,8 +51,8 @@
 				@click="navigateTo('/shop')"
 			></nuxt-picture>
 		</div>
-		<h1 class="font-bold text-center">
+		<h4 class="font-bold text-center">
 			<a href="">&copy; 2023 Raccoon IT Group</a>
-		</h1>
+		</h4>
 	</footer>
 </template>

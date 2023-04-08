@@ -1,6 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const colors = require('tailwindcss/colors')
-
 export default defineNuxtConfig({
 	modules: [
 		'@vueuse/nuxt',
@@ -8,6 +6,7 @@ export default defineNuxtConfig({
 		'@nuxt/content',
 		'@nuxt/image-edge',
 		'@nuxt/devtools',
+		// '@nuxtjs/supabase',
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/google-fonts',
 		'@nuxtjs/html-validator',
