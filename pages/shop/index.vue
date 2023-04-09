@@ -2,14 +2,6 @@
 	definePageMeta({
 		hasHeader: false,
 	})
-
-	const { data } = await useAsyncData('about', () =>
-		queryContent('/about').findOne(),
-	)
-	// const = get() {
-	// 	link =
-	// 	return data
-	// }
 </script>
 
 <template>
@@ -86,7 +78,7 @@
 							}"
 							data-pointer-type="highlight"
 							v-if="randomTea?.parenthesesName"
-							:to="('/shop/products', { query: randomTea.id })"
+							:to="{ path: '/shop/products', query: { id: randomTea.id } }"
 							tabindex="-1"
 						>
 							<span
@@ -213,11 +205,12 @@
 			<div class="p-6 bg-primary rounded-xl" @click="navigateTo('/about')">
 				<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
 				<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
-				<ContentRenderer class="max-h-40 overflow-auto" :value="data">
-					<template #empty>
-						<p>Содержимое страницы не найдено.</p>
-					</template>
-				</ContentRenderer>
+				<p class="max-h-40 overflow-clip">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					Exercitationem, dicta, recusandae architecto delectus repellat quaerat
+					velit fuga consequuntur eos nobis maxime? Distinctio deserunt minus
+					culpa explicabo expedita corrupti temporibus corporis!
+				</p>
 				<p class="mt-4 font-sans text-right underline decoration-4">
 					Читать дальше
 				</p>

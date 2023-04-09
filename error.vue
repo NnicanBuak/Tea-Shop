@@ -23,7 +23,7 @@
 			<span class="text-2xl" v-if="error.statusCode === 404">{{
 				error.url
 			}}</span>
-			<p class="font-sans text-2xl">{{ error.message }}</p>
+			<p class="font-sans text-2xl">{{ error.statusMessage }}</p>
 			<button
 				class="p-2 px-4 text-2xl text-black bg-primary rounded-full"
 				@click="handleError"
@@ -37,14 +37,15 @@
 <script>
 	export default {
 		created() {
+			console.error(this.error.message)
 			switch (this.error.statusCode) {
 				case 404:
 				case '404':
-					this.error.message = 'Упс! Кажется страница не найдена 😔'
+					this.error.statusMessage = 'Упс! Кажется страница не найдена 😔'
 					break
 				case 500:
 				case '500':
-					this.error.message =
+					this.error.statusMessage =
 						'Невозможно подключиться к серверу, попробуйте обновить страницу 🆙'
 					break
 				default:
