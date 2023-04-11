@@ -2,6 +2,15 @@
 	definePageMeta({
 		hasHeader: false,
 	})
+
+	const supabase = useSupabaseClient()
+
+	let { data: products, error: spabaseAPIError } = await supabase
+		.from('products')
+		.select('*')
+	if (spabaseAPIError) console.error(spabaseAPIError)
+
+	defineExpose({ products })
 </script>
 
 <template>
@@ -176,7 +185,6 @@
 				</MenuCard>
 				<MenuCard
 					class="w-max-80 aspect-[3.75/2] rounded-xl"
-					1
 					linkTo="/shop/products"
 					title="Новинки"
 					titleColor="#4f501d"
@@ -232,8 +240,8 @@
 					required
 				/>
 				<button
-					class="px-4 p-2 text-white bg-primary2 rounded-full"
 					type="submit"
+					class="px-4 p-2 text-white bg-primary2 rounded-full"
 				>
 					Подписаться
 				</button>
@@ -245,12 +253,6 @@
 <script>
 	export default {
 		name: 'shop',
-		props: {
-			products: {
-				type: Array,
-				required: false,
-			},
-		},
 		data() {
 			return {
 				sliderImages: ['slide.png'],

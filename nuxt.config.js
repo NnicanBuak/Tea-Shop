@@ -1,12 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+	debug: true,
 	modules: [
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
 		'@nuxt/content',
 		'@nuxt/image-edge',
 		'@nuxt/devtools',
-		// '@nuxtjs/supabase',
+		'@nuxtjs/supabase',
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/google-fonts',
 		'@nuxtjs/html-validator',

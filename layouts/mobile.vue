@@ -18,7 +18,13 @@
 			</div>
 		</Transition>
 
-		<MobileHeader :isWindowScrollAtTop="isWindowScrollAtTop">
+		<MobileHeader
+			@mobilemenuopened="shiftPage"
+			@mobilemenuclosed="unshiftPage"
+			:isWindowScrollAtTop="isWindowScrollAtTop"
+			:menuViaViewportWidth="70"
+			iconSize="8vw"
+		>
 			<NuxtLink to="/shop">
 				<nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture>
 			</NuxtLink>
@@ -56,7 +62,7 @@
 		</MobileHeader>
 		<div class="wrapper h-32" v-if="hasHeader"></div>
 		<slot />
-		<Footer class="mt-40" v-once />
+		<Footer ref="footer" />
 	</div>
 </template>
 
@@ -65,6 +71,7 @@
 		defer: true,
 		props: {
 			hasHeader: { type: Boolean, required: false },
+			// page: { type: Object, required: true },
 		},
 		computed: {
 			isScreenOrientationLandscape() {
@@ -74,6 +81,20 @@
 				const windowScroll = useWindowScroll()
 				return windowScroll.y.value < 100
 			},
+		},
+		methods: {
+			// shiftPage() {
+			// 	if (this.page) {
+			// 		this.page.classList.add('-translate-x-[70%]')
+			// 	}
+			// 	this.$refs.footer.classList.add('-translate-x-[70%]')
+			// },
+			// unshiftPage() {
+			// 	if (this.page) {
+			// 		this.page.classList.remove('-translate-x-[70%]')
+			// 	}
+			// 	this.$refs.footer.classList.remove('-translate-x-[70%]')
+			// },
 		},
 	}
 </script>

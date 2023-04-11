@@ -19,7 +19,7 @@
 		</Transition>
 		<DesktopHeader v-if="hasHeader"></DesktopHeader>
 		<slot />
-		<Footer v-once />
+		<Footer ref="footer" />
 	</div>
 </template>
 
@@ -28,7 +28,6 @@
 		defer: true,
 		props: {
 			hasHeader: { type: Boolean, required: true },
-			hasFooter: { type: Boolean, required: true },
 		},
 		computed: {
 			isWindowWidthNarrow() {

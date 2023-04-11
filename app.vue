@@ -1,7 +1,23 @@
 <script setup>
-	import productsData from '~/assets/products.json'
+	const supabase = useSupabaseAuthClient()
 
-	const emit = defineEmits(['isMobileMenuOpen'])
+	const loading = ref(false)
+	const email = ref('')
+
+	const handleLogin = async () => {
+		try {
+			loading.value = true
+			const { error } = await supabase.auth.signInWithOtp({
+				email: email.value,
+			})
+			if (error) throw error
+			alert('Check your email for the login link!')
+		} catch (error) {
+			alert(error.error_description || error.message)
+		} finally {
+			loading.value = false
+		}
+	}
 </script>
 
 <template>
@@ -13,10 +29,8 @@
 			:throttle="2000"
 		/>
 		<NuxtLayout :name="layout" :hasHeader="hasHeader">
-			<NuxtPage
-				:class="{ '-translate-x-[70%]': emit.isMobileMenuOpen }"
-				:products="productsData"
-			/>
+			<button type="button" @click="handleLogin">Login</button>
+			<NuxtPage ref="page" />
 		</NuxtLayout>
 	</div>
 </template>
@@ -28,6 +42,7 @@
 			const { hasHeader } = this.$route.meta
 			return {
 				hasHeader,
+				refOnPage: null,
 			}
 		},
 		computed: {
@@ -36,6 +51,7 @@
 			},
 		},
 		mounted() {
+			this.refOnPage = this.$refs.page
 			let vh = window.innerHeight * 0.01
 			document.documentElement.style.setProperty('--vh', `${vh}px`)
 		},

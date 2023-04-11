@@ -1,6 +1,4 @@
 <script setup>
-	import { emit } from 'process'
-
 	const isMounted = useMounted()
 </script>
 <template>
@@ -8,8 +6,12 @@
 		<header
 			class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
 			:class="{
-				'translate-x-[calc(100%-8vw-36px)]': !isMobileMenuOpen,
-				'translate-x-[calc(30%-8vw-36px)]': isMobileMenuOpen,
+				['translate-x-[calc(100%-' + iconSize + '-36px)]']: !isMobileMenuOpen,
+				['translate-x-[calc(' +
+				(100 - menuViaViewportWidth) +
+				'%-' +
+				iconSize +
+				'-36px)]']: isMobileMenuOpen,
 			}"
 			ref="header"
 		>
@@ -29,11 +31,12 @@
 							? 'material-symbols:menu-open-rounded'
 							: 'material-symbols:menu-rounded'
 					"
-					size="8vw"
+					:size="iconSize"
 				></Icon>
 			</button>
 			<nav
-				class="h-full w-[70vw] p-10 flex flex-col justify-around bg-white"
+				class="h-full p-10 flex flex-col justify-around bg-white"
+				:class="'w-[' + menuViaViewportWidth + 'vw' + ']'"
 				@click="toggleMobileHeader"
 			>
 				<slot />
@@ -53,27 +56,39 @@
 	export default {
 		name: 'MobileHeader',
 		props: {
+			menuViaViewportWidth: {
+				type: Number,
+				default: 100,
+			},
+			iconSize: {
+				type: String,
+				default: '64px',
+			},
 			isWindowScrollAtTop: {
 				type: Boolean,
 				required: false,
 			},
 		},
+		emits: {
+			mobilemenuopened: null,
+			mobilemenuclosed: null,
+		},
 		data() {
 			return { isMobileMenuOpen: false }
 		},
 		watch: {
-			isMobileMenuOpen: (newValue, oldValue) => {
+			isMobileMenuOpen(newValue, oldValue) {
 				const scrollbarWidth =
 					window.innerWidth - document.documentElement.clientWidth
 				if (newValue === true) {
-					if (newValue !== oldValue) emit('isMobileMenuOpen', true)
+					if (newValue !== oldValue) this.$emit('mobilemenuopened')
 
 					document.body.classList.add('overflow-clip')
 
 					if (scrollbarWidth !== 0)
 						document.body.style.marginRight = `${scrollbarWidth}px`
 				} else {
-					if (newValue !== oldValue) emit('isMobileMenuOpen', false)
+					if (newValue !== oldValue) this.$emit('mobilemenuclosed')
 
 					document.body.classList.remove('overflow-clip')
 
