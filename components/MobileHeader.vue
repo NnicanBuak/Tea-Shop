@@ -37,7 +37,7 @@
 			<nav
 				class="h-full p-10 flex flex-col justify-around bg-white"
 				:class="'w-[' + menuViaViewportWidth + 'vw' + ']'"
-				@click="toggleMobileHeader"
+				@click="closeMobileHeader"
 			>
 				<slot />
 			</nav>
@@ -46,7 +46,7 @@
 			<div
 				class="-z-10 absolute inset-0 h-screen w-screen bg-black bg-opacity-25"
 				v-show="isMobileMenuOpen"
-				@click="toggleMobileHeader"
+				@click="closeMobileHeader"
 			></div>
 		</Transition>
 	</div>
@@ -99,6 +99,9 @@
 		methods: {
 			toggleMobileHeader() {
 				this.isMobileMenuOpen = !this.isMobileMenuOpen
+			},
+			closeMobileHeader() {
+				this.isMobileMenuOpen = false
 			},
 		},
 	}

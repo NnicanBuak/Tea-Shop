@@ -3,12 +3,12 @@
 		hasHeader: false,
 	})
 
-	const supabase = useSupabaseClient()
+	const client = useSupabaseClient()
 
-	let { data: products, error: spabaseAPIError } = await supabase
+	let { data: products, error: supabaseAPIError } = await client
 		.from('products')
 		.select('*')
-	if (spabaseAPIError) console.error(spabaseAPIError)
+	if (supabaseAPIError) console.error(supabaseAPIError)
 
 	defineExpose({ products })
 </script>
