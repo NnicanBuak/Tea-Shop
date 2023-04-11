@@ -141,14 +141,11 @@
 				}"
 			>
 				<SwiperSlide
-					class="h-full w-full max-lg:slideBGscale"
+					class="h-full w-full !bg-no-repeat !bg-left-62%-bottom !bg-cover max-md:!bg-left-59%-bottom max-md:!bg-250%"
 					v-for="(image, index) in sliderImages"
 					:key="index"
 					:style="{
 						backgroundImage: 'url(' + '/img/slider/' + image + ')',
-						backgroundRepeat: 'no-repeat',
-						backgroundPosition: 'left 62% bottom',
-						backgroundSize: 'cover',
 					}"
 				>
 				</SwiperSlide>
@@ -280,13 +277,3 @@
 		},
 	}
 </script>
-
-<style>
-	@media not all and (min-width: 600px) {
-		.swiper-slide {
-			/* !impartant для того что бы встроенные стили элемента переопределялись */
-			background-position: left 59% bottom !important;
-			background-size: 250% !important;
-		}
-	}
-</style>

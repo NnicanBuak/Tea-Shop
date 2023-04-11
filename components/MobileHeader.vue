@@ -2,7 +2,7 @@
 	const isMounted = useMounted()
 </script>
 <template>
-	<div class="z-10 fixed" v-show="isMounted">
+	<div class="z-10 fixed">
 		<header
 			class="z-10 fixed overflow-hidden h-screen w-screen inset-0 flex items-start transform transition-all"
 			:class="{

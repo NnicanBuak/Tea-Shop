@@ -1,20 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	debug: true,
-	css: ['virtual:windi.css', 'virtual:windi-devtools'],
 	modules: [
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
 		'@nuxt/content',
 		'@nuxt/image-edge',
 		'@nuxt/devtools',
+		'@nuxtjs/tailwindcss',
 		'@nuxtjs/supabase',
 		'@nuxtjs/google-fonts',
 		'@nuxtjs/html-validator',
 		'@nuxtjs/device',
 		'nuxt-icon',
 		'nuxt-swiper',
-		'nuxt-windicss',
 	],
 	middleware: ['auth'],
 	app: {
