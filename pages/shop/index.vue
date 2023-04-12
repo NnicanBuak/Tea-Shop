@@ -130,26 +130,14 @@
 					</button>
 				</div>
 			</aside>
-			<Swiper
-				class="h-full w-full row-[1/-1] col-[1/-1]"
-				style="z-index: -20"
-				:modules="[SwiperAutoplay]"
-				:slides-per-view="1"
-				:loop="true"
-				:autoplay="{
-					delay: 15000,
+			<div
+				class="h-full w-full !bg-no-repeat !bg-left-62%-bottom !bg-cover max-md:!bg-left-59%-bottom max-md:!bg-250%"
+				v-for="(image, index) in sliderImages"
+				:key="index"
+				:style="{
+					backgroundImage: 'url(' + '/img/slider/' + image + ')',
 				}"
-			>
-				<SwiperSlide
-					class="h-full w-full !bg-no-repeat !bg-left-62%-bottom !bg-cover max-md:!bg-left-59%-bottom max-md:!bg-250%"
-					v-for="(image, index) in sliderImages"
-					:key="index"
-					:style="{
-						backgroundImage: 'url(' + '/img/slider/' + image + ')',
-					}"
-				>
-				</SwiperSlide>
-			</Swiper>
+			></div>
 		</section>
 		<section class="px-[calc(8vw+24px)]">
 			<h2 class="my-4 text-center text-secondary">Категории</h2>

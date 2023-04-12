@@ -23,10 +23,15 @@
 		"@vueuse/nuxt": "^9.13.0",
 		"micromark": "^3.1.0",
 		"nuxt": "^3.4.0",
-		"nuxt-icon": "^0.3.3",
-		"nuxt-swiper": "^1.1.0"
+		"nuxt-icon": "^0.3.3"
 	},
 	"overrides": {
-		"consola": "3.0.1"
+		"consola": "^3.0.1",
+		"@html-validate/stylish": "^3.0.1",
+		"@supabase/functions-js": "^2.1.1",
+		"@supabase/gotrue-js": "^2.21.1",
+		"@supabase/postgrest-js": "^1.5.0",
+		"@supabase/realtime-js": "^2.7.2",
+		"@supabase/storage-js": "^2.5.1"
 	}
 }

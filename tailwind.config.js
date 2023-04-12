@@ -3,7 +3,6 @@ import tailwindTypography from '@tailwindcss/typography'
 import tailwindForms from '@tailwindcss/forms'
 
 export default {
-	content: ['content/**/*.md'],
 	theme: {
 		container: {
 			center: true,

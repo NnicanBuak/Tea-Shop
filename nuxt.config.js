@@ -13,7 +13,6 @@ export default defineNuxtConfig({
 		'@nuxtjs/html-validator',
 		'@nuxtjs/device',
 		'nuxt-icon',
-		'nuxt-swiper',
 	],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
@@ -91,6 +90,5 @@ export default defineNuxtConfig({
 	},
 	tailwindcss: {
 		viewer: false,
-		configPath: '~/tailwind.config.js',
 	},
 })
