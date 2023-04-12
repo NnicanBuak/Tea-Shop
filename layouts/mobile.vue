@@ -18,7 +18,13 @@
 			</div>
 		</Transition>
 
-		<MobileHeader :isWindowScrollAtTop="isWindowScrollAtTop">
+		<MobileHeader
+			@mobilemenuopened="shiftPage"
+			@mobilemenuclosed="unshiftPage"
+			:isWindowScrollAtTop="isWindowScrollAtTop"
+			:menuViaViewportWidth="70"
+			iconSize="8vw"
+		>
 			<NuxtLink to="/shop">
 				<nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture>
 			</NuxtLink>

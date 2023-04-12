@@ -15,6 +15,7 @@ export default defineNuxtConfig({
 		'nuxt-icon',
 		'nuxt-swiper',
 	],
+	middleware: ['auth'],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
@@ -74,7 +75,7 @@ export default defineNuxtConfig({
 		refreshOnResize: true,
 	},
 	icon: {
-		size: '16px',
+		size: '32px',
 		class: 'icon',
 	},
 	googleFonts: {
@@ -88,9 +89,5 @@ export default defineNuxtConfig({
 				ital: [400],
 			},
 		},
-	},
-	tailwindcss: {
-		viewer: false,
-		configPath: '~/tailwind.config.js',
 	},
 })

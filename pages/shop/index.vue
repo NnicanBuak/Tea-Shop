@@ -207,7 +207,7 @@
 				class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
 				src="/img/bg.png"
 			/>
-			<div class="card" @click="navigateTo('/about')">
+			<div class="p-6 bg-primary rounded-xl" @click="navigateTo('/about')">
 				<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
 				<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
 				<p class="max-h-40 overflow-clip">
@@ -222,7 +222,7 @@
 			</div>
 		</section>
 		<section
-			class="-z-10 relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
+			class="relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
 		>
 			<nuxt-picture
 				class="absolute inset-0 left-4 w-[5vw]"

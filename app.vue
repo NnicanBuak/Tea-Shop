@@ -54,6 +54,44 @@
 	a:focus-visible {
 		outline: none;
 	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: 'EB+Garamond', serif;
+		font-weight: bold;
+	}
+	p {
+		font-family: 'Montserrat, sans-serif';
+		font-size: 1rem;
+		line-height: 1.5rem;
+	}
+	h1 {
+		font-size: 2.25rem;
+		line-height: 2.5rem;
+	}
+	h2 {
+		font-size: 1.875rem;
+		line-height: 2.25rem;
+	}
+	h3 {
+		font-size: 1.5rem;
+		line-height: 2rem;
+	}
+	h4 {
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+	}
+	h5 {
+		font-size: 1.125rem;
+		line-height: 1.75rem;
+	}
+	h6 {
+		font-size: 1rem;
+		line-height: 1.5rem;
+	}
 	hr {
 		margin-top: 0.25rem;
 		margin-bottom: 1rem;
