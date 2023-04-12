@@ -54,12 +54,6 @@
 	a:focus-visible {
 		outline: none;
 	}
-	hr {
-		margin-top: 0.25rem;
-		margin-bottom: 1rem;
-		border: none;
-		border-radius: 9999px;
-	}
 
 	.page-enter-active,
 	.page-leave-active {
