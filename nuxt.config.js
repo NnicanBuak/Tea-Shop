@@ -1,19 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	debug: true,
+	devtools: true,
 	modules: [
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
 		'@nuxt/content',
 		'@nuxt/image-edge',
 		'@nuxt/devtools',
-		'@nuxtjs/tailwindcss',
 		'@nuxtjs/supabase',
 		'@nuxtjs/google-fonts',
 		'@nuxtjs/html-validator',
 		'@nuxtjs/device',
 		'nuxt-icon',
 	],
+	css: ['~/assets/css/tailwind.css'],
+	postcss: {
+		plugins: {
+			tailwindcss: {},
+			autoprefixer: {},
+		},
+	},
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
@@ -87,8 +94,5 @@ export default defineNuxtConfig({
 				ital: [400],
 			},
 		},
-	},
-	tailwindcss: {
-		viewer: false,
 	},
 })
