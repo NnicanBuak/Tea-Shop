@@ -9,18 +9,12 @@ export default defineNuxtConfig({
 		'@nuxt/image-edge',
 		'@nuxt/devtools',
 		'@nuxtjs/supabase',
+		'@nuxtjs/tailwindcss',
 		'@nuxtjs/google-fonts',
 		'@nuxtjs/html-validator',
 		'@nuxtjs/device',
 		'nuxt-icon',
 	],
-	css: ['~/assets/css/tailwind.css'],
-	postcss: {
-		plugins: {
-			tailwindcss: {},
-			autoprefixer: {},
-		},
-	},
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
@@ -75,6 +69,10 @@ export default defineNuxtConfig({
 				},
 			],
 		},
+	},
+	tailwindcss: {
+		viewer: false,
+		exposeConfig: true,
 	},
 	device: {
 		refreshOnResize: true,

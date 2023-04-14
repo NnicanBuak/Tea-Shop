@@ -72,7 +72,9 @@
 						alt=""
 					/>
 					<h4 class="lg:hidden w-full font-normal text-center">
-						<span> Порой просто хочется начать день с чашечки </span>
+						<span class="text-black">
+							Порой просто хочется начать день с чашечки
+						</span>
 						<NuxtLink
 							class="transition-all font-bold text-transparent"
 							:class="{
@@ -130,14 +132,23 @@
 					</button>
 				</div>
 			</aside>
-			<div
-				class="h-full w-full !bg-no-repeat !bg-left-62%-bottom !bg-cover max-md:!bg-left-59%-bottom max-md:!bg-250%"
-				v-for="(image, index) in sliderImages"
-				:key="index"
-				:style="{
-					backgroundImage: 'url(' + '/img/slider/' + image + ')',
-				}"
-			></div>
+			<Swiper
+				class="h-full w-full row-[1/-1] col-[1/-1]"
+				style="z-index: -20"
+				:modules="[SwiperAutoplay]"
+				:slides-per-view="1"
+				:loop="true"
+				:autoplay="{ delay: 15000 }"
+			>
+				<SwiperSlide v-for="(image, index) in sliderImages" :key="index">
+					<div
+						class="h-full w-full !bg-no-repeat !bg-left-62%-bottom !bg-cover max-md:!bg-left-59%-bottom max-md:!bg-250%"
+						:style="{
+							backgroundImage: 'url(' + '/img/slider/' + image + ')',
+						}"
+					></div>
+				</SwiperSlide>
+			</Swiper>
 		</section>
 		<section class="px-[calc(8vw+24px)]">
 			<h2 class="my-4 text-center text-secondary">Категории</h2>
@@ -197,13 +208,16 @@
 			/>
 			<div class="card" @click="navigateTo('/about')">
 				<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
-				<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
-				<p class="max-h-40 overflow-clip">
+				<hr class="h-[2px] w-[55vw]" />
+				<p class="-z-10 h-60 overflow-clip">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
 					Exercitationem, dicta, recusandae architecto delectus repellat quaerat
 					velit fuga consequuntur eos nobis maxime? Distinctio deserunt minus
 					culpa explicabo expedita corrupti temporibus corporis!
 				</p>
+				<div
+					class="inline-block h-24 w-full -mt-24 bg-gradient-to-t from-primary from-30% to-transparent rounded-b-md"
+				></div>
 				<p class="mt-4 font-sans text-right underline decoration-4">
 					Читать дальше
 				</p>
@@ -216,7 +230,7 @@
 				class="absolute inset-0 left-4 w-[5vw]"
 				src="/img/decoration.svg"
 			></nuxt-picture>
-			<h1>Подпишись на&nbsp;рассылку</h1>
+			<h2>Подпишись на&nbsp;рассылку</h2>
 			<form class="space-y-4" action="newsletterSubscribing">
 				<input
 					class="px-4 p-2 shadow-inner rounded-full"

@@ -1,6 +1,6 @@
 <template>
-	<footer class="p-6 px-12 space-y-12 bg-gray-100">
-		<nav class="container grid grid-cols-3">
+	<footer class="container py-10 space-y-12 bg-gray-100">
+		<nav class="grid grid-cols-3">
 			<div class="wrapper text-left">
 				<h1 class="pb-1 font-serif text-gray-400 text-lg">Карта сайта</h1>
 				<ul class="text-sm space-y-3">
