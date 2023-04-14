@@ -5,7 +5,7 @@
 </script>
 
 <template>
-	<ContentDoc :path="$route.path" />
+	<ContentDoc class="max-lg:container prose" :path="$route.path" />
 </template>
 
 <script>

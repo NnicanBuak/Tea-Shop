@@ -3,12 +3,12 @@
 		hasHeader: false,
 	})
 
-	const supabase = useSupabaseClient()
+	const client = useSupabaseClient()
 
-	let { data: products, error: spabaseAPIError } = await supabase
+	let { data: products, error: supabaseAPIError } = await client
 		.from('products')
 		.select('*')
-	if (spabaseAPIError) console.error(spabaseAPIError)
+	if (supabaseAPIError) console.error(supabaseAPIError)
 
 	defineExpose({ products })
 </script>
@@ -130,29 +130,14 @@
 					</button>
 				</div>
 			</aside>
-			<Swiper
-				class="h-full w-full row-[1/-1] col-[1/-1]"
-				style="z-index: -20"
-				:modules="[SwiperAutoplay]"
-				:slides-per-view="1"
-				:loop="true"
-				:autoplay="{
-					delay: 15000,
+			<div
+				class="h-full w-full !bg-no-repeat !bg-left-62%-bottom !bg-cover max-md:!bg-left-59%-bottom max-md:!bg-250%"
+				v-for="(image, index) in sliderImages"
+				:key="index"
+				:style="{
+					backgroundImage: 'url(' + '/img/slider/' + image + ')',
 				}"
-			>
-				<SwiperSlide
-					class="h-full w-full max-lg:slideBGscale"
-					v-for="(image, index) in sliderImages"
-					:key="index"
-					:style="{
-						backgroundImage: 'url(' + '/img/slider/' + image + ')',
-						backgroundRepeat: 'no-repeat',
-						backgroundPosition: 'left 62% bottom',
-						backgroundSize: 'cover',
-					}"
-				>
-				</SwiperSlide>
-			</Swiper>
+			></div>
 		</section>
 		<section class="px-[calc(8vw+24px)]">
 			<h2 class="my-4 text-center text-secondary">Категории</h2>
@@ -210,7 +195,7 @@
 				class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
 				src="/img/bg.png"
 			/>
-			<div class="p-6 bg-primary rounded-xl" @click="navigateTo('/about')">
+			<div class="card" @click="navigateTo('/about')">
 				<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
 				<hr class="h-[2px] w-[55vw] bg-opacity-30 bg-secondary" />
 				<p class="max-h-40 overflow-clip">
@@ -225,7 +210,7 @@
 			</div>
 		</section>
 		<section
-			class="relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
+			class="-z-10 relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
 		>
 			<nuxt-picture
 				class="absolute inset-0 left-4 w-[5vw]"
@@ -280,13 +265,3 @@
 		},
 	}
 </script>
-
-<style>
-	@media not all and (min-width: 600px) {
-		.swiper-slide {
-			/* !impartant для того что бы встроенные стили элемента переопределялись */
-			background-position: left 59% bottom !important;
-			background-size: 250% !important;
-		}
-	}
-</style>
