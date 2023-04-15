@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	debug: true,
 	devtools: true,
 	modules: [
 		'@vueuse/nuxt',
@@ -14,6 +13,7 @@ export default defineNuxtConfig({
 		'@nuxtjs/html-validator',
 		'@nuxtjs/device',
 		'nuxt-icon',
+		'nuxt-swiper',
 	],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },

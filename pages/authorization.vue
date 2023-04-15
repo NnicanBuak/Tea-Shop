@@ -1,22 +1,49 @@
 <script setup>
 	definePageMeta({
-		hasHeader: true,
+		hasHeader: false,
+		middleware: [
+			async function (to, from) {
+				const user = useSupabaseUser()
+
+				if (user.value) {
+					return navigateTo(from ? from : '/shop')
+				}
+			},
+		],
 	})
 
 	const client = useSupabaseAuthClient()
 
 	const loading = ref(false)
 	const email = ref('')
+	const password = ref('')
 
 	const handleLogin = async () => {
 		try {
 			loading.value = true
-			let { data, error } = await client.auth.signInWithOtp({
+			let { data, error } = await client.auth.signInWithPassword({
 				email: email.value,
+				password: password.value,
 			})
 			console.log(data)
 			if (error) throw error
-			alert('Check your email for the login link!')
+			else navigateTo('/profile')
+		} catch (error) {
+			alert(error.error_description || error.message)
+		} finally {
+			loading.value = false
+		}
+	}
+
+	const handleSignup = async () => {
+		try {
+			loading.value = true
+			let { data, error } = await client.auth.signUp({
+				email: email.value,
+				password: password.value,
+			})
+			console.log(data)
+			if (error) throw error
 		} catch (error) {
 			alert(error.error_description || error.message)
 		} finally {
@@ -26,26 +53,64 @@
 </script>
 
 <template>
-	<form class="row flex-center flex" @submit.prevent="handleLogin">
-		<div class="col-6 form-widget">
-			<h1 class="header">Supabase + Nuxt 3</h1>
-			<p class="description">Sign in via magic link with your email below</p>
-			<div>
-				<input
-					class="inputField"
-					type="email"
-					placeholder="Your email"
-					v-model="email"
-				/>
-			</div>
-			<div>
-				<input
-					type="submit"
-					class="button block"
-					:value="loading ? 'Loading' : 'Send magic link'"
-					:disabled="loading"
-				/>
-			</div>
-		</div>
-	</form>
+	<TabsWrapper
+		class="h-screen w-full flex flex-col gap-10 justify-center items-center"
+	>
+		<Tab title="log-in">
+			<form @submit.prevent="handleLogin">
+				<div class="text-center">
+					<div>
+						<input
+							class="inputField"
+							type="email"
+							placeholder="email"
+							v-model="email"
+						/>
+						<input
+							class="inputField"
+							type="password"
+							placeholder="пароль"
+							v-model="password"
+						/>
+					</div>
+					<div>
+						<input
+							class="button"
+							type="submit"
+							:value="loading ? 'Загрузка' : 'Войти'"
+							:disabled="loading"
+						/>
+					</div>
+				</div>
+			</form>
+		</Tab>
+		<Tab title="sign-up">
+			<form @submit.prevent="handleSignup">
+				<div class="text-center">
+					<div>
+						<input
+							class="inputField"
+							type="email"
+							placeholder="email"
+							v-model="email"
+						/>
+						<input
+							class="inputField"
+							type="password"
+							placeholder="пароль"
+							v-model="password"
+						/>
+					</div>
+					<div>
+						<input
+							class="button"
+							type="submit"
+							:value="loading ? 'Загрузка' : 'Зарегистрироваться'"
+							:disabled="loading"
+						/>
+					</div>
+				</div>
+			</form>
+		</Tab>
+	</TabsWrapper>
 </template>

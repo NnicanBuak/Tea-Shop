@@ -31,11 +31,8 @@
 					size="8vw"
 				></Icon>
 			</button>
-			<nav
-				class="h-full w-[70vw] p-10 flex flex-col justify-around bg-white"
-				@click="closeMobileHeader"
-			>
-				<slot />
+			<nav class="h-full w-[70vw]" @click="closeMobileHeader">
+				<slot v-once />
 			</nav>
 		</header>
 		<Transition name="fade">

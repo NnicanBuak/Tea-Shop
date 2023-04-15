@@ -1,8 +1,9 @@
-export default defineNuxtRouteMiddleware((to, _from) => {
+export default defineNuxtRouteMiddleware((to, from) => {
+	if (process.server) return
+
 	const user = useSupabaseUser()
 
 	if (!user.value) {
-		debugger
 		return navigateTo('/authorization')
 	}
 })

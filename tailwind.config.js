@@ -1,4 +1,5 @@
 export default {
+	content: ['./node_modules/flowbite.{js,ts}'],
 	theme: {
 		container: {
 			center: true,
@@ -29,6 +30,7 @@ export default {
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
+		require('flowbite'),
 		require('./tailwindcss/custom-base-styles'),
 		require('./tailwindcss/custom-components'),
 		require('./tailwindcss/custom-variants'),

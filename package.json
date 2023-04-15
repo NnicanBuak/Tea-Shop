@@ -28,5 +28,8 @@
 	"overrides": {
 		"glob-parent": ">=5.1.2",
 		"consola": ">=3.0.2"
+	},
+	"dependencies": {
+		"flowbite": "^1.6.5"
 	}
 }

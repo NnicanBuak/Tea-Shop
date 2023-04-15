@@ -209,7 +209,7 @@
 			<div class="card" @click="navigateTo('/about')">
 				<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
 				<hr class="h-[2px] w-[55vw]" />
-				<p class="-z-10 h-60 overflow-clip">
+				<p class="-z-10 h-50 overflow-clip">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
 					Exercitationem, dicta, recusandae architecto delectus repellat quaerat
 					velit fuga consequuntur eos nobis maxime? Distinctio deserunt minus
@@ -218,7 +218,7 @@
 				<div
 					class="inline-block h-24 w-full -mt-24 bg-gradient-to-t from-primary from-30% to-transparent rounded-b-md"
 				></div>
-				<p class="mt-4 font-sans text-right underline decoration-4">
+				<p class="-mt-8 font-sans text-right underline decoration-4">
 					Читать дальше
 				</p>
 			</div>
