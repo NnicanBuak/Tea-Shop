@@ -1,5 +1,12 @@
 <script setup>
+	const client = useSupabaseClient()
 	const user = useSupabaseUser()
+
+	let { data: userData, error: supabaseAPIError } = await client
+		.from('profiles')
+		.select('avatar_url')
+		.eq('id', user.value.id)
+	if (supabaseAPIError) console.error(supabaseAPIError)
 </script>
 
 <template>
@@ -26,12 +33,20 @@
 			<div
 				class="h-full p-10 flex flex-col flex-nowrap justify-between bg-white"
 			>
-				<div class="p-1 flex flex-nowrap justify-end bg-primary rounded-full">
-					<Icon
-						class="text-secondary"
-						name="material-symbols:account-circle"
-						size="12vw"
-					></Icon>
+				<div class="p-1 flex flex-nowrap justify-end">
+					<NuxtLink to="/profile">
+						<nuxt-img
+							v-if="userData.avatar_url"
+							class="p-1 ring-4 ring-primary rounded-full"
+							:src="userData.avatar_url"
+						/>
+						<Icon
+							v-else
+							class="p-2 text-secondary rounded-full"
+							name="material-symbols:settings-account-box-rounded"
+							size="12vw"
+						></Icon>
+					</NuxtLink>
 				</div>
 				<NuxtLink to="/shop">
 					<nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture>
@@ -79,7 +94,7 @@
 	export default {
 		defer: true,
 		props: {
-			hasHeader: { type: Boolean, required: false },
+			hasHeader: { type: Boolean, required: false, default: true },
 			// page: { type: Object, required: true },
 		},
 		computed: {

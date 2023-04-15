@@ -124,7 +124,7 @@
 					</h1>
 					<button
 						type="button"
-						class="lg:absolute max-lg:w-full transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-bold lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full"
+						class="button lg:absolute max-lg:w-full"
 						data-pointer-type="highlight"
 						@click="navigateTo('/shop/products')"
 					>

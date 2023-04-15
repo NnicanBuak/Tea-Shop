@@ -27,7 +27,7 @@
 			})
 			console.log(data)
 			if (error) throw error
-			else navigateTo('/profile')
+			else navigateTo('/shop')
 		} catch (error) {
 			alert(error.error_description || error.message)
 		} finally {
@@ -44,6 +44,7 @@
 			})
 			console.log(data)
 			if (error) throw error
+			else navigateTo('/profile')
 		} catch (error) {
 			alert(error.error_description || error.message)
 		} finally {
@@ -53,64 +54,64 @@
 </script>
 
 <template>
-	<TabsWrapper
-		class="h-screen w-full flex flex-col gap-10 justify-center items-center"
-	>
-		<Tab title="log-in">
-			<form @submit.prevent="handleLogin">
-				<div class="text-center">
-					<div>
-						<input
-							class="inputField"
-							type="email"
-							placeholder="email"
-							v-model="email"
-						/>
-						<input
-							class="inputField"
-							type="password"
-							placeholder="пароль"
-							v-model="password"
-						/>
+	<div class="container h-screen w-full grid place-content-center">
+		<TabsWrapper class="card flex flex-col gap-10 justify-center items-center">
+			<Tab title="Вход">
+				<form @submit.prevent="handleLogin">
+					<div class="space-y-8 text-center">
+						<div class="space-y-6">
+							<input
+								class="px-4 p-2 shadow-inner rounded-full"
+								type="email"
+								placeholder="email"
+								v-model="email"
+							/>
+							<input
+								class="px-4 p-2 shadow-inner rounded-full"
+								type="password"
+								placeholder="пароль"
+								v-model="password"
+							/>
+						</div>
+						<div>
+							<input
+								class="button w-full px-4 p-2 text-white bg-primary2 rounded-full"
+								type="submit"
+								:value="loading ? 'Загрузка' : 'Войти'"
+								:disabled="loading"
+							/>
+						</div>
 					</div>
-					<div>
-						<input
-							class="button"
-							type="submit"
-							:value="loading ? 'Загрузка' : 'Войти'"
-							:disabled="loading"
-						/>
+				</form>
+			</Tab>
+			<Tab title="Регистрация">
+				<form @submit.prevent="handleSignup">
+					<div class="space-y-8 text-center">
+						<div class="space-y-6">
+							<input
+								class="px-4 p-2 shadow-inner rounded-full"
+								type="email"
+								placeholder="email"
+								v-model="email"
+							/>
+							<input
+								class="px-4 p-2 shadow-inner rounded-full"
+								type="password"
+								placeholder="пароль"
+								v-model="password"
+							/>
+						</div>
+						<div>
+							<input
+								class="button w-full px-4 p-2 text-white bg-primary2 rounded-full"
+								type="submit"
+								:value="loading ? 'Загрузка' : 'Зарегистрироваться'"
+								:disabled="loading"
+							/>
+						</div>
 					</div>
-				</div>
-			</form>
-		</Tab>
-		<Tab title="sign-up">
-			<form @submit.prevent="handleSignup">
-				<div class="text-center">
-					<div>
-						<input
-							class="inputField"
-							type="email"
-							placeholder="email"
-							v-model="email"
-						/>
-						<input
-							class="inputField"
-							type="password"
-							placeholder="пароль"
-							v-model="password"
-						/>
-					</div>
-					<div>
-						<input
-							class="button"
-							type="submit"
-							:value="loading ? 'Загрузка' : 'Зарегистрироваться'"
-							:disabled="loading"
-						/>
-					</div>
-				</div>
-			</form>
-		</Tab>
-	</TabsWrapper>
+				</form>
+			</Tab>
+		</TabsWrapper>
+	</div>
 </template>
