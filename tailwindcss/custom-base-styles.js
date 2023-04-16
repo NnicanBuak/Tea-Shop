@@ -2,24 +2,16 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = plugin(function ({ theme, addBase }) {
 	const hStyle = {
-		fontWeight: theme('fontWeight.bold'),
-		fontFamily: theme('fontFamily.serif'),
-		color: theme('colors.secondary'),
+		'@apply font-bold font-serif text-secondary': {},
 	}
 
 	addBase({
 		hr: {
-			marginTop: theme('margin.1'),
-			marginBottom: theme('margin.3'),
-			borderRadius: theme('borderRadius.full'),
-			backgroundColor: theme('colors.secondary'),
-			backgrondOpacity: '0.3',
-			borderStyle: 'none',
+			'@apply mt-1 mb-3 bg-secondary bg-opacity-30 border-none rounded-full':
+				{},
 		},
 		p: {
-			fontSize: theme('fontSize.base'),
-			fontFamily: theme('fontFamily.sans'),
-			color: theme('colors.secondary'),
+			'@apply font-sans text-base text-secondary': {},
 		},
 		h1: {
 			...hStyle,

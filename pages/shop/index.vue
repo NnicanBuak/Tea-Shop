@@ -124,7 +124,7 @@
 					</h1>
 					<button
 						type="button"
-						class="button lg:absolute max-lg:w-full"
+						class="button button-primary lg:absolute max-lg:w-full"
 						data-pointer-type="highlight"
 						@click="navigateTo('/shop/products')"
 					>
