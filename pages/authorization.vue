@@ -2,11 +2,14 @@
 	definePageMeta({
 		hasHeader: false,
 		middleware: [
-			async function (to, from) {
+			(to, from) => {
 				const user = useSupabaseUser()
 
 				if (user.value) {
-					return navigateTo(from ? from : '/shop')
+					const router = useRouter()
+					console.log(from?.path)
+
+					return navigateTo({ path: '/shop' })
 				}
 			},
 		],

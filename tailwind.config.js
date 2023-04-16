@@ -5,6 +5,8 @@ export default {
 			center: true,
 			padding: {
 				DEFAULT: 'calc(8vw + 24px)',
+				lg: '50px',
+				xl: '0px',
 			},
 		},
 		fontFamily: {

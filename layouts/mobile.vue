@@ -42,7 +42,7 @@
 						/>
 						<Icon
 							v-else
-							class="p-2 text-secondary rounded-full"
+							class="p-2 text-secondary"
 							name="material-symbols:settings-account-box-rounded"
 							size="12vw"
 						></Icon>

@@ -71,10 +71,8 @@
 						src="/img/logo-10.svg"
 						alt=""
 					/>
-					<h4 class="lg:hidden w-full font-normal text-center">
-						<span class="text-black">
-							Порой просто хочется начать день с чашечки
-						</span>
+					<h4 class="lg:hidden w-full font-normal text-black text-center">
+						<span> Порой просто хочется начать день с чашечки </span>
 						<NuxtLink
 							class="transition-all font-bold text-transparent"
 							:class="{
