@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<div class="min-h-screen">
 		<NuxtLoadingIndicator
 			class="fixed inset-0 w-screen"
 			color="#bfd400"
 			:height="6"
 			:throttle="2000"
 		/>
-		<NuxtLayout :name="layout" :hasHeader="hasHeader">
+		<NuxtLayout :name="layout">
 			<NuxtPage ref="page" />
 		</NuxtLayout>
 	</div>
@@ -15,11 +15,26 @@
 <script>
 	export default {
 		name: 'app',
+		provide() {
+			return { userData: this.userData }
+		},
 		data() {
-			const { hasHeader } = this.$route.meta
 			return {
-				hasHeader,
 				refOnPage: null,
+			}
+		},
+		async asyncData() {
+			const client = useSupabaseClient()
+			const user = useSupabaseUser()
+
+			if (user.value) {
+				let { data: userData, error: supabaseAPIError } = await client
+					.from('profiles')
+					.select('avatar_url')
+					.eq('id', user.value.id)
+				if (supabaseAPIError) console.error(supabaseAPIError)
+
+				return { userData }
 			}
 		},
 		computed: {
@@ -27,9 +42,10 @@
 				return this.$device.isMobile ? 'mobile' : 'default'
 			},
 		},
-		mounted() {
+		created() {
 			this.refOnPage = this.$refs.page
-
+		},
+		mounted() {
 			let vh = window.innerHeight * 0.01
 			document.documentElement.style.setProperty('--vh', `${vh}px`)
 		},
@@ -37,17 +53,6 @@
 </script>
 
 <style>
-	@media (pointer: fine) {
-		/* Стили для устройств с мышью */
-		#cursor {
-			background-color: #bfd400;
-		}
-		/* #__nuxt,
-		button,
-		a {
-			cursor: none;
-		} */
-	}
 	img {
 		width: 100%;
 	}

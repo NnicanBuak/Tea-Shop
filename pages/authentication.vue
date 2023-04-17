@@ -1,14 +1,26 @@
 <script setup>
 	definePageMeta({
-		hasHeader: false,
+		hasDesktopHeader: {
+			hid: 'hasDesktopHeader',
+			name: 'hasDesktopHeader',
+			content: true,
+		},
+		hasHeaderOffset: {
+			hid: 'hasHeaderOffset',
+			name: 'hasHeaderOffset',
+			content: false,
+		},
+		hasFooterOffset: {
+			hid: 'hasFooterOffset',
+			name: 'hasFooterOffset',
+			content: false,
+		},
+
 		middleware: [
 			(to, from) => {
 				const user = useSupabaseUser()
 
 				if (user.value) {
-					const router = useRouter()
-					console.log(from?.path)
-
 					return navigateTo({ path: '/shop' })
 				}
 			},
@@ -18,12 +30,13 @@
 	const client = useSupabaseAuthClient()
 
 	const loading = ref(false)
+
 	const email = ref('')
 	const password = ref('')
 
 	const handleLogin = async () => {
 		try {
-			loading.value = true
+			loading = true
 			let { data, error } = await client.auth.signInWithPassword({
 				email: email.value,
 				password: password.value,
@@ -34,13 +47,13 @@
 		} catch (error) {
 			alert(error.error_description || error.message)
 		} finally {
-			loading.value = false
+			loading = false
 		}
 	}
 
 	const handleSignup = async () => {
 		try {
-			loading.value = true
+			loading = true
 			let { data, error } = await client.auth.signUp({
 				email: email.value,
 				password: password.value,
@@ -51,7 +64,7 @@
 		} catch (error) {
 			alert(error.error_description || error.message)
 		} finally {
-			loading.value = false
+			loading = false
 		}
 	}
 </script>
@@ -78,9 +91,9 @@
 						</div>
 						<div>
 							<input
-								class="button w-full px-4 p-2 text-white bg-primary2 rounded-full"
+								class="button w-full px-4 p-2 font-normal text-white text-lg bg-primary2 rounded-full"
 								type="submit"
-								:value="loading ? 'Загрузка' : 'Войти'"
+								:value="loading ? '🔃' : 'Войти'"
 								:disabled="loading"
 							/>
 						</div>
@@ -106,9 +119,9 @@
 						</div>
 						<div>
 							<input
-								class="button w-full px-4 p-2 text-white bg-primary2 rounded-full"
+								class="button w-full px-4 p-2 font-normal text-white text-lg bg-primary2 rounded-full"
 								type="submit"
-								:value="loading ? 'Загрузка' : 'Зарегистрироваться'"
+								:value="loading ? '🔃' : 'Зарегистрироваться'"
 								:disabled="loading"
 							/>
 						</div>

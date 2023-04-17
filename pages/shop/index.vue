@@ -1,6 +1,20 @@
 <script setup>
 	definePageMeta({
-		hasHeader: false,
+		hasDesktopHeader: {
+			hid: 'hasDesktopHeader',
+			name: 'hasDesktopHeader',
+			content: false,
+		},
+		hasHeaderOffset: {
+			hid: 'hasHeaderOffset',
+			name: 'hasHeaderOffset',
+			content: false,
+		},
+		hasFooterOffset: {
+			hid: 'hasFooterOffset',
+			name: 'hasFooterOffset',
+			content: true,
+		},
 	})
 
 	const client = useSupabaseClient()
@@ -16,12 +30,12 @@
 <template>
 	<main class="space-y-40 overflow-auto">
 		<section
-			class="6ontainer-fluid h-screen grid"
+			class="сontainer-xl h-screen grid"
 			style="height: calc(100 * var(--vh, 1vh))"
 			id="hero"
 		>
 			<aside
-				class="h-full container-xl max-lg:container-sm flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 p-[calc(8vw+24px)] max-lg:py-[16vh] xl:p-20 row-[1/-1] col-[1/-1]"
+				class="h-full container xl:container-xl flex flex-col justify-between items-center lg:grid grid-cols-2 grid-rows-4 gap-x-22 xl:gap-x-40 max-lg:py-[16vh] xl:p-20 row-[1/-1] col-[1/-1]"
 			>
 				<nav class="max-lg:hidden flex flex-col lg:row-[1/1] lg:col-[2/2]">
 					<div class="flex">
@@ -44,13 +58,13 @@
 						<button type="button" @click="navigateTo('/shop')">
 							<span><b>Магазин</b></span>
 						</button>
-						<button type="button" @click="navigateTo('/sales')">
+						<button type="button" @click="navigateTo('/other/sales')">
 							<span>Скидки</span>
 						</button>
-						<button type="button" @click="navigateTo('/about')">
+						<button type="button" @click="navigateTo('/other/about')">
 							<span>О нас</span>
 						</button>
-						<button type="button" @click="navigateTo('/contacts')">
+						<button type="button" @click="navigateTo('/other/contacts')">
 							<span>Контакты</span>
 						</button>
 					</div>
@@ -133,10 +147,9 @@
 			<Swiper
 				class="h-full w-full row-[1/-1] col-[1/-1]"
 				style="z-index: -20"
-				:modules="[SwiperAutoplay]"
+				:modules="[]"
 				:slides-per-view="1"
 				:loop="true"
-				:autoplay="{ delay: 15000 }"
 			>
 				<SwiperSlide v-for="(image, index) in sliderImages" :key="index">
 					<div
@@ -148,7 +161,7 @@
 				</SwiperSlide>
 			</Swiper>
 		</section>
-		<section class="px-[calc(8vw+24px)]">
+		<section class="container xl:container-xl">
 			<h2 class="my-4 text-center text-secondary">Категории</h2>
 			<div class="wrapper h-1 my-8">
 				<nuxt-picture
@@ -189,7 +202,7 @@
 				</MenuCard>
 			</MenuSwiper>
 		</section>
-		<section class="px-[calc(8vw+24px)] text-secondary">
+		<section class="container xl:container-xl text-secondary">
 			<h2 class="font-serif text-center">Как мы это делаем?</h2>
 			<div class="wrapper h-1 my-8">
 				<nuxt-picture
@@ -222,14 +235,14 @@
 			</div>
 		</section>
 		<section
-			class="-z-10 relative py-12 px-[calc(8vw+24px)] space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
+			class="container xl:container-xl -z-10 relative py-12 space-y-8 text-gray-700 bg-primary bg-opacity-10 overflow-clip"
 		>
 			<nuxt-picture
 				class="absolute inset-0 left-4 w-[5vw]"
 				src="/img/decoration.svg"
 			></nuxt-picture>
 			<h2>Подпишись на&nbsp;рассылку</h2>
-			<form class="space-y-4" action="newsletterSubscribing">
+			<form class="space-y-4">
 				<input
 					class="px-4 p-2 shadow-inner rounded-full"
 					type="email"

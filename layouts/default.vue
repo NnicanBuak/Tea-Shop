@@ -17,7 +17,8 @@
 				</h2>
 			</div>
 		</Transition>
-		<DesktopHeader v-if="hasHeader"></DesktopHeader>
+
+		<DesktopHeader v-if="$route.meta.hasDesktopHeader?.content"></DesktopHeader>
 		<slot />
 		<Footer ref="footer" />
 	</div>
@@ -26,9 +27,6 @@
 <script>
 	export default {
 		defer: true,
-		props: {
-			hasHeader: { type: Boolean, required: true },
-		},
 		computed: {
 			isWindowWidthNarrow() {
 				return useWindowSize().width.value <= 1024

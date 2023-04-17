@@ -1,7 +1,6 @@
 <template>
 	<div
-		class="z-20 absolute inset-[-100%] h-6 w-6 rounded-full pointer-events-none"
-		id="cursor"
+		class="pointer-coarse:hidden z-20 absolute inset-[-100%] h-6 w-6 rounded-full pointer-events-none"
 		ref="cursor"
 	></div>
 </template>

@@ -1,29 +1,29 @@
 <template>
-	<footer class="container n py-10 space-y-12 bg-gray-100">
+	<footer class="container xl:container-xl py-10 space-y-12 bg-gray-100">
 		<nav class="grid grid-cols-3">
 			<div class="wrapper text-left">
 				<h1 class="pb-1 font-serif text-gray-400 text-lg">Карта сайта</h1>
 				<ul class="text-sm space-y-3">
 					<li><NuxtLink to="/shop">Магазин</NuxtLink></li>
-					<li><NuxtLink to="/sales">Скидки</NuxtLink></li>
-					<li><NuxtLink to="/about">О нас</NuxtLink></li>
-					<li><NuxtLink to="/contacts">Контакты</NuxtLink></li>
+					<li><NuxtLink to="/other/sales">Скидки</NuxtLink></li>
+					<li><NuxtLink to="/other/about">О нас</NuxtLink></li>
+					<li><NuxtLink to="/other/contacts">Контакты</NuxtLink></li>
 				</ul>
 			</div>
 			<div class="wrapper text-center">
 				<h1 class="pb-1 font-serif text-gray-400 text-lg">Клиентам</h1>
 				<ul class="text-sm space-y-3">
-					<li><NuxtLink to="/delivery">Доставка</NuxtLink></li>
-					<li><NuxtLink to="/payment">Оплата</NuxtLink></li>
-					<li><NuxtLink to="/b2b">B2B</NuxtLink></li>
+					<li><NuxtLink to="/support/delivery">Доставка</NuxtLink></li>
+					<li><NuxtLink to="/support/payment">Оплата</NuxtLink></li>
+					<li><NuxtLink to="/support/b2b">B2B</NuxtLink></li>
 				</ul>
 			</div>
 			<div class="wrapper text-right">
 				<h1 class="pb-1 font-serif text-gray-400 text-lg">Помощь</h1>
 				<ul class="text-sm space-y-3">
-					<li><NuxtLink to="">Связаться с нами</NuxtLink></li>
-					<li><NuxtLink to="/faq">Частые вопросы</NuxtLink></li>
-					<li><NuxtLink to="/offer">Оферта</NuxtLink></li>
+					<li><NuxtLink to="/support">Связаться с нами</NuxtLink></li>
+					<li><NuxtLink to="/support/faq">Частые вопросы</NuxtLink></li>
+					<li><NuxtLink to="/support/offer">Оферта</NuxtLink></li>
 				</ul>
 			</div>
 		</nav>

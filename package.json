@@ -23,7 +23,8 @@
 		"@vueuse/nuxt": "^9.13.0",
 		"nuxt": "^3.4.1",
 		"nuxt-icon": "^0.3.3",
-		"nuxt-swiper": "^1.0.1"
+		"nuxt-swiper": "^1.0.1",
+		"tailwindcss-touch": "^1.0.1"
 	},
 	"overrides": {
 		"glob-parent": ">=5.1.2",

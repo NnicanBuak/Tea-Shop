@@ -1,6 +1,20 @@
 <script setup>
 	definePageMeta({
-		hasHeader: true,
+		hasDesktopHeader: {
+			hid: 'hasDesktopHeader',
+			name: 'hasDesktopHeader',
+			content: true,
+		},
+		hasHeaderOffset: {
+			hid: 'hasHeaderOffset',
+			name: 'hasHeaderOffset',
+			content: true,
+		},
+		hasFooterOffset: {
+			hid: 'hasFooterOffset',
+			name: 'hasFooterOffset',
+			content: true,
+		},
 	})
 
 	const route = useRoute()

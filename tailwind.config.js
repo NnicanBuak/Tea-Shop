@@ -33,6 +33,7 @@ export default {
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
 		require('flowbite'),
+		require('tailwindcss-touch'),
 		require('./tailwindcss/custom-base-styles'),
 		require('./tailwindcss/custom-components'),
 		require('./tailwindcss/custom-variants'),

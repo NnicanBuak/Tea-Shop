@@ -8,23 +8,24 @@
 		hasHeaderOffset: {
 			hid: 'hasHeaderOffset',
 			name: 'hasHeaderOffset',
-			content: false,
+			content: true,
 		},
 		hasFooterOffset: {
 			hid: 'hasFooterOffset',
 			name: 'hasFooterOffset',
-			content: false,
+			content: true,
 		},
-		middleware: ['auth'],
 	})
 </script>
 
 <template>
-	<div class="h-screen"></div>
+	<div>
+		<Content class="container xl:container-xl" :path="name" />
+	</div>
 </template>
 
 <script>
 	export default {
-		name: 'profile',
+		name: 'offer',
 	}
 </script>

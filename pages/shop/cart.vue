@@ -1,7 +1,22 @@
 <script setup>
 	definePageMeta({
-		hasHeader: true,
-		middleware: 'auth',
+		hasDesktopHeader: {
+			hid: 'hasDesktopHeader',
+			name: 'hasDesktopHeader',
+			content: true,
+		},
+		hasHeaderOffset: {
+			hid: 'hasHeaderOffset',
+			name: 'hasHeaderOffset',
+			content: true,
+		},
+		hasFooterOffset: {
+			hid: 'hasFooterOffset',
+			name: 'hasFooterOffset',
+			content: true,
+		},
+
+		middleware: ['auth'],
 	})
 </script>
 
