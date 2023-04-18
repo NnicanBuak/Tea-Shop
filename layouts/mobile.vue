@@ -27,21 +27,20 @@
 				>
 					<div class="flex flex-row-reverse flex-nowrap">
 						<NuxtLink class="p-2" to="/profile">
-							<nuxt-img
+							<!-- <nuxt-img
 								v-if="userData?.avatar_url"
 								class="ring-4 ring-primary rounded-full"
 								:src="userData?.avatar_url"
-							/>
+							/> -->
 							<Icon
-								v-else
-								class="text-secondary2"
+								class="text-primary2"
 								name="material-symbols:settings-account-box-rounded"
 								size="8vw"
 							></Icon>
 						</NuxtLink>
 					</div>
 					<NuxtLink to="/shop">
-						<nuxt-picture class="w-full" src="/img/logo-08.svg"></nuxt-picture>
+						<nuxt-picture class="w-full" src="/img/logo-07.svg"></nuxt-picture>
 					</NuxtLink>
 					<div class="flex flex-col gap-10 text-right">
 						<div class="wrapper">
@@ -52,13 +51,13 @@
 							</h1>
 							<ul class="space-y-4 text-2xl">
 								<li>
+									<NuxtLink to="/other/contacts">Контакты</NuxtLink>
+								</li>
+								<li>
 									<NuxtLink to="/other/sales">Скидки</NuxtLink>
 								</li>
 								<li>
 									<NuxtLink to="/other/about">О нас</NuxtLink>
-								</li>
-								<li>
-									<NuxtLink to="/other/contacts">Контакты</NuxtLink>
 								</li>
 							</ul>
 						</div>
@@ -84,20 +83,33 @@
 		<div class="h-40" v-if="hasHeaderOffset"></div>
 		<slot />
 		<div class="h-40" v-if="hasFooterOffset"></div>
-		<Footer ref="footer" />
+		<Footer />
 	</div>
 </template>
 
 <script>
 	export default {
 		defer: true,
-		inject: ['userData'],
 		data() {
 			const { hasHeaderOffset, hasFooterOffset } = this.$route.meta
 			return {
 				hasHeaderOffset: hasHeaderOffset?.content,
 				hasFooterOffset: hasFooterOffset?.content,
 			}
+		},
+		async asyncData() {
+			const supabase = useSupabaseClient()
+			const user = useSupabaseUser()
+
+			if (user.value) {
+				let { data: userData, error } = await supabase
+					.from('profiles')
+					.select('avatar_url')
+					.eq('id', user.value.id)
+				if (error) console.error(error)
+				else return { userData }
+			}
+			return {}
 		},
 		computed: {
 			isScreenOrientationLandscape() {

@@ -16,19 +16,6 @@
 			content: true,
 		},
 	})
-
-	const route = useRoute()
-	const client = useSupabaseClient()
-
-	let { data: products, error: supabaseAPIError } = await client
-		.from('products')
-		.select('*')
-	if (supabaseAPIError) console.error(supabaseAPIError)
-
-	defineExpose({ products })
-
-	if (route.query?.id) {
-	}
 </script>
 
 <template>
@@ -38,5 +25,23 @@
 <script>
 	export default {
 		name: 'products',
+		async asyncData() {
+			const route = useRoute()
+			const supabase = useSupabaseClient()
+
+			let { data: products, error } = await supabase
+				.from('products')
+				.select('*')
+			if (error) console.error(error)
+
+			if (route.query?.id) {
+				let { data: selectedProduct, error } = await supabase
+					.from('products')
+					.eq('id', route.query.id)
+				if (error) console.error(error)
+				else return { products, selectedProduct }
+			}
+			if (!error) return { products }
+		},
 	}
 </script>

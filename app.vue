@@ -15,35 +15,10 @@
 <script>
 	export default {
 		name: 'app',
-		provide() {
-			return { userData: this.userData }
-		},
-		data() {
-			return {
-				refOnPage: null,
-			}
-		},
-		async asyncData() {
-			const client = useSupabaseClient()
-			const user = useSupabaseUser()
-
-			if (user.value) {
-				let { data: userData, error: supabaseAPIError } = await client
-					.from('profiles')
-					.select('avatar_url')
-					.eq('id', user.value.id)
-				if (supabaseAPIError) console.error(supabaseAPIError)
-
-				return { userData }
-			}
-		},
 		computed: {
 			layout() {
 				return this.$device.isMobile ? 'mobile' : 'default'
 			},
-		},
-		created() {
-			this.refOnPage = this.$refs.page
 		},
 		mounted() {
 			let vh = window.innerHeight * 0.01

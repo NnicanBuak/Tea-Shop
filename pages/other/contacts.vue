@@ -10,7 +10,6 @@
 			name: 'hasHeaderOffset',
 			content: true,
 		},
-
 		hasFooterOffset: {
 			hid: 'hasFooterOffset',
 			name: 'hasFooterOffset',
@@ -21,7 +20,7 @@
 
 <template>
 	<div>
-		<Content class="container xl:container-xl" :path="name" />
+		<Content class="container xl:container-xl" :name="name" />
 	</div>
 </template>
 

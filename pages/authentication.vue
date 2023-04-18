@@ -27,17 +27,16 @@
 		],
 	})
 
-	const client = useSupabaseAuthClient()
+	const supabaseAuth = useSupabaseAuthClient()
 
-	const loading = ref(false)
-
-	const email = ref('')
-	const password = ref('')
+	let loading = ref(false)
+	let email = ref('')
+	let password = ref('')
 
 	const handleLogin = async () => {
 		try {
 			loading = true
-			let { data, error } = await client.auth.signInWithPassword({
+			let { data, error } = await supabaseAuth.auth.signInWithPassword({
 				email: email.value,
 				password: password.value,
 			})
@@ -54,7 +53,7 @@
 	const handleSignup = async () => {
 		try {
 			loading = true
-			let { data, error } = await client.auth.signUp({
+			let { data, error } = await supabaseAuth.auth.signUp({
 				email: email.value,
 				password: password.value,
 			})
@@ -85,7 +84,7 @@
 							<input
 								class="px-4 p-2 shadow-inner rounded-full"
 								type="password"
-								placeholder="пароль"
+								placeholder="password"
 								v-model="password"
 							/>
 						</div>
@@ -113,7 +112,7 @@
 							<input
 								class="px-4 p-2 shadow-inner rounded-full"
 								type="password"
-								placeholder="пароль"
+								placeholder="password"
 								v-model="password"
 							/>
 						</div>

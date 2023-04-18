@@ -16,15 +16,6 @@
 			content: true,
 		},
 	})
-
-	const client = useSupabaseClient()
-
-	let { data: products, error: supabaseAPIError } = await client
-		.from('products')
-		.select('*')
-	if (supabaseAPIError) console.error(supabaseAPIError)
-
-	defineExpose({ products })
 </script>
 
 <template>
@@ -85,7 +76,7 @@
 						src="/img/logo-10.svg"
 						alt=""
 					/>
-					<h4 class="lg:hidden w-full font-normal text-black text-center">
+					<h3 class="lg:hidden w-full font-normal text-black text-center">
 						<span> Порой просто хочется начать день с чашечки </span>
 						<NuxtLink
 							class="transition-all font-bold text-transparent"
@@ -103,26 +94,25 @@
 							v-if="randomTea?.parenthesesName"
 							:to="{ path: '/shop/products', query: { id: randomTea.id } }"
 							tabindex="-1"
-						>
-							<span
-								class="bg-clip-text bg-gradient-to-r"
-								:class="{
-									'from-yellow-300 to-yellow-500':
-										randomTea.variety === 'Зелёный',
-									'from-white to-gray-200': randomTea.variety === 'Белый',
-									'from-green-400 to-green-800':
-										randomTea.variety === 'Травянной',
-									'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
-									'from-orange-400 to-orange-600':
-										randomTea.variety === 'Чёрный',
-									'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
-								}"
-								>{{ randomTea.parenthesesName }}
-							</span>
+						> 
+						<span
+							class="bg-clip-text bg-gradient-to-r"
+							:class="{
+								'from-yellow-300 to-yellow-500':
+									randomTea.variety === 'Зелёный',
+								'from-white to-gray-200': randomTea.variety === 'Белый',
+								'from-green-400 to-green-800':
+									randomTea.variety === 'Травянной',
+								'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
+								'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
+								'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
+							}"
+							>{{ randomTea.parenthesesName }}
+						</span>
 						</NuxtLink>
 
-						<span v-else>чая</span>
-					</h4>
+						<span>чая</span>
+					</h3>
 				</div>
 				<div
 					class="max-lg:w-full lg:h-full lg:row-[2/-1] lg:col-[2/2]"
@@ -217,7 +207,7 @@
 				class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
 				src="/img/bg.png"
 			/>
-			<div class="card" @click="navigateTo('/about')">
+			<div class="card" @click="navigateTo('other/about')">
 				<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
 				<hr class="h-[2px] w-[55vw]" />
 				<p class="-z-10 h-50 overflow-clip">
@@ -268,6 +258,19 @@
 				sliderImages: ['slide.png'],
 				randomTea: null,
 			}
+		},
+		async asyncData() {
+			const supabase = useSupabaseClient()
+			const user = useSupabaseUser()
+
+			if (user.value) {
+				let { data: products, error } = await supabase
+					.from('products')
+					.select('*')
+				if (error) console.error(error)
+				else return { products }
+			}
+			return {}
 		},
 		mounted() {
 			this.randomTea = this.getRandomProductByCategory('🍵')
