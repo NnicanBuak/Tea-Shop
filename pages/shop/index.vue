@@ -77,41 +77,7 @@
 						alt=""
 					/>
 					<h3 class="lg:hidden w-full font-normal text-black text-center">
-						<span> Порой просто хочется начать день с чашечки </span>
-						<NuxtLink
-							class="transition-all font-bold text-transparent"
-							:class="{
-								'from-yellow-300 to-yellow-500':
-									randomTea.variety === 'Зелёный',
-								'from-white to-gray-200': randomTea.variety === 'Белый',
-								'from-green-400 to-green-800':
-									randomTea.variety === 'Травянной',
-								'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
-								'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
-								'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
-							}"
-							data-pointer-type="highlight"
-							v-if="randomTea?.parenthesesName"
-							:to="{ path: '/shop/products', query: { id: randomTea.id } }"
-							tabindex="-1"
-						> 
-						<span
-							class="bg-clip-text bg-gradient-to-r"
-							:class="{
-								'from-yellow-300 to-yellow-500':
-									randomTea.variety === 'Зелёный',
-								'from-white to-gray-200': randomTea.variety === 'Белый',
-								'from-green-400 to-green-800':
-									randomTea.variety === 'Травянной',
-								'from-yellow-300 to-yellow-400': randomTea.variety === 'Улун',
-								'from-orange-400 to-orange-600': randomTea.variety === 'Чёрный',
-								'from-red-900 to-gray-900': randomTea.variety === 'Пуэр',
-							}"
-							>{{ randomTea.parenthesesName }}
-						</span>
-						</NuxtLink>
-
-						<span>чая</span>
+						Порой просто хочется начать день с чашечки чая
 					</h3>
 				</div>
 				<div
