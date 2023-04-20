@@ -19,8 +19,8 @@
 </script>
 
 <template>
-	<div>
-		<Content class="container xl:container-xl" :name="name" />
+	<div class="container xl:container-xl prose-xl">
+		<Article />
 	</div>
 </template>
 

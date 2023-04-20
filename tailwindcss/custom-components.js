@@ -2,12 +2,14 @@ const plugin = require('tailwindcss/plugin')
 module.exports = plugin(function ({ addComponents }) {
 	addComponents({
 		'.card': {
-			'@apply relative p-6 bg-primary rounded-xl': {},
+			'@apply relative p-6 rounded-lg': {},
 		},
 		'.button': {
-			'@apply transition-all lg:hover:px-4 lg:focus-visible:px-4 py-[1vw] lg:hover:border-[3px] focus-visible:border-[3px] lg:border-[3px] border-black max-lg:bg-primary text-black text-[6vw] lg:text-3xl font-serif lg:hover:uppercase focus-visible:uppercase tracking-[-0.15vw] rounded-full':
+			'@apply py-[1vw] text-3xl rounded-full': {},
+		},
+		'.button-primary': {
+			'@apply transition-all pointing:px-4 pointing:border-[3px] bg-primary border-black max-lg:bg-primary font-special font-[800] text-black pointing:uppercase tracking-[-0.15vw]':
 				{},
 		},
-		'.button-primary': {},
 	})
 })

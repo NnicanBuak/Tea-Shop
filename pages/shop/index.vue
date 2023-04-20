@@ -16,6 +16,13 @@
 			content: true,
 		},
 	})
+
+	let { data: articleData } = useAsyncData(
+		'articleData',
+		async () => await queryContent('/other/about').findOne(),
+	)
+	// const articleLinks = Array.from(articleData.body.toc.links)
+	// const currentArticleLink = ref(articleLinks[0])
 </script>
 
 <template>
@@ -109,7 +116,7 @@
 			>
 				<SwiperSlide v-for="(image, index) in sliderImages" :key="index">
 					<div
-						class="h-full w-full !bg-no-repeat !bg-left-62%-bottom !bg-cover max-md:!bg-left-59%-bottom max-md:!bg-250%"
+						class="h-full w-full !bg-no-repeat !bg-[left_62%_bottom] !bg-cover max-md:!bg-[left_59%_bottom] max-md:!bg-250%"
 						:style="{
 							backgroundImage: 'url(' + '/img/slider/' + image + ')',
 						}"
@@ -166,28 +173,85 @@
 					src="/img/decoration-horizontal.svg"
 				/>
 			</div>
-			<h1 class="my-4 font-sans font-bold text-center text-primary">
+			<div class="wrapper h-44 w-44 mb-8 mx-auto p-4 bg-primary rounded-full">
+				<nuxt-img class="h-full rounded-full" src="/img/bg.png" />
+			</div>
+			<h3 class="mb-2 font-serif text-center max-md:text-xl text-[#333]">
 				Главный секрет приготовления
-			</h1>
-			<nuxt-img
-				class="h-44 w-44 my-8 mx-auto border-[16px] border-primary rounded-full"
-				src="/img/bg.png"
-			/>
-			<div class="card" @click="navigateTo('other/about')">
-				<h2>Мы не скрываем того, из чего именно собран наш чай.</h2>
-				<hr class="h-[2px] w-[55vw]" />
-				<p class="-z-10 h-50 overflow-clip">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Exercitationem, dicta, recusandae architecto delectus repellat quaerat
-					velit fuga consequuntur eos nobis maxime? Distinctio deserunt minus
-					culpa explicabo expedita corrupti temporibus corporis!
-				</p>
-				<div
-					class="inline-block h-24 w-full -mt-24 bg-gradient-to-t from-primary from-30% to-transparent rounded-b-md"
-				></div>
-				<p class="-mt-8 font-sans text-right underline decoration-4">
-					Читать дальше
-				</p>
+			</h3>
+			<div class="card flex flex-col overflow-clip">
+				<div class="wrapper relative flex flex-col overflow-clip">
+					<Transition name="long-fade-out">
+						<div
+							class="absolute bottom-0 h-full w-full bg-gradient-to-t from-primary from-20% to-transparent to-50%"
+							v-show="!isArticleOpen"
+						></div>
+					</Transition>
+					<div
+						class="wrapper transition-max-height ease-out duration-1000"
+						:class="{
+							'max-h-96': !isArticleOpen,
+							'max-h-[60rem]': isArticleOpen,
+						}"
+					>
+						<div
+							class="wrapper"
+							v-for="link in articleData.body.toc.links"
+							:key="link.id"
+						>
+							<Transition name="long-fade-in-right-out-left-in-out">
+								<div class="wrapper" v-show="articleData">
+									<h1 class="text-secondary">
+										<a :href="'#' + link.id">
+											{{ link.text }}
+										</a>
+									</h1>
+									<hr />
+									<p>
+										{{
+											articleData.body.children[
+												Number(
+													getKeyByValue(
+														articleData.body.children,
+														findInObject(articleData.body.children, 'props', {
+															id: link.id,
+														}),
+													),
+												) + 1
+											].children[0].value
+										}}
+									</p>
+								</div>
+							</Transition>
+						</div>
+						<hr class="h-[4px]" />
+						<nav class="flex flex-row-reverse">
+							<button type="button" class="p-2">
+								<Icon
+									class="active:bg-secondary active:text-primary rounded-full"
+									name="material-symbols:arrow-circle-right-outline-rounded"
+									size="10vw"
+								/>
+							</button>
+							<button type="button" class="p-2">
+								<Icon
+									class="active:bg-secondary active:text-primary rounded-full"
+									name="material-symbols:arrow-circle-left-outline-rounded"
+									size="10vw"
+								/>
+							</button>
+						</nav>
+					</div>
+				</div>
+				<Transition name="fade-out">
+					<p
+						class="w-fit mt-4 self-end font-sans font-sm border-b-4 border-secondary leading-none"
+						v-show="!isArticleOpen"
+						@click.prevent="isArticleOpen = true"
+					>
+						Читать дальше
+					</p>
+				</Transition>
 			</div>
 		</section>
 		<section
@@ -223,19 +287,18 @@
 			return {
 				sliderImages: ['slide.png'],
 				randomTea: null,
+				isArticleOpen: false,
 			}
 		},
 		async asyncData() {
-			const supabase = useSupabaseClient()
-			const user = useSupabaseUser()
+			// const supabase = useSupabaseClient()
 
-			if (user.value) {
-				let { data: products, error } = await supabase
-					.from('products')
-					.select('*')
-				if (error) console.error(error)
-				else return { products }
-			}
+			// const { data: products, error } = await supabase
+			// 	.from('products')
+			// 	.select('*')
+			// if (error) console.error(error)
+			// else return { products }
+
 			return {}
 		},
 		mounted() {
@@ -255,6 +318,30 @@
 					)
 					return ProductsByCategory[randomIndex]
 				}
+			},
+			findInObject(object, key, value) {
+				if (
+					object.hasOwnProperty(key) &&
+					JSON.stringify(object[key]) === JSON.stringify(value)
+				) {
+					return object // Возвращаем исходный объект, если найдена пара ключ-значение
+				}
+				for (let prop in object) {
+					if (object.hasOwnProperty(prop) && typeof object[prop] === 'object') {
+						let result = this.findInObject(object[prop], key, value) // Рекурсивно вызываем функцию для поиска пары ключ-значение в дочернем объекте
+						if (result) {
+							return result // Возвращаем дочерний объект, если найдена пара ключ-значение
+						}
+					}
+				}
+			},
+			getKeyByValue(object, value) {
+				for (let key in object) {
+					if (object.hasOwnProperty(key) && object[key] === value) {
+						return key
+					}
+				}
+				return null // Если значение не найдено, вернем null
 			},
 		},
 	}

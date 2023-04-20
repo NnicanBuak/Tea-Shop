@@ -20,32 +20,31 @@
 
 		<MobileHeader :sideLeft="true" :isWindowScrollAtTop="isWindowScrollAtTop">
 			<div
-				class="wrapper h-full pr-[2px] bg-gradient-to-b from-gray-300 via-white via-[4rem] to-gray-300 to-[calc(4rem+8vw+36px)]"
+				class="wrapper h-full pr-[2px] bg-gradient-to-b from-gray-300 via-white via-[4.5rem] to-gray-300 to-[calc(4rem+8vw+36px)]"
 			>
 				<div
-					class="wrapper h-full p-10 flex flex-col flex-nowrap justify-between bg-white"
+					class="wrapper h-full p-10 py-16 flex flex-col flex-nowrap justify-between bg-white"
+					ref="header"
 				>
-					<div class="flex flex-row-reverse flex-nowrap">
-						<NuxtLink class="p-2" to="/profile">
-							<!-- <nuxt-img
-								v-if="userData?.avatar_url"
-								class="ring-4 ring-primary rounded-full"
-								:src="userData?.avatar_url"
-							/> -->
-							<Icon
-								class="text-primary2"
-								name="material-symbols:settings-account-box-rounded"
-								size="8vw"
-							></Icon>
-						</NuxtLink>
-					</div>
-					<NuxtLink to="/shop">
-						<nuxt-picture class="w-full" src="/img/logo-07.svg"></nuxt-picture>
-					</NuxtLink>
-					<div class="flex flex-col gap-10 text-right">
+					<div class="flex flex-col gap-10 text-left">
 						<div class="wrapper">
 							<h1
-								class="-mr-2 mb-3 font-serif text-gray-400 text-3xl uppercase"
+								class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase"
+							>
+								Магазин
+							</h1>
+							<ul class="space-y-4 text-2xl">
+								<li>
+									<NuxtLink to="/shop/cart">Корзина</NuxtLink>
+								</li>
+								<li>
+									<NuxtLink to="/shop/products">Товары</NuxtLink>
+								</li>
+							</ul>
+						</div>
+						<div class="wrapper">
+							<h1
+								class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase"
 							>
 								Другое
 							</h1>
@@ -61,28 +60,44 @@
 								</li>
 							</ul>
 						</div>
-						<div class="wrapper">
-							<h1
-								class="-mr-2 mb-3 font-serif text-gray-400 text-3xl uppercase"
-							>
-								Магазин
-							</h1>
-							<ul class="space-y-4 text-2xl">
-								<li>
-									<NuxtLink to="/shop/cart">Корзина</NuxtLink>
-								</li>
-								<li>
-									<NuxtLink to="/shop/products">Товары</NuxtLink>
-								</li>
-							</ul>
-						</div>
+					</div>
+					<NuxtLink to="/shop">
+						<nuxt-picture class="w-full" src="/img/logo-07.svg"></nuxt-picture>
+					</NuxtLink>
+					<div class="flex flex-nowrap">
+						<NuxtLink class="p-2" to="/profile">
+							<!-- <nuxt-img
+								v-if="userData?.avatar_url"
+								class="ring-4 ring-primary rounded-full"
+								:src="userData?.avatar_url"
+							/> -->
+							<Icon
+								class="text-primary2"
+								name="material-symbols:settings-account-box-rounded"
+								size="8vw"
+							></Icon>
+						</NuxtLink>
 					</div>
 				</div>
 			</div>
 		</MobileHeader>
-		<div class="h-40" v-if="hasHeaderOffset"></div>
+		<div
+			class="h-40 transition-max-height duration-[2000ms] ease-out"
+			:class="{
+				'max-h-0': !$route.meta.hasFooterOffset?.content,
+				'max-h-40': $route.meta.hasFooterOffset?.content,
+			}"
+			v-show="$route.meta.hasHeaderOffset?.content"
+		></div>
 		<slot />
-		<div class="h-40" v-if="hasFooterOffset"></div>
+		<div
+			class="h-40 transition-max-height duration-[2000ms] ease-out"
+			:class="{
+				'max-h-0': !$route.meta.hasFooterOffset?.content,
+				'max-h-40': $route.meta.hasFooterOffset?.content,
+			}"
+			v-show="$route.meta.hasFooterOffset?.content"
+		></div>
 		<Footer />
 	</div>
 </template>
@@ -90,13 +105,6 @@
 <script>
 	export default {
 		defer: true,
-		data() {
-			const { hasHeaderOffset, hasFooterOffset } = this.$route.meta
-			return {
-				hasHeaderOffset: hasHeaderOffset?.content,
-				hasFooterOffset: hasFooterOffset?.content,
-			}
-		},
 		async asyncData() {
 			const supabase = useSupabaseClient()
 			const user = useSupabaseUser()
@@ -117,8 +125,16 @@
 			},
 			isWindowScrollAtTop() {
 				const windowScroll = useWindowScroll()
-				return windowScroll.y.value < 100
+				return windowScroll.y.value === 0
 			},
+		},
+		mounted() {
+			const userAgent = window.navigator.userAgent
+			const isChrome =
+				userAgent.includes('Chrome') && userAgent.includes('Mobile Safari')
+			if (isChrome) {
+				this.$refs.header.classList.add('pb-36')
+			}
 		},
 		methods: {
 			// shiftPage() {

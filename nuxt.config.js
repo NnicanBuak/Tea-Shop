@@ -87,9 +87,12 @@ export default defineNuxtConfig({
 				wght: [400, 700],
 				ital: [400],
 			},
-			Montserrat: {
-				wght: [400, 700],
-				ital: [400],
+			'Fira+Sans': {
+				wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+				ital: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+			},
+			'Nanum+Gothic': {
+				wght: [700, 800],
 			},
 		},
 	},

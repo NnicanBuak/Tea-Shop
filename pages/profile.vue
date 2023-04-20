@@ -64,33 +64,28 @@
 				const supabase = useSupabaseClient()
 				const user = useSupabaseUser()
 
-				const { data: files_list, error: listError } = await supabase.storage
-					.from('user')
-					.list('avatars/')
-				if (listError) console.error(listError)
-
-				console.log(files_list)
-				const existingFile = files_list?.find((file) =>
-					file.name.startsWith(`avtar_${user.value.id}`),
-				)
-
-				if (existingFile) {
-					const { error: deleteError } = await supabase.storage
-						.from('user/avatars')
-						.download(`avatar_${user.value.id}`)
-					if (deleteError) console.error(deleteError)
-				}
-
-				const { data: uploadedFile, error: uploadError } =
-					await supabase.storage
-						.from('user/avatars')
-						.upload(`avatar_${user.value.id}`, avatarFile)
+				let { data: uploadedFile, error: uploadError } = await supabase.storage
+					.from('user/avatars')
+					.upload(`avatar_${user.value.id}`, avatarFile)
 				if (uploadError) console.error(uploadError)
 
-				console.log(uploadedFile)
+				if (uploadError?.statusCode == 409) {
+					let { data: existingFileName, error: selectError } = await supabase
+						.from('profiles')
+						.select('avatar_file')
+						.eq('id', user.value.id)
+					if (selectError) console.error(selectError)
+
+					let { data: uploadedFile, error: uploadError } =
+						await supabase.storage
+							.from('user/avatars')
+							.update(existingFileName, avatarFile)
+					if (uploadError) console.error(uploadError)
+				} else {
+				}
 				const avatar_url = ''
 
-				const { data, error } = await supabase
+				let { data, error } = await supabase
 					.from('profiles')
 					.update({ avatar_url: avatar_url })
 					.eq('id', user.value?.id)

@@ -1,5 +1,5 @@
 export default {
-	content: ['./node_modules/flowbite.{js,ts}'],
+	content: ['./node_modules/flowbite.{js,ts}', './tailwindcss/*'],
 	theme: {
 		container: {
 			center: true,
@@ -10,23 +10,33 @@ export default {
 			},
 		},
 		fontFamily: {
-			sans: ['Montserrat', 'sans-serif'],
+			sans: ['Fira+Sans', 'sans-serif'],
 			serif: ['EB Garamond', 'serif'],
 		},
 		extend: {
+			transitionProperty: {
+				'max-height': 'max-height',
+				height: 'height',
+				spacing: 'margin, padding',
+			},
+			fontFamily: { special: ['Nanum+Gothic', 'sans-serif'] },
 			colors: {
 				primary: '#BFD400',
 				primary2: '#BB66A5',
 				secondary: '#4F501D',
 				secondary2: '#56184A',
 			},
-			backgroundPosition: {
-				'left-59%-bottom': 'left 59% bottom',
-				'left-62%-bottom': 'left 62% bottom',
-			},
 			backgroundSize: {
 				'250%': '250%',
 			},
+			typography: (theme) => ({
+				DEFAULT: {
+					css: {
+						color: theme('colors.secondary'),
+						hr: { marginTop: '1rem', marginBottom: '3rem' },
+					},
+				},
+			}),
 		},
 	},
 	plugins: [

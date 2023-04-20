@@ -29,6 +29,7 @@
 		defer: true,
 		computed: {
 			isWindowWidthNarrow() {
+				console.log(useWindowSize().width.value <= 1024)
 				return useWindowSize().width.value <= 1024
 			},
 		},
