@@ -1,3 +1,21 @@
+<script setup>
+	const supabase = useSupabaseClient()
+
+	let { data: userData } = useAsyncData('userData', async () => {
+		const user = useSupabaseUser()
+
+		if (user.value) {
+			let { data, error } = await supabase
+				.from('profiles')
+				.select('avatar_url')
+				.eq('id', user.value.id)
+			if (error) console.error('[Supabase] ' + error)
+			else return { data }
+		}
+		return {}
+	})
+</script>
+
 <template>
 	<div>
 		<!-- <CustomCursor /> -->
@@ -82,21 +100,28 @@
 			</div>
 		</MobileHeader>
 		<div
-			class="h-40 transition-max-height duration-[2000ms] ease-out"
+			class="h-40 transition-max-height delay-500 duration-300 ease-out"
 			:class="{
-				'max-h-0': !$route.meta.hasFooterOffset?.content,
-				'max-h-40': $route.meta.hasFooterOffset?.content,
+				'max-h-0': !$route.meta.hasHeaderOffset.content,
+				'max-h-40': $route.meta.hasHeaderOffset.content,
 			}"
-			v-show="$route.meta.hasHeaderOffset?.content"
-		></div>
+		>
+			<div class="container xl:container-xl h-full grid place-content-center">
+				<div class="wrapper" v-if="$route.path === '/shop/products'">
+					<h1 class="text-[#333] text-center uppercase">
+						<Icon class="inline" name="bx:leaf" size="2.5rem" />
+						<span>Товары</span>
+					</h1>
+				</div>
+			</div>
+		</div>
 		<slot />
 		<div
-			class="h-40 transition-max-height duration-[2000ms] ease-out"
+			class="h-40 transition-max-height delay-200 duration-500 ease-out"
 			:class="{
-				'max-h-0': !$route.meta.hasFooterOffset?.content,
-				'max-h-40': $route.meta.hasFooterOffset?.content,
+				'max-h-0': !$route.meta.hasFooterOffset.content,
+				'max-h-40': $route.meta.hasFooterOffset.content,
 			}"
-			v-show="$route.meta.hasFooterOffset?.content"
 		></div>
 		<Footer />
 	</div>
@@ -105,20 +130,6 @@
 <script>
 	export default {
 		defer: true,
-		async asyncData() {
-			const supabase = useSupabaseClient()
-			const user = useSupabaseUser()
-
-			if (user.value) {
-				let { data: userData, error } = await supabase
-					.from('profiles')
-					.select('avatar_url')
-					.eq('id', user.value.id)
-				if (error) console.error(error)
-				else return { userData }
-			}
-			return {}
-		},
 		computed: {
 			isScreenOrientationLandscape() {
 				return useScreenOrientation().orientation.value === 'landscape-primary'

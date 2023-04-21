@@ -17,12 +17,27 @@
 		},
 	})
 
-	let { data: articleData } = useAsyncData(
-		'articleData',
-		async () => await queryContent('/other/about').findOne(),
-	)
-	// const articleLinks = Array.from(articleData.body.toc.links)
-	// const currentArticleLink = ref(articleLinks[0])
+	// const supabase = useSupabaseClient()
+
+	// let { data: products } = useAsyncData('productsData', async () => {
+	// 	let { data: productsData, error } = await supabase
+	// 		.from('products')
+	// 		.select('*')
+	// 	if (error) {
+	// 		console.error('[Supabase] ' + error)
+	// 		return null
+	// 	} else return { productsData }
+	// })
+
+	// useState('products', () => {
+	// 	return []
+	// })
+
+	let { data: articleData } = useAsyncData('articleData', async () => {
+		let data = await queryContent('/other/about').findOne()
+		let articleLinks = data.body.toc.links
+		return { data, articleLinks }
+	})
 </script>
 
 <template>
@@ -114,7 +129,7 @@
 				:slides-per-view="1"
 				:loop="true"
 			>
-				<SwiperSlide v-for="(image, index) in sliderImages" :key="index">
+				<SwiperSlide v-for="(image, index) in ['slide.png']" :key="index">
 					<div
 						class="h-full w-full !bg-no-repeat !bg-[left_62%_bottom] !bg-cover max-md:!bg-[left_59%_bottom] max-md:!bg-250%"
 						:style="{
@@ -183,24 +198,25 @@
 				<div class="wrapper relative flex flex-col overflow-clip">
 					<Transition name="long-fade-out">
 						<div
-							class="absolute bottom-0 h-full w-full bg-gradient-to-t from-primary from-20% to-transparent to-50%"
+							class="absolute bottom-0 h-full w-full bg-gradient-to-t from-primary to-transparent to-50%"
 							v-show="!isArticleOpen"
 						></div>
 					</Transition>
 					<div
 						class="wrapper transition-max-height ease-out duration-1000"
 						:class="{
-							'max-h-96': !isArticleOpen,
+							'max-h-60': !isArticleOpen,
 							'max-h-[60rem]': isArticleOpen,
 						}"
 					>
-						<div
-							class="wrapper"
-							v-for="link in articleData.body.toc.links"
-							:key="link.id"
-						>
-							<Transition name="long-fade-in-right-out-left-in-out">
-								<div class="wrapper" v-show="articleData">
+						<TransitionGroup name="long-fade-in-right-out-left-in-out">
+							<div
+								class="wrapper"
+								v-show="true"
+								v-for="link in articleData.articleLinks"
+								:key="link.id"
+							>
+								<div class="wrapper">
 									<h1 class="text-secondary">
 										<a :href="'#' + link.id">
 											{{ link.text }}
@@ -209,21 +225,25 @@
 									<hr />
 									<p>
 										{{
-											articleData.body.children[
+											articleData.data.body.children[
 												Number(
 													getKeyByValue(
-														articleData.body.children,
-														findInObject(articleData.body.children, 'props', {
-															id: link.id,
-														}),
+														articleData.data.body.children,
+														findInObject(
+															articleData.data.body.children,
+															'props',
+															{
+																id: link.id,
+															},
+														),
 													),
 												) + 1
 											].children[0].value
 										}}
 									</p>
 								</div>
-							</Transition>
-						</div>
+							</div>
+						</TransitionGroup>
 						<hr class="h-[4px]" />
 						<nav class="flex flex-row-reverse">
 							<button type="button" class="p-2">
@@ -285,40 +305,28 @@
 		name: 'shop',
 		data() {
 			return {
-				sliderImages: ['slide.png'],
 				randomTea: null,
 				isArticleOpen: false,
 			}
 		},
-		async asyncData() {
-			// const supabase = useSupabaseClient()
-
-			// const { data: products, error } = await supabase
-			// 	.from('products')
-			// 	.select('*')
-			// if (error) console.error(error)
-			// else return { products }
-
-			return {}
-		},
-		mounted() {
-			this.randomTea = this.getRandomProductByCategory('🍵')
+		created() {
+			// this.randomTea = getRandomProductByCategory('🍵')
+			// function getRandomProductByCategory(category) {
+			// 	if (this.products.data) {
+			// 		const ProductsByCategory = this.products.filter(
+			// 			(product) =>
+			// 				product.inStock &&
+			// 				product.aviableQuantity > 0 &&
+			// 				product.category === category,
+			// 		)
+			// 		const randomIndex = Math.floor(
+			// 			Math.random() * ProductsByCategory.length,
+			// 		)
+			// 		return ProductsByCategory[randomIndex]
+			// 	}
+			// }
 		},
 		methods: {
-			getRandomProductByCategory(category) {
-				if (this.products) {
-					const ProductsByCategory = this.products.filter(
-						(product) =>
-							product.inStock &&
-							product.aviableQuantity > 0 &&
-							product.category === category,
-					)
-					const randomIndex = Math.floor(
-						Math.random() * ProductsByCategory.length,
-					)
-					return ProductsByCategory[randomIndex]
-				}
-			},
 			findInObject(object, key, value) {
 				if (
 					object.hasOwnProperty(key) &&

@@ -12,7 +12,7 @@
 <script>
 	export default {
 		props: {
-			name: { type: String, required: false },
+			name: { type: String, required: true },
 		},
 	}
 </script>

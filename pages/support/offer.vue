@@ -1,4 +1,5 @@
 <script setup>
+	useHead({ title: 'Соцветие • Оферта' })
 	definePageMeta({
 		hasDesktopHeader: {
 			hid: 'hasDesktopHeader',
@@ -20,7 +21,7 @@
 
 <template>
 	<div class="container xl:container-xl prose-xl">
-		<Article />
+		<Article :name="$route.path" />
 	</div>
 </template>
 

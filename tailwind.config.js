@@ -10,16 +10,17 @@ export default {
 			},
 		},
 		fontFamily: {
-			sans: ['Fira+Sans', 'sans-serif'],
+			sans: ['Fira Sans', 'sans-serif'],
 			serif: ['EB Garamond', 'serif'],
 		},
 		extend: {
 			transitionProperty: {
 				'max-height': 'max-height',
+				display: 'diplay',
 				height: 'height',
 				spacing: 'margin, padding',
 			},
-			fontFamily: { special: ['Nanum+Gothic', 'sans-serif'] },
+			fontFamily: { special: ['Nanum Gothic', 'sans-serif'] },
 			colors: {
 				primary: '#BFD400',
 				primary2: '#BB66A5',

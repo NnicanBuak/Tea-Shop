@@ -4,7 +4,7 @@
 <template>
 	<div v-show="isMounted">
 		<header
-			class="z-20 fixed inset-0 h-screen w-[calc(70vw+8vw+36px)] flex items-start transition-all ease-out duration-300 overflow-hidden"
+			class="z-30 fixed inset-0 h-screen w-[calc(70vw+8vw+24px)] flex items-start transition-all ease-out duration-300 overflow-hidden"
 			:class="{
 				'flex-row-reverse': sideLeft,
 				'translate-x-[calc(100vw-8vw-36px)]': !sideLeft && !isMobileMenuOpen,
@@ -19,17 +19,8 @@
 				:class="{
 					'rounded-l-full border-l-2': !sideLeft,
 					'rounded-r-full border-r-2': sideLeft,
-					'mt-10 pr-6': !sideLeft && isWindowScrollAtTop && !isMobileMenuOpen,
-					'ml-4 mt-[15vh] pr-2':
-						!sideLeft && !isMobileMenuOpen && !isWindowScrollAtTop,
-					'ml-4 mt-10 pr-2':
-						!sideLeft && (isMobileMenuOpen || !isWindowScrollAtTop),
-
-					'pl-6 mt-10': sideLeft && isWindowScrollAtTop && !isMobileMenuOpen,
-					'pl-2 mt-[15vh] mr-4 ':
-						sideLeft && !isMobileMenuOpen && !isWindowScrollAtTop,
-					'pl-2 mt-10 mr-4':
-						sideLeft && (isMobileMenuOpen || !isWindowScrollAtTop),
+					'mt-12': isMobileMenuOpen || isWindowScrollAtTop,
+					'mt-[15vh]': !isWindowScrollAtTop && !isMobileMenuOpen,
 				}"
 				type="button"
 				@click="toggleMobileHeader"
@@ -49,7 +40,7 @@
 		</header>
 		<Transition name="fade">
 			<div
-				class="z-10 fixed inset-0 h-screen w-screen bg-black bg-opacity-25"
+				class="z-20 fixed inset-0 h-screen w-screen bg-black bg-opacity-25"
 				v-show="isMobileMenuOpen"
 				@click="closeMobileHeader"
 			></div>

@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	devtools: true,
+	vite: { server: { hmr: { overlay: false } } },
 	modules: [
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',
@@ -15,6 +16,7 @@ export default defineNuxtConfig({
 		'nuxt-icon',
 		'nuxt-swiper',
 	],
+	css: ['assets/css/main.css'],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
@@ -36,6 +38,9 @@ export default defineNuxtConfig({
 				{ name: 'language', content: 'ru' },
 			],
 		},
+	},
+	nitro: {
+		compressPublicAssets: true,
 	},
 	pwa: {
 		manifest: {
