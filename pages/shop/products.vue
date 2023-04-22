@@ -42,7 +42,6 @@
 	)
 
 	const handleFiltering = (filter) => {
-		console.log('Yep!', filter)
 		category.value = filter.category
 		search.value = filter.search
 	}
