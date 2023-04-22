@@ -1,6 +1,8 @@
 {
 	"private": true,
 	"scripts": {
+		"start": "concurrently \"npm run preview\" \"npm run localtunnel\"",
+		"localtunnel": "npx localtunnel --port 3000",
 		"build": "nuxt build",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
@@ -21,6 +23,7 @@
 		"@tailwindcss/typography": "^0.5.9",
 		"@vite-pwa/nuxt": "^0.0.7",
 		"@vueuse/nuxt": "^9.13.0",
+		"concurrently": "^8.0.1",
 		"nuxt": "^3.4.1",
 		"nuxt-icon": "^0.3.3",
 		"nuxt-swiper": "^1.0.1",
