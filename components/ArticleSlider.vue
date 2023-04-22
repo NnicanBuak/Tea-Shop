@@ -63,9 +63,7 @@
 				>
 					<div class="wrapper">
 						<h1 class="text-secondary">
-							<a :href="'#' + link.id">
-								{{ link.text }}
-							</a>
+							{{ link.text }}
 						</h1>
 						<hr />
 						<p>
