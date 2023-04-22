@@ -3,7 +3,7 @@
 </script>
 
 <template>
-	<form class="relative flex">
+	<form class="relative flex" @submit.prevent="">
 		<label
 			class="mb-2 text-sm font-medium text-[#333] sr-only"
 			for="search-dropdown"
@@ -18,7 +18,7 @@
 			v-show="!isSearchFocus"
 			@click="isDropdownOpen = true"
 		>
-			{{ category ? category : isLargeScreen ? 'Категория' : '' }}
+			<span>{{ category ? category : isLargeScreen ? 'Категория' : '' }}</span>
 			<Icon name="material-symbols:arrow-drop-down-rounded" size="1.2rem" />
 		</button>
 		<div
@@ -31,29 +31,22 @@
 					<button
 						class="inline-flex w-full px-4 py-2 pointing:bg-gray-100"
 						type="button"
-						@click="handleDropdownSelect('')"
+						value=""
+						@click="handleDropdownSelect($event)"
 					>
 						-
 					</button>
 				</li>
 			</ul>
 			<ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-button">
-				<li>
+				<li v-for="item in categories">
 					<button
 						class="inline-flex w-full px-4 py-2 pointing:bg-gray-100"
 						type="button"
-						@click="handleDropdownSelect($event.target.innerText)"
+						:value="item"
+						@click="handleDropdownSelect($event)"
 					>
-						Чай
-					</button>
-				</li>
-				<li>
-					<button
-						class="inline-flex w-full px-4 py-2 pointing:bg-gray-100"
-						type="button"
-						@click="handleDropdownSelect($event.target.innerText)"
-					>
-						Микс
+						{{ item }}
 					</button>
 				</li>
 			</ul>
@@ -65,7 +58,7 @@
 		></div>
 		<div class="relative w-full">
 			<input
-				class="peer block p-2.5 pr-8 w-full z-20 text-sm text-[#333] bg-gray-50 rounded-r-lg focus:rounded-lg border-l-gray-50 border-l-2 focus:border-l-[1px] border-gray-300 focus:ring-primary2 focus:border-primary2"
+				class="peer block p-2.5 pr-11 w-full z-20 text-sm text-[#333] bg-gray-50 rounded-r-lg focus:rounded-lg border-l-gray-50 border-l-2 focus:border-l-[1px] border-gray-300 focus:ring-primary2 focus:border-primary2"
 				v-model="search"
 				ref="search"
 				type="search"
@@ -74,34 +67,13 @@
 				required
 				@focus="isSearchFocus = true"
 				@blur="isSearchFocus = false"
+				@keydown.enter="$event.target.blur()"
 			/>
 			<div
 				class="wrapper absolute top-0 right-0 p-2.5 text-gray-400 peer-focus:text-[#333]"
 			>
 				<Icon name="material-symbols:search" size="1.5rem" />
 			</div>
-
-			<!-- <button
-				type="submit"
-				class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-primary2 rounded-r-lg border border-primary2 pointing:bg-secondary2 focus:ring-4 focus:outline-none focus:ring-blue-300"
-			>
-				<svg
-					aria-hidden="true"
-					class="w-5 h-5"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-					></path>
-				</svg>
-				<span class="sr-only">Search</span>
-			</button> -->
 		</div>
 	</form>
 </template>
@@ -111,26 +83,81 @@
 		name: 'SearchByCatigories',
 		data() {
 			return {
+				categories: ['Чай', 'Сбор'],
 				category: '',
 				search: '',
 				isDropdownOpen: false,
 				isSearchFocus: false,
 			}
 		},
-		mounted() {
-			if (this.$route.query.search !== undefined) {
+		watch: {
+			category(newValue) {
+				const state = {
+					category: newValue,
+					search: this.search,
+				}
+
+				history.pushState(
+					state,
+					'',
+					state.category !== ''
+						? `products?category=${state.category}?search=${state.search}`
+						: state.search !== ''
+						? `products?category=${state.search}`
+						: '?',
+				)
+
+				this.$route.query.category = newValue
+
+				this.$emit('filtering', state)
+			},
+			search(newValue) {
+				this.debounce(() => {
+					const state = {
+						category: this.category,
+						search: newValue,
+					}
+
+					history.pushState(
+						state,
+						'',
+						state.search !== ''
+							? `products?category=${state.category}?search=${state.search}`
+							: state.category !== ''
+							? `products?category=${state.category}`
+							: '?',
+					)
+
+					this.$route.query.search = newValue
+
+					this.$emit('filtering', state)
+				}, 300)()
+			},
+		},
+		created() {
+			if (this.$route.query.search) {
 				this.search = this.$route.query.search
 
 				const searchRef = this.$refs.search
-				const end = searchRef.value.length
-				searchRef.setSelectionRange(end, end)
-				searchRef.focus()
+				this.handleInputFocus(searchRef)
+			}
+
+			if (
+				this.$route.query.category &&
+				this.categories.includes(this.$route.query.category)
+			) {
+				this.category = this.$route.query.category
 			}
 		},
 		methods: {
-			handleDropdownSelect(category) {
+			handleInputFocus(target) {
+				const end = target.value.length
+				target.setSelectionRange(end, end)
+				target.focus()
+			},
+			handleDropdownSelect(event) {
 				this.isDropdownOpen = false
-				this.category = category
+				this.category = event.target.value
 			},
 			debounce(fn, wait) {
 				let timer

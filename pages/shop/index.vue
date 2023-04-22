@@ -17,26 +17,14 @@
 		},
 	})
 
-	// const supabase = useSupabaseClient()
+	const supabase = useSupabaseClient()
 
-	// let { data: products } = useAsyncData('productsData', async () => {
-	// 	let { data: productsData, error } = await supabase
-	// 		.from('products')
-	// 		.select('*')
-	// 	if (error) {
-	// 		console.error('[Supabase] ' + error)
-	// 		return null
-	// 	} else return { productsData }
-	// })
+	const products = ref(null)
 
-	// useState('products', () => {
-	// 	return []
-	// })
-
-	let { data: articleData } = useAsyncData('articleData', async () => {
-		let data = await queryContent('/other/about').findOne()
-		let articleLinks = data.body.toc.links
-		return { data, articleLinks }
+	useAsyncData('products', async () => {
+		let { data, error } = await supabase.from('products').select('*')
+		console.error('[Supabase] ' + error?.message)
+		products.value = data
 	})
 </script>
 
@@ -198,70 +186,11 @@
 				<div class="wrapper relative flex flex-col overflow-clip">
 					<Transition name="long-fade-out">
 						<div
-							class="absolute bottom-0 h-full w-full bg-gradient-to-t from-primary to-transparent to-50%"
+							class="z-10 absolute bottom-0 h-full w-full bg-gradient-to-t from-primary from-[5rem] to-transparent to-60%"
 							v-show="!isArticleOpen"
 						></div>
 					</Transition>
-					<div
-						class="wrapper transition-max-height ease-out duration-1000"
-						:class="{
-							'max-h-60': !isArticleOpen,
-							'max-h-[60rem]': isArticleOpen,
-						}"
-					>
-						<TransitionGroup name="long-fade-in-right-out-left-in-out">
-							<div
-								class="wrapper"
-								v-show="true"
-								v-for="link in articleData.articleLinks"
-								:key="link.id"
-							>
-								<div class="wrapper">
-									<h1 class="text-secondary">
-										<a :href="'#' + link.id">
-											{{ link.text }}
-										</a>
-									</h1>
-									<hr />
-									<p>
-										{{
-											articleData.data.body.children[
-												Number(
-													getKeyByValue(
-														articleData.data.body.children,
-														findInObject(
-															articleData.data.body.children,
-															'props',
-															{
-																id: link.id,
-															},
-														),
-													),
-												) + 1
-											].children[0].value
-										}}
-									</p>
-								</div>
-							</div>
-						</TransitionGroup>
-						<hr class="h-[4px]" />
-						<nav class="flex flex-row-reverse">
-							<button type="button" class="p-2">
-								<Icon
-									class="active:bg-secondary active:text-primary rounded-full"
-									name="material-symbols:arrow-circle-right-outline-rounded"
-									size="10vw"
-								/>
-							</button>
-							<button type="button" class="p-2">
-								<Icon
-									class="active:bg-secondary active:text-primary rounded-full"
-									name="material-symbols:arrow-circle-left-outline-rounded"
-									size="10vw"
-								/>
-							</button>
-						</nav>
-					</div>
+					<ArticleSlider />
 				</div>
 				<Transition name="fade-out">
 					<p
@@ -305,7 +234,6 @@
 		name: 'shop',
 		data() {
 			return {
-				randomTea: null,
 				isArticleOpen: false,
 			}
 		},
@@ -325,32 +253,6 @@
 			// 		return ProductsByCategory[randomIndex]
 			// 	}
 			// }
-		},
-		methods: {
-			findInObject(object, key, value) {
-				if (
-					object.hasOwnProperty(key) &&
-					JSON.stringify(object[key]) === JSON.stringify(value)
-				) {
-					return object // Возвращаем исходный объект, если найдена пара ключ-значение
-				}
-				for (let prop in object) {
-					if (object.hasOwnProperty(prop) && typeof object[prop] === 'object') {
-						let result = this.findInObject(object[prop], key, value) // Рекурсивно вызываем функцию для поиска пары ключ-значение в дочернем объекте
-						if (result) {
-							return result // Возвращаем дочерний объект, если найдена пара ключ-значение
-						}
-					}
-				}
-			},
-			getKeyByValue(object, value) {
-				for (let key in object) {
-					if (object.hasOwnProperty(key) && object[key] === value) {
-						return key
-					}
-				}
-				return null // Если значение не найдено, вернем null
-			},
 		},
 	}
 </script>

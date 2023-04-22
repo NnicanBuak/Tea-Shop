@@ -16,6 +16,7 @@ export default defineNuxtConfig({
 		'nuxt-icon',
 		'nuxt-swiper',
 	],
+	components: { path: '~/components', pathPrefix: false },
 	css: ['assets/css/main.css'],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },

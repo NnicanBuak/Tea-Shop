@@ -1,7 +1,8 @@
 <script setup>
 	const supabase = useSupabaseClient()
+	const profile = ref(null)
 
-	let { data: userData } = useAsyncData('userData', async () => {
+	useAsyncData('profile', async () => {
 		const user = useSupabaseUser()
 
 		if (user.value) {
@@ -10,7 +11,7 @@
 				.select('avatar_url')
 				.eq('id', user.value.id)
 			if (error) console.error('[Supabase] ' + error)
-			else return { data }
+			else profile.value = data
 		}
 		return {}
 	})
@@ -38,7 +39,7 @@
 
 		<MobileHeader :sideLeft="true" :isWindowScrollAtTop="isWindowScrollAtTop">
 			<div
-				class="wrapper h-full pr-[2px] bg-gradient-to-b from-gray-300 via-white via-[4.5rem] to-gray-300 to-[calc(4rem+8vw+36px)]"
+				class="wrapper h-full pr-[2px] bg-gradient-to-b from-gray-400 via-white via-[5rem] to-gray-300 to-[calc(4rem+8vw+36px)]"
 			>
 				<div
 					class="wrapper h-full p-10 py-16 flex flex-col flex-nowrap justify-between bg-white"
@@ -107,12 +108,14 @@
 			}"
 		>
 			<div class="container xl:container-xl h-full grid place-content-center">
-				<div class="wrapper" v-if="$route.path === '/shop/products'">
-					<h1 class="text-[#333] text-center uppercase">
-						<Icon class="inline" name="bx:leaf" size="2.5rem" />
-						<span>Товары</span>
-					</h1>
-				</div>
+				<Transition name="long-fade-delay-enter">
+					<div class="wrapper" v-if="$route.path === '/shop/products'">
+						<h1 class="text-[#333] text-center uppercase">
+							<Icon class="inline" name="bx:leaf" size="2.5rem" />
+							<span>Товары</span>
+						</h1>
+					</div>
+				</Transition>
 			</div>
 		</div>
 		<slot />

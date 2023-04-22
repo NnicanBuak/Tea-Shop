@@ -49,11 +49,35 @@ a:focus-visible {
 
 .long-fade-enter-active,
 .long-fade-leave-active {
-	transition: opacity 1s ease-in;
+	transition: opacity 1s;
 }
 
 .long-fade-enter-from,
 .long-fade-leave-to {
+	opacity: 0;
+}
+
+.long-fade-delay-enter-enter-active,
+.long-fade-delay-enter-leave-active {
+	transition: opacity 1s;
+}
+
+.long-fade-delay-enter-enter-from,
+.long-fade-delay-enter-leave-to {
+	opacity: 0;
+}
+
+.long-fade-delay-enter-enter-active {
+	transition-delay: 500ms;
+}
+
+.long-fade-in-enter-active,
+.long-fade-in-leave-active {
+	transition: opacity 1s ease-in;
+}
+
+.long-fade-in-enter-from,
+.long-fade-in-leave-to {
 	opacity: 0;
 }
 
@@ -95,10 +119,36 @@ a:focus-visible {
 }
 
 .long-fade-in-right-out-left-in-out-enter-from {
+	position: absolute;
+	top: 0;
+	left: 100%;
 	opacity: 0;
 	transform: translateX(100%);
 }
 .long-fade-in-right-out-left-in-out-leave-to {
+	position: absolute;
+	top: 0;
+	left: 0;
 	opacity: 0;
 	transform: translateX(-100%);
+}
+
+.long-fade-in-left-in-right-out-out-enter-active,
+.long-fade-in-left-in-right-out-out-leave-active {
+	transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.long-fade-in-left-in-right-out-out-enter-from {
+	position: absolute;
+	top: 0;
+	right: 100%;
+	opacity: 0;
+	transform: translateX(-100%);
+}
+.long-fade-in-left-in-right-out-out-leave-to {
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0;
+	transform: translateX(100%);
 }
