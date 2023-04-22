@@ -137,10 +137,6 @@
 			isScreenOrientationLandscape() {
 				return useScreenOrientation().orientation.value === 'landscape-primary'
 			},
-			isWindowScrollAtTop() {
-				const windowScroll = useWindowScroll()
-				return windowScroll.y.value === 0
-			},
 		},
 		mounted() {
 			const userAgent = window.navigator.userAgent

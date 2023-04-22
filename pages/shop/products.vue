@@ -41,6 +41,8 @@
 			: products.value,
 	)
 
+	const windowScroll = useWindowScroll()
+
 	const handleFiltering = (filter) => {
 		category.value = filter.category
 		search.value = filter.search
@@ -49,8 +51,17 @@
 
 <template>
 	<main class="space-y-16">
-		<section class="container xl:container-xl">
-			<SearchByCategories @filtering="handleFiltering($event)" />
+		<section
+			class="xl:container-xl sticky top-0 transition-spacing"
+			:class="{
+				container: windowScroll.y.value <= 150,
+				'p-3': windowScroll.y.value > 150,
+			}"
+		>
+			<SearchByCategories
+				:class="{ 'shadow-lg': windowScroll.y.value > 150 }"
+				@filtering="handleFiltering($event)"
+			/>
 		</section>
 		<section
 			class="container xl:container-xl grid grid-cols-1 gap-4 place-items-center"

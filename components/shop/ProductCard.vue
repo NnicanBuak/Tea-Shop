@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="card p-0 h-[450px] w-full flex flex-col border-2 border-gray-200 bg-white"
+		class="card static p-0 h-[450px] w-full flex flex-col border-2 border-gray-200 bg-white"
 		@click="navigateTo({ path: '/shop/products', query: { id: id } })"
 	>
 		<div
@@ -16,7 +16,10 @@
 				<span class="font-normal"
 					>{{ title.replace(search, 'Ô').split('Ô')[0] }}
 				</span>
-				<span class="px-1">{{ search }} </span>
+				<span
+					class="px-1 bg-primary bg-opacity-25 border-2 border-primary rounded-lg"
+					>{{ search }}
+				</span>
 				<span class="font-normal"
 					>{{ title.replace(search, 'Ô').split('Ô')[1] }}
 				</span>

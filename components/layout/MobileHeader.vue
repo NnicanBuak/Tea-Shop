@@ -15,12 +15,10 @@
 			ref="header"
 		>
 			<button
-				class="transition-all duration-500 p-3 bg-white border-t-2 border-b-2 border-gray-300 shadow-md"
+				class="transition-all duration-500 mt-16 p-3 bg-white border-t-2 border-b-2 border-gray-300 shadow-md"
 				:class="{
 					'rounded-l-full border-l-2': !sideLeft,
 					'rounded-r-full border-r-2': sideLeft,
-					'mt-12': isMobileMenuOpen || isWindowScrollAtTop,
-					'mt-[15vh]': !isWindowScrollAtTop && !isMobileMenuOpen,
 				}"
 				type="button"
 				@click="toggleMobileHeader"
