@@ -31,3 +31,24 @@ jobs:
     - run: npm run build --if-present
     - run: npm run generate --if-present
     - run: npm test --if-present
+  web-deploy:
+      name: 🎉 Deploy
+      runs-on: windows-latest
+      steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: 🤖 Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          local-dir: ./.output/
+          server-dir: domains/nnican.ru/public_html/
+          server: ftp.nnican.ru
+          username: f0810388
+          password: ${{ secrets.ftp_password }}
