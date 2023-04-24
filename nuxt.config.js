@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
 	devtools: true,
 	vite: { server: { hmr: { overlay: false } } },
+	build: {
+		publicPath: 'public_html/',
+	},
 	modules: [
 		'@vueuse/nuxt',
 		'@vite-pwa/nuxt',

@@ -182,7 +182,13 @@
 			<h3 class="mb-2 font-serif text-center max-md:text-xl text-[#333]">
 				Главный секрет приготовления
 			</h3>
-			<div class="card flex flex-col overflow-clip">
+			<div
+				class="card  flex flex-col overflow-clip transition-max-height"
+				:class="{
+					'max-h-18': !isArticleOpen,
+					'max-h-[50rem]': isArticleOpen,
+				}"
+			>
 				<div class="wrapper relative flex flex-col overflow-clip">
 					<Transition name="long-fade-out">
 						<div

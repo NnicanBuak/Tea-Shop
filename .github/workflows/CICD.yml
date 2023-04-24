@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
     paths:
       - assets/**
       - components/**
@@ -22,7 +22,7 @@ on:
       - tailwind.config.js
       - tsconfig.json
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
     paths:
       - assets/**
       - components/**
@@ -44,19 +44,19 @@ on:
 
 jobs:
   build:
-    name: "CI: Node.js"
+    name: 'CI: Node.js'
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: "🤖 Use Node.js 18.x"
+      - name: '🤖 Use Node.js 18.x'
         uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
-          cache: "npm"
+          node-version: '18.x'
+          cache: 'npm'
 
-      - name: "🔨 Build, test, genearate check"
+      - name: '🔨 Build, test, genearate check'
         run: |
           npm ci
           npm run postinstall --if-present
@@ -64,29 +64,29 @@ jobs:
           npm run generate --if-present
           npm test --if-present
 
-      - name: "🛫 Upload build to artifacts"
+      - name: '🛫 Upload build to artifacts'
         uses: actions/upload-artifact@v2
         with:
-          name: "output-files"
-          path: "./.output/"
+          name: 'output-files'
+          path: './.output/'
 
   web-deploy:
-    name: "CD: Deploy"
+    name: 'CD: Deploy'
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: "🛬 Download build from artifacts"
+      - name: '🛬 Download build from artifacts'
         uses: actions/download-artifact@v2
         with:
-          name: "output-files"
-          path: "./.output/"
+          name: 'output-files'
+          path: './.output/'
 
       - name: 🚚 Transfer to server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          local-dir: "./.output/"
-          server-dir: "domains/nnican.ru/"
-          server: "141.8.193.236"
-          username: "f0810388"
-          password: "${{ secrets.ftp_password }}"
+          local-dir: './.output/'
+          server-dir: 'domains/nnican.ru/'
+          server: '141.8.193.236'
+          username: 'f0810388'
+          password: '${{ secrets.ftp_password }}'
