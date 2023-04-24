@@ -3,8 +3,44 @@ name: CI/CD
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - assets/**
+      - components/**
+      - content/**
+      - layout/**
+      - middleware/**
+      - pages/**
+      - public/**
+      - tailwindcss/**
+      - app.config.js
+      - app.vue
+      - error.vue
+      - flowbite.css
+      - nuxt.config.js
+      - package.json
+      - package-lock.json
+      - tailwind.config.js
+      - tsconfig.json
   pull_request:
     branches: [ "main" ]
+    paths:
+      - assets/**
+      - components/**
+      - content/**
+      - layout/**
+      - middleware/**
+      - pages/**
+      - public/**
+      - tailwindcss/**
+      - app.config.js
+      - app.vue
+      - error.vue
+      - flowbite.css
+      - nuxt.config.js
+      - package.json
+      - package-lock.json
+      - tailwind.config.js
+      - tsconfig.json
 
 jobs:
   build:
@@ -20,7 +56,7 @@ jobs:
           node-version: "18.x"
           cache: "npm"
 
-      - name: "🔨 Build, test, and generate files"
+      - name: "🔨 Build, test, genearate check"
         run: |
           npm ci
           npm run postinstall --if-present
