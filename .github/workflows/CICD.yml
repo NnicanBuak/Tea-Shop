@@ -28,7 +28,7 @@ jobs:
           npm run generate --if-present
           npm test --if-present
 
-      - name: "🛫 Upload artifacts"
+      - name: "🛫 Upload build to artifacts"
         uses: actions/upload-artifact@v2
         with:
           name: "output-files"
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "🛬 Download artifacts"
+      - name: "🛬 Download build from artifacts"
         uses: actions/download-artifact@v2
         with:
           name: "output-files"
@@ -50,7 +50,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           local-dir: "./.output/"
-          server-dir: "domains/nnican.ru/public_html/"
+          server-dir: "domains/nnican.ru/"
           server: "ftp.nnican.ru"
           username: "f0810388"
           password: "${{ secrets.ftp_password }}"
