@@ -51,6 +51,6 @@ jobs:
         with:
           local-dir: "./.output/"
           server-dir: "domains/nnican.ru/"
-          server: "ftp.nnican.ru"
+          server: "141.8.193.236"
           username: "f0810388"
           password: "${{ secrets.ftp_password }}"
