@@ -70,23 +70,23 @@ jobs:
           name: 'output-files'
           path: './.output/'
 
-  web-deploy:
-    name: 'CD: Deploy'
-    needs: build
-    runs-on: ubuntu-latest
+#   web-deploy:
+#     name: 'CD: Deploy'
+#     needs: build
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: '🛬 Download build from artifacts'
-        uses: actions/download-artifact@v2
-        with:
-          name: 'output-files'
-          path: './.output/'
+#     steps:
+#       - name: '🛬 Download build from artifacts'
+#         uses: actions/download-artifact@v2
+#         with:
+#           name: 'output-files'
+#           path: './.output/'
 
-      - name: 🚚 Transfer to server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          local-dir: './.output/'
-          server-dir: 'domains/nnican.ru/'
-          server: '141.8.193.236'
-          username: 'f0810388'
-          password: '${{ secrets.ftp_password }}'
+#       - name: 🚚 Transfer to server
+#         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+#         with:
+#           local-dir: './.output/'
+#           server-dir: 'domains/nnican.ru/'
+#           server: '141.8.193.236'
+#           username: 'f0810388'
+#           password: '${{ secrets.ftp_password }}'
