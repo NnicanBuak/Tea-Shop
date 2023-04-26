@@ -45,8 +45,8 @@ export default {
 		require('@tailwindcss/forms'),
 		require('flowbite'),
 		require('tailwindcss-touch'),
-		require('./tailwindcss/custom-base-styles'),
-		require('./tailwindcss/custom-components'),
-		require('./tailwindcss/custom-variants'),
+		require('./assets/tailwindcss/custom-base-styles'),
+		require('./assets/tailwindcss/custom-components'),
+		require('./assets/tailwindcss/custom-variants'),
 	],
 }

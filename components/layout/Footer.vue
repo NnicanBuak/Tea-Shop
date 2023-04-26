@@ -21,7 +21,7 @@
 			<div class="wrapper text-right">
 				<h1 class="pb-1 font-serif text-gray-400 text-xl">Помощь</h1>
 				<ul class="text-md space-y-3">
-					<li><NuxtLink to="/support">Связаться с нами</NuxtLink></li>
+					<li><NuxtLink to="/support">Связь с нами</NuxtLink></li>
 					<li><NuxtLink to="/support/faq">Частые вопросы</NuxtLink></li>
 					<li><NuxtLink to="/support/offer">Оферта</NuxtLink></li>
 				</ul>

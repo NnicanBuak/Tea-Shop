@@ -37,7 +37,7 @@
 			</div>
 		</Transition>
 
-		<MobileHeader :sideLeft="true" :isWindowScrollAtTop="isWindowScrollAtTop">
+		<MobileHeader :sideLeft="true">
 			<div
 				class="wrapper h-full pr-[2px] bg-gradient-to-b from-gray-400 via-white via-[5rem] to-gray-300 to-[calc(4rem+8vw+36px)]"
 			>
@@ -103,8 +103,8 @@
 		<div
 			class="h-40 transition-max-height delay-500 duration-300 ease-out"
 			:class="{
-				'max-h-0': !$route.meta.hasHeaderOffset.content,
-				'max-h-40': $route.meta.hasHeaderOffset.content,
+				'max-h-0': !$route.meta.hasHeaderOffset?.content,
+				'max-h-40': $route.meta.hasHeaderOffset?.content,
 			}"
 		>
 			<div class="container xl:container-xl h-full grid place-content-center">
@@ -122,8 +122,8 @@
 		<div
 			class="h-40 transition-max-height delay-200 duration-500 ease-out"
 			:class="{
-				'max-h-0': !$route.meta.hasFooterOffset.content,
-				'max-h-40': $route.meta.hasFooterOffset.content,
+				'max-h-0': !$route.meta.hasFooterOffset?.content,
+				'max-h-40': $route.meta.hasFooterOffset?.content,
 			}"
 		></div>
 		<Footer />

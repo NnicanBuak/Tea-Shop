@@ -1,7 +1,3 @@
 <script setup>
-	await navigateTo('/shop')
+	navigateTo('/shop')
 </script>
-
-<template>
-	<div></div>
-</template>

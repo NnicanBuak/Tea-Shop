@@ -32,11 +32,27 @@
 
 	const filteredProducts = computed(() =>
 		category.value !== '' || search.value !== ''
-			? products.value.filter((item) =>
-					category.value === ''
-						? true
-						: item.category === category.value &&
-						  item.title.toLowerCase().includes(search.value.toLowerCase()),
+			? products.value?.filter((product) =>
+					category.value !== ''
+						? product.category === category.value &&
+						  search.value
+								.toLowerCase()
+								.split(' ')
+								.filter((word) => word !== '')
+								.some((searchWord) =>
+									product.title
+										.toLowerCase()
+										.includes(searchWord.toLowerCase()),
+								)
+						: search.value
+								.toLowerCase()
+								.split(' ')
+								.filter((word) => word !== '')
+								.some((searchWord) =>
+									product.title
+										.toLowerCase()
+										.includes(searchWord.toLowerCase()),
+								),
 			  )
 			: products.value,
 	)
@@ -65,7 +81,7 @@
 		</section>
 		<section
 			class="container xl:container-xl grid grid-cols-1 gap-4 place-items-center"
-			v-if="filteredProducts"
+			v-if="filteredProducts !== []"
 		>
 			<ProductCard
 				v-for="product in filteredProducts"
@@ -76,7 +92,7 @@
 				:price="product.price"
 				:piece="product.piece_weight"
 				:category="product.category"
-				:variety="product.tea_variety"
+				:teaVariety="product.tea_variety"
 				:search="search"
 			/>
 		</section>

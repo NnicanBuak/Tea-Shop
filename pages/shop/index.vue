@@ -119,7 +119,7 @@
 			>
 				<SwiperSlide v-for="(image, index) in ['slide.png']" :key="index">
 					<div
-						class="h-full w-full !bg-no-repeat !bg-[left_62%_bottom] !bg-cover max-md:!bg-[left_59%_bottom] max-md:!bg-250%"
+						class="h-full w-full blur-[3px] !bg-no-repeat !bg-[left_62%_bottom] !bg-cover max-md:!bg-[left_59%_bottom] max-md:!bg-250%"
 						:style="{
 							backgroundImage: 'url(' + '/img/slider/' + image + ')',
 						}"
@@ -137,7 +137,7 @@
 			</div>
 			<MenuSwiper class="space-y-10">
 				<MenuCard
-					class="w-max-80 aspect-[3.75/2] rounded-xl"
+					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
 					linkTo="/shop/products"
 					title="Ассортимент"
 					titleColor="#4f501d"
@@ -147,7 +147,7 @@
 				>
 				</MenuCard>
 				<MenuCard
-					class="w-max-80 aspect-[3.75/2] rounded-xl"
+					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
 					linkTo="/shop/products"
 					title="Акции"
 					titleColor="#4f501d"
@@ -157,7 +157,7 @@
 				>
 				</MenuCard>
 				<MenuCard
-					class="w-max-80 aspect-[3.75/2] rounded-xl"
+					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
 					linkTo="/shop/products"
 					title="Новинки"
 					titleColor="#4f501d"
@@ -183,7 +183,7 @@
 				Главный секрет приготовления
 			</h3>
 			<div
-				class="card  flex flex-col overflow-clip transition-max-height"
+				class="card flex flex-col overflow-clip transition-max-height"
 				:class="{
 					'max-h-18': !isArticleOpen,
 					'max-h-[50rem]': isArticleOpen,
@@ -202,7 +202,7 @@
 					<p
 						class="w-fit mt-4 self-end font-sans font-sm border-b-4 border-secondary leading-none"
 						v-show="!isArticleOpen"
-						@click.prevent="isArticleOpen = true"
+						@click="isArticleOpen = true"
 					>
 						Читать дальше
 					</p>

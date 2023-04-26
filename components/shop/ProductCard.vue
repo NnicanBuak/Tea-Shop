@@ -12,18 +12,12 @@
 			}"
 		></div>
 		<div class="wrapper p-6 space-y-4">
-			<h2 class="text-black" v-if="search">
-				<span class="font-normal"
-					>{{ title.replace(search, 'Ô').split('Ô')[0] }}
-				</span>
-				<span
-					class="px-1 bg-primary bg-opacity-25 border-2 border-primary rounded-lg"
-					>{{ search }}
-				</span>
-				<span class="font-normal"
-					>{{ title.replace(search, 'Ô').split('Ô')[1] }}
-				</span>
-			</h2>
+			<h2
+				class="font-normal text-black"
+				id="highlightedTitle"
+				v-html="highlightedTitle"
+				v-if="search !== ''"
+			></h2>
 			<h2 class="text-black font-normal" v-else>{{ title }}</h2>
 			<h3 class="font-sans text-black">
 				<span class="font-normal">{{ piece + 'г.' + ' / ' }}</span>
@@ -39,19 +33,21 @@
 					class="w-fit px-4 py-1 font-bold text-sm rounded-full bg-opacity-25 border-2"
 					:class="{
 						'bg-[#fc3c0b] border-[#fc3c0b] text-[#9c2406]':
-							variety === 'Чёрный',
+							teaVariety === 'Чёрный',
 						'bg-[#790a06] border-[#790a06] text-[#3a0503]':
-							variety === 'Красный',
-						'bg-[#f8cb66] border-[#f8cb66] text-[#8d743b]': variety === 'Улун',
+							teaVariety === 'Красный',
+						'bg-[#f8cb66] border-[#f8cb66] text-[#8d743b]':
+							teaVariety === 'Улун',
 						'bg-[#fcc85b] border-[#fcc85b] text-[#997a38]':
-							variety === 'Зелёный',
-						'bg-[#ffe7c8] border-[#ffe7c8] text-[#8b7f6e]': variety === 'Белый',
+							teaVariety === 'Зелёный',
+						'bg-[#ffe7c8] border-[#ffe7c8] text-[#8b7f6e]':
+							teaVariety === 'Белый',
 						'bg-[#e67d19] border-[#e67d19] text-[#bb6515]':
-							variety === 'Травянной',
+							teaVariety === 'Травянной',
 					}"
-					v-if="category === 'Чай' && variety"
+					v-if="category === 'Чай' && teaVariety"
 				>
-					{{ variety }}
+					{{ teaVariety }}
 				</div>
 			</div>
 		</div>
@@ -68,8 +64,42 @@
 			price: { type: Number, required: true },
 			piece: { type: Number, required: false },
 			category: { type: String, required: false },
-			variety: { type: String, required: false },
+			teaVariety: { type: String, required: false },
 			search: { type: String, required: false },
+		},
+		computed: {
+			highlightedTitle() {
+				let highlightedTitle = this.title
+				const searchWords = this.search
+					.toLowerCase()
+					.split(' ')
+					.filter((word) => word !== '')
+				searchWords.forEach((searchWord, i) => {
+					const lowercaseTitle = highlightedTitle.toLowerCase()
+					const startIndex = lowercaseTitle.indexOf(
+						searchWord,
+						i * searchWord.length,
+					)
+					if (startIndex !== -1) {
+						const endIndex = startIndex + searchWord.length
+						const before = highlightedTitle.slice(0, startIndex)
+						const after = highlightedTitle.slice(endIndex)
+						highlightedTitle = `${before}<b>${highlightedTitle.slice(
+							startIndex,
+							endIndex,
+						)}</b>${after}`
+					}
+				})
+				return highlightedTitle
+			},
 		},
 	}
 </script>
+
+<style>
+	#highlightedTitle > b {
+		padding: 0.25rem;
+		background-color: rgb(191 212 0);
+		border-radius: 0.75rem;
+	}
+</style>

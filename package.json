@@ -26,6 +26,7 @@
 		"concurrently": "^8.0.1",
 		"nuxt": "^3.4.1",
 		"nuxt-icon": "^0.3.3",
+		"nuxt-lodash": "^2.4.1",
 		"nuxt-swiper": "^1.0.1",
 		"tailwindcss-touch": "^1.0.1"
 	},

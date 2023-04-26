@@ -1,7 +1,3 @@
-<script setup>
-	const isLargeScreen = useMediaQuery('(min-width: 1024px)')
-</script>
-
 <template>
 	<form @submit.prevent="">
 		<div class="wrapper relative flex">
@@ -77,12 +73,17 @@
 					@keydown.enter="$event.target.blur()"
 				/>
 				<div
-					class="wrapper absolute top-0 right-0 p-2.5 text-gray-400 peer-focus:text-[#333]"
+					class="peer-focus:text-[#333] wrapper absolute top-0 right-0 p-2.5 text-gray-400"
 				>
 					<Icon name="material-symbols:search" size="1.5rem" />
 				</div>
 			</div>
 		</div>
+		<div
+			class="-z-10 fixed inset-0 h-screen w-screen"
+			v-show="isSearchFocus"
+			@click="$refs.search.blur()"
+		></div>
 	</form>
 </template>
 
@@ -105,41 +106,25 @@
 					search: this.search,
 				}
 
-				history.pushState(
-					state,
-					'',
-					state.category !== ''
-						? `products?category=${state.category}?search=${state.search}`
-						: state.search !== ''
-						? `products?category=${state.search}`
-						: '?',
-				)
+				this.updateHref(state)
 
 				this.$route.query.category = newValue
 
 				this.$emit('filtering', state)
 			},
-			search(newValue) {
-				this.debounce(() => {
+			search: {
+				handler: _debounce(function (newValue) {
 					const state = {
 						category: this.category,
 						search: newValue,
 					}
 
-					history.pushState(
-						state,
-						'',
-						state.search !== ''
-							? `products?category=${state.category}?search=${state.search}`
-							: state.category !== ''
-							? `products?category=${state.category}`
-							: '?',
-					)
+					this.updateHref(state)
 
 					this.$route.query.search = newValue
 
 					this.$emit('filtering', state)
-				}, 300)()
+				}, 300),
 			},
 		},
 		created() {
@@ -158,26 +143,29 @@
 			}
 		},
 		methods: {
+			updateHref(state) {
+				history.pushState(
+					state,
+					'',
+					state.search !== '' && state.category !== ''
+						? `products?category=${state.category}?search=${state.search}`
+						: state.category !== ''
+						? `products?category=${state.category}`
+						: state.search !== ''
+						? `products?search=${state.search}`
+						: '?',
+				)
+			},
 			handleInputFocus(target) {
-				const end = target.value.length
-				target.setSelectionRange(end, end)
-				target.focus()
+				if (target) {
+					const end = target.value.length
+					target.setSelectionRange(end, end)
+					target.focus()
+				}
 			},
 			handleDropdownSelect(event) {
 				this.isDropdownOpen = false
-				this.category = event.target.value
-			},
-			debounce(fn, wait) {
-				let timer
-				return function (...args) {
-					if (timer) {
-						clearTimeout(timer)
-					}
-					const context = this
-					timer = setTimeout(() => {
-						fn.apply(context, args)
-					}, wait)
-				}
+				this.category = event.target?.value
 			},
 		},
 	}

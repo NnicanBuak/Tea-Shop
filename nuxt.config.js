@@ -18,6 +18,7 @@ export default defineNuxtConfig({
 		'@nuxtjs/device',
 		'nuxt-icon',
 		'nuxt-swiper',
+		'nuxt-lodash',
 	],
 	components: { path: '~/components', pathPrefix: false },
 	css: ['assets/css/main.css'],
@@ -104,5 +105,9 @@ export default defineNuxtConfig({
 				wght: [700, 800],
 			},
 		},
+	},
+	lodash: {
+		prefix: '_',
+		upperAfterPrefix: false,
 	},
 })
