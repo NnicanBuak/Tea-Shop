@@ -84,10 +84,12 @@
 						const endIndex = startIndex + searchWord.length
 						const before = highlightedTitle.slice(0, startIndex)
 						const after = highlightedTitle.slice(endIndex)
-						highlightedTitle = `${before}<b>${highlightedTitle.slice(
-							startIndex,
-							endIndex,
-						)}</b>${after}`
+						highlightedTitle =
+							before +
+							'<b>' +
+							highlightedTitle.slice(startIndex, endIndex) +
+							'</b>' +
+							after
 					}
 				})
 				return highlightedTitle
