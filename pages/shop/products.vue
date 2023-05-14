@@ -28,13 +28,13 @@
 
 	const supabase = useSupabaseClient()
 	const products = ref(null)
-	const selectedProduct = ref(null)
+	const selectedProduct = ref(undefined) // use undefined instead of null
 
 	useAsyncData('products', async () => {
 		let { data, error } = await supabase.from('products').select('*')
 		if (error) console.error('[Supabase] ' + error)
 
-		products.value = data
+		products.value = data || [] // use empty array if data is falsy
 
 		// если существует параметр id в url и он существует в базе данных (data), то selectedProduct присвоить значение продукта
 		if (route.params.id && data)
@@ -48,9 +48,8 @@
 		() => route.params.id,
 		(newId) => {
 			if (products.value) {
-				selectedProduct.value = products.value.find(
-					(product) => product.id === newId,
-				)
+				selectedProduct.value =
+					products.value.find((product) => product.id === newId) || undefined // set to undefined if not found
 			}
 		},
 	)
@@ -58,10 +57,11 @@
 	const category = ref('')
 	const search = ref('')
 
-	const filteredProducts = computed(() =>
+	const filteredProducts = computed(() => {
+		if (!products.value) return [] // check if products.value exists first
 		// фильтрация товаров по категории и поисковому запросу
-		category.value !== '' || search.value !== ''
-			? products.value?.filter((product) =>
+		return category.value !== '' || search.value !== ''
+			? products.value.filter((product) =>
 					category.value !== ''
 						? product.category === category.value
 						: search.value
@@ -69,13 +69,11 @@
 								.split(' ')
 								.filter((word) => word !== '')
 								.some((searchWord) =>
-									product.title
-										.toLowerCase()
-										.includes(searchWord.toLowerCase()),
+									product.title.toLowerCase().includes(searchWord),
 								),
 			  )
-			: products.value,
-	)
+			: products.value
+	})
 
 	const handleFiltering = (filter) => {
 		// установить реактивные значения категории и поискового запроса
