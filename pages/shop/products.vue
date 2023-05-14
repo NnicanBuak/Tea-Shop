@@ -11,6 +11,11 @@
 			name: 'hasHeaderOffset',
 			content: true,
 		},
+		headerOffsetTitle: {
+			hid: 'headerOffsetTitle',
+			name: 'headerOffsetTitle',
+			content: 'Товары',
+		},
 		hasFooterOffset: {
 			hid: 'hasFooterOffset',
 			name: 'hasFooterOffset',
@@ -18,32 +23,47 @@
 		},
 	})
 
+	const windowScroll = useWindowScroll()
+	const route = useRoute()
+
 	const supabase = useSupabaseClient()
 	const products = ref(null)
+	const selectedProduct = ref(null)
 
 	useAsyncData('products', async () => {
 		let { data, error } = await supabase.from('products').select('*')
 		if (error) console.error('[Supabase] ' + error)
-		else products.value = data
+
+		products.value = data
+
+		// если существует параметр id в url и он существует в базе данных (data), то selectedProduct присвоить значение продукта
+		if (route.params.id && data)
+			selectedProduct.value = data.find(
+				(product) => product.id === route.params.id,
+			)
 	})
 
-	const search = ref('')
+	// watcher для изменения selectedProduct при изменении параметра id в url
+	watch(
+		() => route.params.id,
+		(newId) => {
+			if (products.value) {
+				selectedProduct.value = products.value.find(
+					(product) => product.id === newId,
+				)
+			}
+		},
+	)
+
 	const category = ref('')
+	const search = ref('')
 
 	const filteredProducts = computed(() =>
+		// фильтрация товаров по категории и поисковому запросу
 		category.value !== '' || search.value !== ''
 			? products.value?.filter((product) =>
 					category.value !== ''
-						? product.category === category.value &&
-						  search.value
-								.toLowerCase()
-								.split(' ')
-								.filter((word) => word !== '')
-								.some((searchWord) =>
-									product.title
-										.toLowerCase()
-										.includes(searchWord.toLowerCase()),
-								)
+						? product.category === category.value
 						: search.value
 								.toLowerCase()
 								.split(' ')
@@ -57,16 +77,20 @@
 			: products.value,
 	)
 
-	const windowScroll = useWindowScroll()
-
 	const handleFiltering = (filter) => {
-		category.value = filter.category
-		search.value = filter.search
+		// установить реактивные значения категории и поискового запроса
+		if (filter) {
+			category.value = filter.category
+			search.value = filter.search
+		} else {
+			category.value = ''
+			search.value = ''
+		}
 	}
 </script>
 
 <template>
-	<main class="space-y-16">
+	<main class="space-y-16" v-if="selectedProduct === null">
 		<section
 			class="xl:container-xl sticky top-0 transition-spacing"
 			:class="{
@@ -81,7 +105,7 @@
 		</section>
 		<section
 			class="container xl:container-xl grid grid-cols-1 gap-4 place-items-center"
-			v-if="filteredProducts !== []"
+			v-if="filteredProducts && filteredProducts.length > 0"
 		>
 			<ProductCard
 				v-for="product in filteredProducts"
@@ -96,25 +120,39 @@
 				:search="search"
 			/>
 		</section>
-		<section v-else>
+		<section v-else-if="products.value">
 			<h1 class="text-secondary text-center">Ничего не найдено.</h1>
 		</section>
+		<section v-else>
+			<h1 class="text-secondary text-center">
+				Произошла ошибка или список товаров пуст.
+			</h1>
+		</section>
 	</main>
+	<main v-else>{{ selectedProduct.value }}</main>
 </template>
 
 <script>
 	export default {
 		name: 'products',
 		emits: ['filtering'],
-		data() {
-			return {
-				selectedProduct: null,
-			}
-		},
-		created() {
-			if (this.$route.query.id) {
-				this.selectedProduct = this.$route.query.id
-			}
+		selectedProduct: {
+			// при изменении selectedProduct, установить флаг для скрытия всех товаров кроме выбранного, после таймаута для анимации установить флаг для раскрытия текущего элемента товара на весь экран и скрытия остальных элементов
+
+			handler: (ref) => {
+				const product = ref.value
+				if (product) {
+					product.isExpanded = false
+					setTimeout(() => {
+						product.isExpanded = true
+						products.value?.forEach((comparableProduct) => {
+							if (comparableProduct.id !== product.id)
+								product.product.isExpanded = false
+						})
+					}, 1000)
+				}
+			},
+			deep: true,
 		},
 	}
 </script>

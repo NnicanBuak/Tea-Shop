@@ -15,16 +15,6 @@
 			name: 'hasFooterOffset',
 			content: false,
 		},
-
-		middleware: [
-			(to, from) => {
-				const user = useSupabaseUser()
-
-				if (user.value) {
-					return navigateTo({ path: '/shop' })
-				}
-			},
-		],
 	})
 
 	const supabaseAuth = useSupabaseAuthClient()

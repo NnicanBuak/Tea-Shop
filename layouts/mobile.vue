@@ -8,12 +8,11 @@
 		if (user.value) {
 			let { data, error } = await supabase
 				.from('profiles')
-				.select('avatar_url')
+				.select('*')
 				.eq('id', user.value.id)
 			if (error) console.error('[Supabase] ' + error)
 			else profile.value = data
 		}
-		return {}
 	})
 </script>
 
@@ -84,35 +83,51 @@
 						<nuxt-picture class="w-full" src="/img/logo-07.svg"></nuxt-picture>
 					</NuxtLink>
 					<div class="flex flex-nowrap">
-						<NuxtLink class="p-2" to="/profile">
-							<!-- <nuxt-img
-								v-if="userData?.avatar_url"
-								class="ring-4 ring-primary rounded-full"
-								:src="userData?.avatar_url"
-							/> -->
-							<Icon
-								class="text-primary2"
-								name="material-symbols:settings-account-box-rounded"
-								size="8vw"
-							></Icon>
+						<NuxtLink
+							class="p-1 ring-4 ring-primary2 rounded-full"
+							to="/profile"
+						>
+							<nuxt-img
+								class="rounded-full"
+								v-if="profile?.avatar_url"
+								:src="profile?.avatar_url"
+							/>
+
+							<div
+								class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+								v-else
+							>
+								<svg
+									class="absolute w-12 h-12 text-gray-400 -left-1"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+										clip-rule="evenodd"
+									></path>
+								</svg>
+							</div>
 						</NuxtLink>
 					</div>
 				</div>
 			</div>
 		</MobileHeader>
 		<div
-			class="h-40 transition-max-height delay-500 duration-300 ease-out"
+			class="h-48 transition-max-height delay-500 duration-300 ease-out"
 			:class="{
-				'max-h-0': !$route.meta.hasHeaderOffset?.content,
-				'max-h-40': $route.meta.hasHeaderOffset?.content,
+				'max-h-0': $route.meta.hasHeaderOffset?.content === false,
+				'max-h-48': $route.meta.hasHeaderOffset?.content === true,
 			}"
 		>
 			<div class="container xl:container-xl h-full grid place-content-center">
 				<Transition name="long-fade-delay-enter">
-					<div class="wrapper" v-if="$route.path === '/shop/products'">
+					<div class="wrapper" v-if="$route.meta.headerOffsetTitle?.content">
 						<h1 class="text-[#333] text-center uppercase">
 							<Icon class="inline" name="bx:leaf" size="2.5rem" />
-							<span>Товары</span>
+							<span>{{ $route.meta.headerOffsetTitle?.content }}</span>
 						</h1>
 					</div>
 				</Transition>
@@ -122,8 +137,8 @@
 		<div
 			class="h-40 transition-max-height delay-200 duration-500 ease-out"
 			:class="{
-				'max-h-0': !$route.meta.hasFooterOffset?.content,
-				'max-h-40': $route.meta.hasFooterOffset?.content,
+				'max-h-0': $route.meta.hasFooterOffset?.content === false,
+				'max-h-48': $route.meta.hasFooterOffset?.content === true,
 			}"
 		></div>
 		<Footer />

@@ -68,8 +68,8 @@
 					id="search-dropdown"
 					placeholder="Хочу найти..."
 					required
-					@focus="isSearchFocus = true"
-					@blur="isSearchFocus = false"
+					@focus="handleInputFocus($event.target)"
+					@blur="handleInputBlur"
 					@keydown.enter="$event.target.blur()"
 				/>
 				<div
@@ -127,12 +127,12 @@
 				}, 300),
 			},
 		},
-		created() {
+		mounted() {
 			if (this.$route.query.search) {
 				this.search = this.$route.query.search
 
 				const searchRef = this.$refs.search
-				this.handleInputFocus(searchRef)
+				this.focusInput(searchRef)
 			}
 
 			if (
@@ -144,24 +144,30 @@
 		},
 		methods: {
 			updateHref(state) {
-				history.pushState(
-					state,
-					'',
-					state.search !== '' && state.category !== ''
-						? `products?category=${state.category}?search=${state.search}`
-						: state.category !== ''
-						? `products?category=${state.category}`
-						: state.search !== ''
-						? `products?search=${state.search}`
-						: '?',
-				)
+				const router = useRouter()
+				// обновление router (сохрняя текущие параметры)
+				router.push({
+					query: {
+						...this.$route.query,
+						category: state.category,
+						search: state.search,
+					},
+				})
+			},
+			focusInput(target) {
+				if (target) {
+					target.focus()
+					setTimeout(function () {
+						target.selectionStart = target.selectionEnd = 10000
+					}, 0)
+					this.isSearchFocus = true
+				}
 			},
 			handleInputFocus(target) {
-				if (target) {
-					const end = target.value.length
-					target.setSelectionRange(end, end)
-					target.focus()
-				}
+				this.focusInput(target)
+			},
+			handleInputBlur() {
+				this.isSearchFocus = false
 			},
 			handleDropdownSelect(event) {
 				this.isDropdownOpen = false
