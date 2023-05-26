@@ -1,46 +1,53 @@
 <script setup>
+	const props = defineProps({
+		articleContentPath: { type: String, required: true },
+	})
+
+	const article = ref(null)
 	const articleLinks = ref([])
-	const articleLinksLength = ref(null)
 	const currentArticleLink = ref(null)
-
-	let { data: article } = useAsyncData('article', async () => {
-		const data = await queryContent('/other/about').findOne()
-		return { data }
-	})
-
-	onMounted(() => {
-		articleLinks.value = Array.from(article.value.data.body.toc.links)
-		articleLinksLength.value = articleLinks.value.length
-		currentArticleLink.value = articleLinks.value[0]
-	})
-
 	const currentArticleLinkNumber = ref(1)
-	const articleTransition = ref(null)
-	const isArticleTransitioning = ref(false)
+	const articleCurrentTransition = ref(null)
+
+	const fetchArticle = async () => {
+		article.value = await queryContent(props.articleContentPath).findOne()
+		articleLinks.value = Array.from(article.value.body.toc.links)
+		currentArticleLink.value = articleLinks.value[0]
+	}
 
 	const handleArticleNavigation = (isPrevious) => {
-		const currentIndex = articleLinks.value.indexOf(currentArticleLink.value)
-
-		articleTransition.value = isPrevious
-			? 'long-fade-in-left-in-right-out-out'
-			: 'long-fade-in-right-out-left-in-out'
-
-		onUpdated(() => {
-			isArticleTransitioning.value = true
-			setTimeout(() => {
-				isArticleTransitioning.value = false
-			}, 1000)
-		})
-
+		// check is predict transition in admissible range
+		const index = articleLinks.value.indexOf(currentArticleLink.value)
 		const isWithinRange = isPrevious
-			? currentIndex - 1 >= 0
-			: currentIndex + 1 < articleLinks.value.length
+			? index - 1 >= 0
+			: index + 1 < articleLinks.value.length
+
 		if (isWithinRange) {
-			const nextIndex = isPrevious ? currentIndex - 1 : currentIndex + 1
+			// set needed transition
+			articleCurrentTransition.value = isPrevious
+				? 'long-fade-in-left-in-right-out-out'
+				: 'long-fade-in-right-out-left-in-out'
+			// change index
+			const nextIndex = isPrevious ? index - 1 : index + 1
 			currentArticleLinkNumber.value = nextIndex + 1
+			// set article header
 			currentArticleLink.value = articleLinks.value[nextIndex]
+
+			// scroll to article header
+			nextTick(() => {
+				const articleHeader = document.getElementById('articleHeader')
+				articleHeader.scrollIntoView({ behavior: 'smooth' })
+			})
 		}
 	}
+
+	onUpdated(() => {
+		if (articleLinks.value.length > 0 && !currentArticleLink.value) {
+			currentArticleLink.value = articleLinks.value[0]
+		}
+	})
+
+	fetchArticle()
 </script>
 
 <template>
@@ -62,17 +69,17 @@
 					:key="link.id"
 				>
 					<div class="wrapper">
-						<h1 class="text-secondary">
+						<h1 class="text-secondary" id="articleHeader">
 							{{ link.text }}
 						</h1>
 						<hr />
 						<p>
 							{{
-								article.data.body.children[
+								article.body.children[
 									Number(
 										getKeyByValue(
-											article.data.body.children,
-											findInObject(article.data.body.children, 'props', {
+											article.body.children,
+											findInObject(article.body.children, 'props', {
 												id: link.id,
 											}),
 										),
@@ -111,7 +118,7 @@
 				</button>
 			</nav>
 			<h4 class="absolute left-2 bottom-4 font-sans" id="pagination">
-				{{ currentArticleLinkNumber + '/' + articleLinksLength }}
+				{{ currentArticleLinkNumber + '/' + articleLinks.length }}
 			</h4>
 		</div>
 	</div>

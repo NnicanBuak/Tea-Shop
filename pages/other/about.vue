@@ -11,6 +11,11 @@
 			name: 'hasHeaderOffset',
 			content: true,
 		},
+		headerOffsetTitle: {
+			hid: 'headerOffsetTitle',
+			name: 'headerOffsetTitle',
+			content: 'О нас',
+		},
 		hasFooterOffset: {
 			hid: 'hasFooterOffset',
 			name: 'hasFooterOffset',

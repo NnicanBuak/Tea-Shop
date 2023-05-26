@@ -71,10 +71,17 @@
 									<NuxtLink to="/other/contacts">Контакты</NuxtLink>
 								</li>
 								<li>
-									<NuxtLink to="/other/sales">Скидки</NuxtLink>
+									<NuxtLink to="/other/sales">О скидках</NuxtLink>
 								</li>
 								<li>
 									<NuxtLink to="/other/about">О нас</NuxtLink>
+								</li>
+							</ul>
+						</div>
+						<div class="wrapper">
+							<ul class="space-y-4 text-2xl">
+								<li>
+									<NuxtLink to="/shop">Главная</NuxtLink>
 								</li>
 							</ul>
 						</div>

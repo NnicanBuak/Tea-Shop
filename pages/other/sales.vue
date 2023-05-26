@@ -10,6 +10,11 @@
 			name: 'hasHeaderOffset',
 			content: true,
 		},
+		headerOffsetTitle: {
+			hid: 'headerOffsetTitle',
+			name: 'headerOffsetTitle',
+			content: 'О скидках',
+		},
 		hasFooterOffset: {
 			hid: 'hasFooterOffset',
 			name: 'hasFooterOffset',

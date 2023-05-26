@@ -1,5 +1,6 @@
 <script setup>
 	useHead({ title: 'Соцветие • Товары' })
+
 	definePageMeta({
 		hasDesktopHeader: {
 			hid: 'hasDesktopHeader',
@@ -25,58 +26,80 @@
 
 	const windowScroll = useWindowScroll()
 	const route = useRoute()
-
 	const supabase = useSupabaseClient()
-	const products = ref(null)
-	const selectedProduct = ref(undefined) // use undefined instead of null
 
-	useAsyncData('products', async () => {
+	const products = ref([])
+	const selectedProduct = ref(null)
+
+	const fetchProducts = async () => {
 		let { data, error } = await supabase.from('products').select('*')
-		if (error) console.error('[Supabase] ' + error)
 
-		products.value = data || [] // use empty array if data is falsy
+		if (error) {
+			console.error('[Supabase] ' + error.message)
+			return []
+		}
 
-		// если существует параметр id в url и он существует в базе данных (data), то selectedProduct присвоить значение продукта
-		if (route.params.id && data)
-			selectedProduct.value = data.find(
-				(product) => product.id === route.params.id,
-			)
-	})
+		products.value = data || []
+	}
 
-	// watcher для изменения selectedProduct при изменении параметра id в url
+	const setSelectedProduct = () => {
+		if (route.params.id && products.value.length) {
+			selectedProduct.value =
+				products.value.find((product) => product.id === route.params.id) ||
+				undefined
+		}
+	}
+
 	watch(
 		() => route.params.id,
-		(newId) => {
-			if (products.value) {
-				selectedProduct.value =
-					products.value.find((product) => product.id === newId) || undefined // set to undefined if not found
+		() => {
+			setSelectedProduct()
+		},
+	)
+
+	watch(
+		() => selectedProduct.value,
+		(newProduct) => {
+			if (newProduct) {
+				newProduct.isExpanded = false
+				setTimeout(() => {
+					newProduct.isExpanded = true
+
+					products.value.forEach((product) => {
+						if (product.id !== newProduct.id) {
+							product.isExpanded = false
+						}
+					})
+				}, 1000)
 			}
 		},
+		{ deep: true },
 	)
 
 	const category = ref('')
 	const search = ref('')
 
 	const filteredProducts = computed(() => {
-		if (!products.value) return [] // check if products.value exists first
-		// фильтрация товаров по категории и поисковому запросу
-		return category.value !== '' || search.value !== ''
+		if (!products.value.length) {
+			return []
+		}
+
+		return category.value || search.value
 			? products.value.filter((product) =>
-					category.value !== ''
+					category.value
 						? product.category === category.value
 						: search.value
 								.toLowerCase()
 								.split(' ')
 								.filter((word) => word !== '')
-								.some((searchWord) =>
-									product.title.toLowerCase().includes(searchWord),
-								),
+								.some((searchWord) => {
+									return product.title.toLowerCase().includes(searchWord)
+								}),
 			  )
 			: products.value
 	})
 
 	const handleFiltering = (filter) => {
-		// установить реактивные значения категории и поискового запроса
 		if (filter) {
 			category.value = filter.category
 			search.value = filter.search
@@ -85,6 +108,9 @@
 			search.value = ''
 		}
 	}
+
+	fetchProducts()
+	setSelectedProduct()
 </script>
 
 <template>
@@ -108,6 +134,7 @@
 			<ProductCard
 				v-for="product in filteredProducts"
 				:key="product.id"
+				v-show="product.inStock && !product.isExpanded"
 				:id="product.id"
 				:image="product.image_url"
 				:title="product.title"
@@ -118,14 +145,15 @@
 				:search="search"
 			/>
 		</section>
-		<section v-else-if="products.value">
+		<section class="container xl:container-xl" v-else-if="products">
 			<h1 class="text-secondary text-center">Ничего не найдено.</h1>
 		</section>
-		<section v-else>
+		<section class="container xl:container-xl" v-else>
 			<h1 class="text-secondary text-center">
 				Произошла ошибка или список товаров пуст.
 			</h1>
 		</section>
+		<NewsletterSubscribingSection />
 	</main>
 	<main v-else>{{ selectedProduct.value }}</main>
 </template>
@@ -134,23 +162,5 @@
 	export default {
 		name: 'products',
 		emits: ['filtering'],
-		selectedProduct: {
-			// при изменении selectedProduct, установить флаг для скрытия всех товаров кроме выбранного, после таймаута для анимации установить флаг для раскрытия текущего элемента товара на весь экран и скрытия остальных элементов
-
-			handler: (ref) => {
-				const product = ref.value
-				if (product) {
-					product.isExpanded = false
-					setTimeout(() => {
-						product.isExpanded = true
-						products.value?.forEach((comparableProduct) => {
-							if (comparableProduct.id !== product.id)
-								product.product.isExpanded = false
-						})
-					}, 1000)
-				}
-			},
-			deep: true,
-		},
 	}
 </script>
