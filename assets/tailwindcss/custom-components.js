@@ -2,8 +2,7 @@ const plugin = require('tailwindcss/plugin')
 module.exports = plugin(function ({ addComponents }) {
 	addComponents({
 		'.card': {
-			'@apply relative overflow-clip p-6 bg-primary border-2 border-secondary shadow-xl rounded-xl':
-				{},
+			'@apply relative overflow-clip p-6 bg-primary shadow-xl rounded-xl': {},
 		},
 		'.button': {
 			'@apply py-[1vw] text-xl rounded-full': {},

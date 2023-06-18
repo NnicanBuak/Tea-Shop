@@ -1,8 +1,12 @@
 <template>
 	<div
-		class="card static p-0 h-[450px] w-full flex flex-col border-2 border-gray-200 bg-white"
-		@click="navigateTo({ path: '/shop/products', query: { id: id } })"
+		class="card static p-0 w-full h-[550px] flex flex-col border-2 border-gray-200 bg-white"
+		@click="handleProductSelecting"
 	>
+		<div
+			class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
+			v-if="!inStock"
+		></div>
 		<div
 			class="basis-3/5"
 			:style="{
@@ -13,17 +17,26 @@
 		></div>
 		<div class="wrapper p-6 space-y-4">
 			<h2
-				class="font-normal text-black"
+				class="font-normal text-black leading-relaxed"
 				id="highlightedTitle"
 				v-html="highlightedTitle"
 				v-if="search !== ''"
 			></h2>
 			<h2 class="text-black font-normal" v-else>{{ title }}</h2>
-			<h3 class="font-sans text-black">
-				<span class="font-normal">{{ piece + 'г.' + ' / ' }}</span>
+			<h3 class="font-sans font-normal text-black">
 				<span>{{ price + '₽' }}</span>
+				<span class="text-sm">{{ ' / ' + piece + 'г.' }}</span>
 			</h3>
-			<div class="wrapper flex flex-wrap gap-2" id="tags">
+			<p
+				class="h-[60px] font-normal text-gray-400 text-sm line-clamp-3 overflow-hidden"
+			>
+				{{
+					description.length > 90
+						? this.trimString(description.slice(0, 90)) + '...'
+						: description
+				}}
+			</p>
+			<div class="wrapper flex flex-wrap gap-2">
 				<div
 					class="w-fit px-4 py-1 font-bold text-sm text-secondary rounded-full bg-primary bg-opacity-25 border-2 border-primary"
 				>
@@ -58,6 +71,7 @@
 	export default {
 		name: 'ProductCard',
 		props: {
+			inStock: { type: Boolean, required: true },
 			id: { type: Number, required: true },
 			image: { type: String, default: '/img/pattern-02.png' },
 			title: { type: String, required: true },
@@ -66,6 +80,7 @@
 			category: { type: String, required: false },
 			teaVariety: { type: String, required: false },
 			search: { type: String, required: false },
+			description: { type: String, required: false },
 		},
 		computed: {
 			highlightedTitle() {
@@ -95,12 +110,28 @@
 				return highlightedTitle
 			},
 		},
+		methods: {
+			handleProductSelecting() {
+				if (inStock) navigateTo({ path: '/shop/products', query: { id: id } })
+			},
+			trimString(str) {
+				const trimmedString = str.replace(/\s\S*$/, '')
+				const punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/g
+				const trimmedAndCleanedString = trimmedString.replace(
+					punctuationRegex,
+					'',
+				)
+
+				return trimmedAndCleanedString
+			},
+		},
 	}
 </script>
 
 <style>
 	#highlightedTitle > b {
-		padding: 0.25rem;
+		padding-left: 0.25rem;
+		padding-right: 0.25rem;
 		background-color: rgb(191 212 0);
 		border-radius: 0.75rem;
 	}

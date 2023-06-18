@@ -1,6 +1,6 @@
 <template>
-	<footer class="container xl:container-xl py-10 space-y-12 bg-gray-100">
-		<nav class="grid grid-cols-3">
+	<footer class="container xl:container-xl py-10 px-8 space-y-12 bg-gray-100">
+		<nav class="grid grid-cols-3 gap-x-4">
 			<div class="wrapper text-left">
 				<h1 class="pb-1 font-serif text-gray-400 text-xl">Сайт</h1>
 				<ul class="text-md space-y-3">

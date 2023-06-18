@@ -30,15 +30,15 @@
 					size="20vh"
 				></Icon>
 				<h1 class="font-bold text-center text-white text-2xl">
-					Для лучшего пользовательского опыта рекомендуем использовать сайт в
-					портретном режиме
+					Для удобства рекомендуем использовать сайт в портретном режиме
 				</h1>
 			</div>
 		</Transition>
 
 		<MobileHeader :sideLeft="true">
 			<div
-				class="wrapper h-full pr-[2px] bg-gradient-to-b from-gray-400 via-white via-[5rem] to-gray-300 to-[calc(4rem+8vw+36px)]"
+				class="wrapper h-full pr-[2px] bg-gradient-to-b from-gray-400 via-white via-[5.6rem] to-gray-300 to-[calc(5.6rem+8vw+36px)]"
+				v-show="!isSearchFocused"
 			>
 				<div
 					class="wrapper h-full p-10 py-16 flex flex-col flex-nowrap justify-between bg-white"
@@ -101,13 +101,13 @@
 							/>
 
 							<div
-								class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+								class="relative w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
 								v-else
 							>
 								<svg
 									class="absolute w-12 h-12 text-gray-400 -left-1"
 									fill="currentColor"
-									viewBox="0 0 20 20"
+									viewBox="0 0 24 24"
 									xmlns="http://www.w3.org/2000/svg"
 								>
 									<path
@@ -140,7 +140,7 @@
 				</Transition>
 			</div>
 		</div>
-		<slot />
+		<slot @isProductsSearchFocused="handleProductsSearchFocusing" />
 		<div
 			class="h-40 transition-max-height delay-200 duration-500 ease-out"
 			:class="{
@@ -167,20 +167,6 @@
 			if (isChrome) {
 				this.$refs.header.classList.add('pb-36')
 			}
-		},
-		methods: {
-			// shiftPage() {
-			// 	if (this.page) {
-			// 		this.page.classList.add('-translate-x-[70%]')
-			// 	}
-			// 	this.$refs.footer.classList.add('-translate-x-[70%]')
-			// },
-			// unshiftPage() {
-			// 	if (this.page) {
-			// 		this.page.classList.remove('-translate-x-[70%]')
-			// 	}
-			// 	this.$refs.footer.classList.remove('-translate-x-[70%]')
-			// },
 		},
 	}
 </script>

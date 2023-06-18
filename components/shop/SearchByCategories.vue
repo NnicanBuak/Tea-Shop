@@ -19,7 +19,7 @@
 				<Icon name="material-symbols:arrow-drop-down-rounded" size="1.2rem" />
 			</button>
 			<div
-				class="z-20 absolute left-0 top-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+				class="z-20 absolute left-0 top-16 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
 				v-show="isDropdownOpen"
 				ref="dropdown"
 			>
@@ -165,9 +165,11 @@
 			},
 			handleInputFocus(target) {
 				this.focusInput(target)
+				this.$emit('isSearchFocused', true)
 			},
 			handleInputBlur() {
 				this.isSearchFocus = false
+				this.$emit('isSearchFocused', false)
 			},
 			handleDropdownSelect(event) {
 				this.isDropdownOpen = false

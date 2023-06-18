@@ -198,7 +198,16 @@
 							v-show="!isArticleOpen"
 						></div>
 					</Transition>
-					<ArticleSlider articleContentPath="/other/about" />
+					<div
+						class="wrapper transition-max-height ease-out duration-1000"
+						:class="{
+							'max-h-60': !isArticleOpen,
+							'max-h-[60rem]': isArticleOpen && !isArticleTransitioning,
+							'max-h-[61rem]': isArticleTransitioning,
+						}"
+					>
+						<ArticleSlider articleContentPath="/other/about" />
+					</div>
 				</div>
 				<Transition name="fade-out">
 					<p

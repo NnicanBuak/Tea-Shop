@@ -3,6 +3,21 @@
 		articleContentPath: { type: String, required: true },
 	})
 
+	// article composition
+	// > body
+	// -> children (parsed content)
+	// --> %ID%
+	// ---> children
+	// ---> props
+	// ---> tag
+	// ->	toc
+	// --> links (headline)
+	// ---> %ID%
+	// ----> id
+	// ----> text
+	// > title
+	// > description
+	// > ...
 	const article = ref(null)
 	const articleLinks = ref([])
 	const currentArticleLink = ref(null)
@@ -11,6 +26,7 @@
 
 	const fetchArticle = async () => {
 		article.value = await queryContent(props.articleContentPath).findOne()
+		console.log(article.value)
 		articleLinks.value = Array.from(article.value.body.toc.links)
 		currentArticleLink.value = articleLinks.value[0]
 	}
@@ -33,6 +49,14 @@
 			// set article header
 			currentArticleLink.value = articleLinks.value[nextIndex]
 
+			// if previous article content bigger than current by index
+			if (true) {
+				this.$emit('isArticleTransitioning', true)
+				setTimeout(() => {
+					this.$emit('isArticleTransitioning', false)
+				}, 1000)
+			}
+
 			// scroll to article header
 			nextTick(() => {
 				const articleHeader = document.getElementById('articleHeader')
@@ -51,17 +75,9 @@
 </script>
 
 <template>
-	<div
-		class="wrapper transition-max-height ease-out duration-1000"
-		:class="{
-			'max-h-60': !isArticleOpen,
-			'max-h-[60rem]': isArticleOpen,
-			'max-h-[61rem]': isArticleTransitioning,
-			'max-h-[62rem]': !isArticleTransitioning,
-		}"
-	>
+	<div class="wrapper">
 		<div class="wrapper relative">
-			<TransitionGroup :name="articleTransition">
+			<TransitionGroup :name="articleCurrentTransition">
 				<div
 					class="wrapper w-full"
 					v-show="currentArticleLink.id === link.id"
@@ -97,7 +113,7 @@
 				<button
 					type="button"
 					class="p-2"
-					@click="handleArticleNavigation((isPrevious = true))"
+					@click="handleArticleNavigation(true)"
 				>
 					<Icon
 						class="active:bg-secondary active:text-primary rounded-full"

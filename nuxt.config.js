@@ -13,7 +13,6 @@ export default defineNuxtConfig({
 		'@nuxt/devtools',
 		'@nuxtjs/supabase',
 		'@nuxtjs/tailwindcss',
-		'@nuxtjs/google-fonts',
 		'@nuxtjs/html-validator',
 		'@nuxtjs/device',
 		'nuxt-icon',
@@ -26,7 +25,15 @@ export default defineNuxtConfig({
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
 			title: 'Соцветие • Интернет-магазин',
-			link: [{ rel: 'canonical', href: 'https://<SITE.COM>/shop' }],
+			link: [
+				{ rel: 'canonical', href: 'https://<SITE.COM>/shop' },
+				{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+				{ rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+				{
+					rel: 'stylesheet',
+					href: 'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nanum+Gothic:wght@400;700;800&display=swap',
+				},
+			],
 			htmlAttrs: {
 				lang: 'ru',
 			},
@@ -91,21 +98,21 @@ export default defineNuxtConfig({
 		size: '16px',
 		class: 'icon',
 	},
-	googleFonts: {
-		families: {
-			'EB+Garamond': {
-				wght: [400, 700],
-				ital: [400],
-			},
-			'Fira+Sans': {
-				wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-				ital: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-			},
-			'Nanum+Gothic': {
-				wght: [700, 800],
-			},
-		},
-	},
+	// googleFonts: {
+	// 	families: {
+	// 		'EB+Garamond': {
+	// 			wght: [400, 700],
+	// 			ital: [400],
+	// 		},
+	// 		'Fira+Sans': {
+	// 			wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+	// 			ital: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+	// 		},
+	// 		'Nanum+Gothic': {
+	// 			wght: [700, 800],
+	// 		},
+	// 	},
+	// },
 	lodash: {
 		prefix: '_',
 		upperAfterPrefix: false,
