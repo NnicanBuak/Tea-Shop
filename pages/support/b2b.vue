@@ -24,9 +24,3 @@
 		<Article :name="$route.path" />
 	</div>
 </template>
-
-<script>
-	export default {
-		name: 'b2b',
-	}
-</script>

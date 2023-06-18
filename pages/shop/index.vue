@@ -226,7 +226,6 @@
 
 <script>
 	export default {
-		name: 'shop',
 		data() {
 			return {
 				isArticleOpen: false,

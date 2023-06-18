@@ -29,9 +29,3 @@
 		<Article :name="$route.path" />
 	</div>
 </template>
-
-<script>
-	export default {
-		name: 'contacts',
-	}
-</script>

@@ -75,7 +75,6 @@
 
 <script>
 	export default {
-		name: 'profile',
 		methods: {
 			async handleUpdateAvatar(avatarFile) {
 				const user = useSupabaseUser()

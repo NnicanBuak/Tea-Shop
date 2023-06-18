@@ -238,9 +238,3 @@
 	</main>
 	<main v-else>{{ selectedProduct.value }}</main>
 </template>
-
-<script>
-	export default {
-		name: 'products',
-	}
-</script>
