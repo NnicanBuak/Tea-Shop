@@ -47,7 +47,7 @@
 					<div class="flex flex-col gap-10 text-left">
 						<div class="wrapper">
 							<h1
-								class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase"
+								class="-ml-3 mb-3 font-serif text-gray-400 text-3xl uppercase"
 							>
 								Магазин
 							</h1>
@@ -62,7 +62,7 @@
 						</div>
 						<div class="wrapper">
 							<h1
-								class="-ml-2 mb-3 font-serif text-gray-400 text-3xl uppercase"
+								class="-ml-3 mb-3 font-serif text-gray-400 text-3xl uppercase"
 							>
 								Другое
 							</h1>

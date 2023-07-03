@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="">
+	<form class="rounded-lg" @submit.prevent="">
 		<div class="wrapper relative flex">
 			<label
 				class="mb-2 text-sm font-medium text-[#333] sr-only"
@@ -8,8 +8,8 @@
 				Поиск
 			</label>
 			<button
-				type="button"
 				class="z-10 inline-flex flex-shrink-0 items-center py-2.5 px-4 text-sm font-medium text-center text-[#333] bg-gray-100 border border-gray-300 rounded-l-lg pointing:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100"
+				type="button"
 				id="dropdown-button"
 				data-dropdown-toggle="dropdown"
 				v-show="!isSearchFocus"
@@ -24,7 +24,7 @@
 				ref="dropdown"
 			>
 				<ul
-					class="py-2 text-sm text-gray-700"
+					class="py-2 text-sm text-gray-700 bg-white"
 					aria-labelledby="dropdown-button"
 				>
 					<li>
@@ -73,7 +73,7 @@
 					@keydown.enter="$event.target.blur()"
 				/>
 				<div
-					class="peer-focus:text-[#333] wrapper absolute top-0 right-0 p-2.5 text-gray-400"
+					class="h-[42px] p-2 flex items-center peer-focus:text-[#333] wrapper absolute top-0 right-0 text-gray-400"
 				>
 					<Icon name="material-symbols:search" size="1.5rem" />
 				</div>

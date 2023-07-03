@@ -15,8 +15,8 @@
 				required
 			/>
 			<button
-				type="submit"
 				class="px-4 p-2 text-white bg-primary2 rounded-full"
+				@click="navigateTo({ path: '/newsletter', query: { email: $event } })"
 			>
 				Подписаться
 			</button>

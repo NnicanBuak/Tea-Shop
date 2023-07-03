@@ -1,49 +1,79 @@
+<script setup>
+	const windowSize = useWindowSize()
+
+	const isCardHovered = ref(null)
+	const imageStyles = ref(null)
+
+	watch(isCardHovered, async (newBoolean) => {
+		if (windowSize.width > 1024 && newBoolean) {
+			imageStyles.value.backgroundSize = '130%'
+		} else {
+			imageStyles.value.backgroundSize = '100%'
+		}
+	})
+
+	const handleMouseEnterCard = () => {
+		isCardHovered.value = true
+	}
+	const handleMouseLeaveCard = () => {
+		isCardHovered.value = false
+	}
+
+	onMounted(() => {
+		imageStyles.value = {
+			backgroundPosition: 'center',
+			backgroundSize: '100%',
+		}
+	})
+</script>
+
 <template>
 	<div
-		class="card static p-0 w-full h-[550px] flex flex-col border-2 border-gray-200 bg-white"
+		class="card static p-0 w-full h-[450px] flex flex-col border-2 border-gray-200 bg-white pointing:shadow-none transition-shadow"
 		@click="handleProductSelecting"
+		@mouseenter="handleMouseEnterCard"
+		@mouseleave="handleMouseLeaveCard"
 	>
 		<div
 			class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
 			v-if="!inStock"
 		></div>
 		<div
-			class="basis-3/5"
+			class="basis-2/5 transition"
 			:style="{
 				background: `url(${image})`,
-				backgroundPosition: 'center',
-				backgroundSize: 'cover',
+				...imageStyles,
+				transition: 'background-size 0.4s ease-out',
 			}"
 		></div>
-		<div class="wrapper p-6 space-y-4">
-			<h2
-				class="font-normal text-black leading-relaxed"
-				id="highlightedTitle"
-				v-html="highlightedTitle"
-				v-if="search !== ''"
-			></h2>
-			<h2 class="text-black font-normal" v-else>{{ title }}</h2>
+		<div class="wrapper p-6 space-y-4 basis-3/5">
+			<div class="wrapper">
+				<h2
+					class="font-normal text-black leading-relaxed"
+					id="highlightedTitle"
+					v-html="highlightedTitle"
+					v-if="search !== ''"
+				></h2>
+				<h2 class="text-black font-normal" v-else>{{ title }}</h2>
+			</div>
 			<h3 class="font-sans font-normal text-black">
-				<span>{{ price + '₽' }}</span>
-				<span class="text-sm">{{ ' / ' + piece + 'г.' }}</span>
+				<span>{{ price }}</span>
+				<span class="text-xl"> ₽</span>
+				<span class="text-sm">{{ ' / ' + piece + ' г.' }}</span>
 			</h3>
 			<p
 				class="h-[60px] font-normal text-gray-400 text-sm line-clamp-3 overflow-hidden"
 			>
-				{{
-					description.length > 90
-						? this.trimString(description.slice(0, 90)) + '...'
-						: description
-				}}
+				{{ description }}
 			</p>
 			<div class="wrapper flex flex-wrap gap-2">
 				<div
-					class="w-fit px-4 py-1 font-bold text-sm text-secondary rounded-full bg-primary bg-opacity-25 border-2 border-primary"
+					class="h-8 w-fit px-4 flex items-center font-bold text-sm text-secondary bg-primary bg-opacity-25 border-2 border-primary rounded-full leading-none"
 				>
 					{{ category }}
 				</div>
 				<div
-					class="w-fit px-4 py-1 font-bold text-sm rounded-full bg-opacity-25 border-2"
+					class="h-8 w-fit px-4 flex items-center font-bold text-sm rounded-full bg-opacity-25 border-2"
 					:class="{
 						'bg-[#fc3c0b] border-[#fc3c0b] text-[#9c2406]':
 							teaVariety === 'Чёрный',
@@ -112,17 +142,8 @@
 		},
 		methods: {
 			handleProductSelecting() {
-				if (inStock) navigateTo({ path: '/shop/products', query: { id: id } })
-			},
-			trimString(str) {
-				const trimmedString = str.replace(/\s\S*$/, '')
-				const punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/g
-				const trimmedAndCleanedString = trimmedString.replace(
-					punctuationRegex,
-					'',
-				)
-
-				return trimmedAndCleanedString
+				if (this.inStock)
+					navigateTo({ path: '/shop/products', query: { id: this.id } })
 			},
 		},
 	}

@@ -15,7 +15,7 @@
 		hasFooterOffset: {
 			hid: 'hasFooterOffset',
 			name: 'hasFooterOffset',
-			content: true,
+			content: false,
 		},
 	})
 
@@ -31,7 +31,7 @@
 </script>
 
 <template>
-	<main class="space-y-40 overflow-auto">
+	<main class="space-y-16 overflow-auto">
 		<section
 			class="сontainer-xl h-screen grid"
 			style="height: calc(100 * var(--vh, 1vh))"
@@ -93,7 +93,7 @@
 					</h3>
 				</div>
 				<div
-					class="max-lg:w-full lg:h-full lg:row-[2/-1] lg:col-[2/2]"
+					class="flex justify-center lg:h-full lg:row-[2/-1] lg:col-[2/2]"
 					id="alt-title"
 				>
 					<h1
@@ -104,11 +104,16 @@
 					</h1>
 					<button
 						type="button"
-						class="button button-primary lg:absolute max-lg:w-full"
+						class="button button-primary py-1 px-4"
 						data-pointer-type="highlight"
 						@click="navigateTo('/shop/products')"
 					>
-						выбрать
+						Перейти в каталог
+						<Icon
+							class="m-1 -mr-1"
+							name="material-symbols:arrows-more-up-rounded"
+							size="20"
+						></Icon>
 					</button>
 				</div>
 			</aside>
@@ -131,59 +136,44 @@
 		</section>
 		<section class="container xl:container-xl">
 			<h2 class="my-4 text-center text-secondary">Категории</h2>
-			<div class="wrapper h-1 my-8">
-				<nuxt-picture
-					class="absolute left-0 w-screen"
-					src="/img/decoration-horizontal.svg"
-				/>
-			</div>
 			<MenuSwiper class="space-y-10">
 				<MenuCard
 					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
-					linkTo="/shop/products"
-					title="Ассортимент"
-					titleColor="#4f501d"
-					backgroundImage="url(/img/tea1.png)"
-					backgroundPosition="bottom"
-					gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
-				>
-				</MenuCard>
-				<MenuCard
-					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
-					linkTo="/shop/products"
-					title="Акции"
-					titleColor="#4f501d"
-					backgroundImage="url(/img/tea2.png)"
-					backgroundPosition="bottom"
-					gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
-				>
-				</MenuCard>
-				<MenuCard
-					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
-					linkTo="/shop/products"
-					title="Новинки"
-					titleColor="#4f501d"
+					linkTo="/shop/products#Новинки"
 					backgroundImage="url(/img/tea3.png)"
-					backgroundPosition="bottom"
-					gradientOnBackground="linear-gradient(360deg, rgba(191,212,0,1) 10%, rgba(0,0,0,0) 50%)"
+					title="Новинки"
+					backgroundImagePosition="bottom"
+				>
+				</MenuCard>
+				<MenuCard
+					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
+					linkTo="/shop/products#Акции"
+					backgroundImage="url(/img/tea2.png)"
+					title="Акции"
+					backgroundImagePosition="bottom"
+				>
+				</MenuCard>
+				<MenuCard
+					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
+					linkTo="/shop/products#Ассортимент"
+					backgroundImage="url(/img/tea1.png)"
+					title="Ассортимент"
+					backgroundImagePosition="bottom"
 				>
 				</MenuCard>
 			</MenuSwiper>
+			<CustomDivider />
 		</section>
-		<section class="container xl:container-xl text-secondary">
-			<h2 class="font-serif text-center">Как мы это делаем?</h2>
-			<div class="wrapper h-1 my-8">
-				<nuxt-picture
-					class="absolute left-0 w-screen"
-					src="/img/decoration-horizontal.svg"
-				/>
+		<section class="container xl:container-xl text-secondary space-y-4">
+			<div class="wrapper">
+				<h2 class="font-serif text-center">Как мы это делаем?</h2>
+				<h3 class="mb-2 font-serif text-center max-md:text-xl text-[#333]">
+					Главный секрет приготовления
+				</h3>
 			</div>
 			<div class="wrapper h-44 w-44 mb-8 mx-auto p-4 bg-primary rounded-full">
 				<nuxt-img class="h-full rounded-full" src="/img/bg.png" />
 			</div>
-			<h3 class="mb-2 font-serif text-center max-md:text-xl text-[#333]">
-				Главный секрет приготовления
-			</h3>
 			<div
 				class="card flex flex-col overflow-clip transition-max-height"
 				:class="{
@@ -219,6 +209,7 @@
 					</p>
 				</Transition>
 			</div>
+			<CustomDivider />
 		</section>
 		<NewsletterSubscribingSection />
 	</main>

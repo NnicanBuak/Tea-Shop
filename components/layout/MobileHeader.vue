@@ -4,11 +4,13 @@
 <template>
 	<div v-show="isMounted">
 		<header
-			class="z-30 fixed inset-0 h-screen w-[calc(70vw+8vw+24px)] flex items-start transition-all ease-out duration-300 overflow-hidden"
+			class="fixed inset-0 h-screen w-[calc(70vw+8vw+20px)] flex items-start transition-all ease-out duration-300 overflow-hidden"
 			:class="{
+				'z-30': !isMobileMenuOpen,
+				'z-50': isMobileMenuOpen,
 				'flex-row-reverse': sideLeft,
-				'translate-x-[calc(100vw-8vw-36px)]': !sideLeft && !isMobileMenuOpen,
-				'translate-x-[calc(30vw-8vw-36px)]': !sideLeft && isMobileMenuOpen,
+				'translate-x-[calc(100vw-8vw-20px)]': !sideLeft && !isMobileMenuOpen,
+				'translate-x-[calc(30vw-8vw-20px)]': !sideLeft && isMobileMenuOpen,
 				'-translate-x-[70vw]': sideLeft && !isMobileMenuOpen,
 				'translate-x-0': sideLeft && isMobileMenuOpen,
 			}"
