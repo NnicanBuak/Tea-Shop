@@ -104,21 +104,21 @@
 					</h1>
 					<button
 						type="button"
-						class="button button-primary py-1 px-4"
+						class="button button-primary"
 						data-pointer-type="highlight"
 						@click="navigateTo('/shop/products')"
 					>
-						Перейти в каталог
 						<Icon
-							class="m-1 -mr-1"
-							name="material-symbols:arrows-more-up-rounded"
-							size="20"
+							class="mr-2"
+							name="material-symbols:keyboard-double-arrow-right"
+							size="28"
 						></Icon>
+						Перейти в каталог
 					</button>
 				</div>
 			</aside>
 			<Swiper
-				class="h-full w-full row-[1/-1] col-[1/-1]"
+				class="h-full w-full row-[1/-1] col-[1/-1] overflow-hidden"
 				style="z-index: -20"
 				:modules="[]"
 				:slides-per-view="1"
@@ -131,6 +131,9 @@
 							backgroundImage: 'url(' + '/img/slider/' + image + ')',
 						}"
 					></div>
+					<div
+						class="absolute inset-0 h-screen w-screen bg-white bg-opacity-20"
+					></div>
 				</SwiperSlide>
 			</Swiper>
 		</section>
@@ -139,40 +142,43 @@
 			<MenuSwiper class="space-y-10">
 				<MenuCard
 					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
+					title="Новинки"
 					linkTo="/shop/products#Новинки"
 					backgroundImage="url(/img/tea3.png)"
-					title="Новинки"
 					backgroundImagePosition="bottom"
 				>
 				</MenuCard>
 				<MenuCard
 					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
+					title="Акции"
 					linkTo="/shop/products#Акции"
 					backgroundImage="url(/img/tea2.png)"
-					title="Акции"
 					backgroundImagePosition="bottom"
 				>
 				</MenuCard>
 				<MenuCard
 					class="w-max-80 aspect-[3.75/2] shadow-xl rounded-xl"
+					title="Ассортимент"
 					linkTo="/shop/products#Ассортимент"
 					backgroundImage="url(/img/tea1.png)"
-					title="Ассортимент"
 					backgroundImagePosition="bottom"
 				>
 				</MenuCard>
 			</MenuSwiper>
 			<CustomDivider />
 		</section>
-		<section class="container xl:container-xl text-secondary space-y-4">
-			<div class="wrapper">
+		<section
+			class="container xl:container-xl relative text-secondary space-y-8"
+		>
+			<div
+				class="-z-10 absolute top-32 left-[-50%] h-[50vh] w-[150vw] bg-primary bg-opacity-20"
+			></div>
+			<div class="wrapper space-y-6">
 				<h2 class="font-serif text-center">Как мы это делаем?</h2>
+				<nuxt-img class="h-40 w-48 mx-auto rounded-full" src="/img/bg.png" />
 				<h3 class="mb-2 font-serif text-center max-md:text-xl text-[#333]">
 					Главный секрет приготовления
 				</h3>
-			</div>
-			<div class="wrapper h-44 w-44 mb-8 mx-auto p-4 bg-primary rounded-full">
-				<nuxt-img class="h-full rounded-full" src="/img/bg.png" />
 			</div>
 			<div
 				class="card flex flex-col overflow-clip transition-max-height"
@@ -191,9 +197,9 @@
 					<div
 						class="wrapper transition-max-height ease-out duration-1000"
 						:class="{
-							'max-h-60': !isArticleOpen,
-							'max-h-[60rem]': isArticleOpen && !isArticleTransitioning,
+							'max-h-[16rem]': !isArticleOpen,
 							'max-h-[61rem]': isArticleTransitioning,
+							'max-h-[60rem]': isArticleOpen && !isArticleTransitioning,
 						}"
 					>
 						<ArticleSlider articleContentPath="/other/about" />

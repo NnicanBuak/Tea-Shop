@@ -3,10 +3,10 @@
 		class="menu-card relative bg-gradient-to-t from-primary from-10% to-60%"
 		:style="{
 			backgroundImage: backgroundImage
-				? 'linear-gradient(360deg, #bfd400 8%, #bfd400 8%, rgba(0,0,0,0) 40%)' +
+				? 'linear-gradient(360deg, rgba(0,0,0,0.5) 8%, rgba(0,0,0,0) 35% )' +
 				  ', ' +
 				  backgroundImage
-				: 'linear-gradient(90deg, #bfd400, #4f501d)',
+				: 'linear-gradient(360deg, #bfd400, #4f501d)',
 			backgroundRepeat: 'none',
 			backgroundPosition:
 				backgroundImage && backgroundImagePosition

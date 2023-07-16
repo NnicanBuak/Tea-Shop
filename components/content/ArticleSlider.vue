@@ -107,8 +107,11 @@
 				</div>
 			</TransitionGroup>
 		</div>
-		<hr class="h-[4px]" />
-		<div class="wrapper relative flex flex-row-reverse">
+		<hr />
+		<div class="wrapper relative flex justify-between items-center">
+			<h4 class="p-2 font-sans" id="pagination">
+				{{ currentArticleLinkNumber + '/' + articleLinks.length }}
+			</h4>
 			<nav>
 				<button
 					type="button"
@@ -118,7 +121,7 @@
 					<Icon
 						class="active:bg-secondary active:text-primary rounded-full"
 						name="material-symbols:arrow-circle-left-outline-rounded"
-						size="10vw"
+						size="2rem"
 					/>
 				</button>
 				<button
@@ -129,13 +132,10 @@
 					<Icon
 						class="active:bg-secondary active:text-primary rounded-full"
 						name="material-symbols:arrow-circle-right-outline-rounded"
-						size="10vw"
+						size="2rem"
 					/>
 				</button>
 			</nav>
-			<h4 class="absolute left-2 bottom-4 font-sans" id="pagination">
-				{{ currentArticleLinkNumber + '/' + articleLinks.length }}
-			</h4>
 		</div>
 	</div>
 </template>

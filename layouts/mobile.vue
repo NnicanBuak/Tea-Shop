@@ -46,12 +46,10 @@
 				>
 					<div class="flex flex-col gap-10 text-left">
 						<div class="wrapper">
-							<h1
-								class="-ml-3 mb-3 font-serif text-gray-400 text-3xl uppercase"
-							>
+							<h1 class="mb-3 font-serif text-gray-400 text-3xl uppercase">
 								Магазин
 							</h1>
-							<ul class="space-y-4 text-2xl">
+							<ul class="ml-3 space-y-4 text-2xl">
 								<li>
 									<NuxtLink to="/shop/cart">Корзина</NuxtLink>
 								</li>
@@ -61,12 +59,10 @@
 							</ul>
 						</div>
 						<div class="wrapper">
-							<h1
-								class="-ml-3 mb-3 font-serif text-gray-400 text-3xl uppercase"
-							>
+							<h1 class="mb-3 font-serif text-gray-400 text-3xl uppercase">
 								Другое
 							</h1>
-							<ul class="space-y-4 text-2xl">
+							<ul class="ml-3 space-y-4 text-2xl">
 								<li>
 									<NuxtLink to="/other/contacts">Контакты</NuxtLink>
 								</li>
@@ -79,7 +75,7 @@
 							</ul>
 						</div>
 						<div class="wrapper">
-							<ul class="space-y-4 text-2xl">
+							<ul class="ml-3 space-y-4 text-2xl">
 								<li>
 									<NuxtLink to="/shop">Главная</NuxtLink>
 								</li>
