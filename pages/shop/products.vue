@@ -201,7 +201,7 @@
 			</div>
 			<div
 				class="wrapper w-full space-y-14"
-				v-else-if="isProductsFetching || products.length > 0"
+				v-else-if="products.length > 0 || isProductsFetching"
 			>
 				<div class="wrapper space-y-8">
 					<h2 class="font-serif text-center" href="#Новинки">Новинки</h2>

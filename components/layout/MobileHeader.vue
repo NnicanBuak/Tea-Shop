@@ -5,6 +5,7 @@
 	<div v-show="isMounted">
 		<header
 			class="fixed inset-0 h-screen w-[calc(70vw+8vw+20px)] flex items-start transition-all ease-out duration-300 overflow-hidden"
+			@click="isMobileMenuOpen ? closeMobileHeader : true"
 			:class="{
 				'z-30': !isMobileMenuOpen,
 				'z-50': isMobileMenuOpen,
@@ -40,7 +41,7 @@
 		</header>
 		<Transition name="fade">
 			<div
-				class="z-20 fixed inset-0 h-screen w-screen bg-black bg-opacity-25"
+				class="z-40 fixed inset-0 h-screen w-screen bg-black bg-opacity-25"
 				v-show="isMobileMenuOpen"
 				@click="closeMobileHeader"
 			></div>
