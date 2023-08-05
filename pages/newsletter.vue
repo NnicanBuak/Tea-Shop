@@ -13,7 +13,7 @@
 		hasFooterOffset: {
 			hid: 'hasFooterOffset',
 			name: 'hasFooterOffset',
-			content: true,
+			content: false,
 		},
 	})
 </script>

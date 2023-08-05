@@ -18,7 +18,7 @@
 		hasFooterOffset: {
 			hid: 'hasFooterOffset',
 			name: 'hasFooterOffset',
-			content: true,
+			content: false,
 		},
 
 		middleware: ['auth'],
@@ -26,5 +26,5 @@
 </script>
 
 <template>
-	<div></div>
+	<div><NewsletterSubscribingSection /></div>
 </template>
