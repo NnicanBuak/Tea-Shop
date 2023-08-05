@@ -199,7 +199,10 @@
 				</div>
 				<CustomDivider />
 			</div>
-			<div class="wrapper w-full space-y-14" v-else-if="products.length > 0">
+			<div
+				class="wrapper w-full space-y-14"
+				v-else-if="isProductsFetching || products.length > 0"
+			>
 				<div class="wrapper space-y-8">
 					<h2 class="font-serif text-center" href="#Новинки">Новинки</h2>
 
@@ -419,12 +422,12 @@
 					<CustomDivider />
 				</div>
 			</div>
-			<div
+			<!-- <div
 				class="container xl:container-xl grid place-items-center"
 				v-else-if="isProductsFetching"
 			>
 				<Icon name="eos-icons:bubble-loading" size="64" />
-			</div>
+			</div> -->
 			<div class="container xl:container-xl" v-else>
 				<h1 class="text-secondary text-center">
 					Произошла ошибка или список товаров пуст.
