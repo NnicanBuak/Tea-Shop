@@ -4,7 +4,7 @@ export default {
 		container: {
 			center: true,
 			padding: {
-				DEFAULT: 'calc(8vw + 24px)',
+				DEFAULT: 'calc(10vw)',
 				lg: '50px',
 				xl: '0px',
 			},
