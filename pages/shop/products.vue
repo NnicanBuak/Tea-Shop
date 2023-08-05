@@ -169,8 +169,9 @@
 				<h2 class="font-serif text-center" :href="'#' + category">
 					{{ category }}
 				</h2>
+				<h2 class="font-serif text-center" href="#Поиск">Поиск</h2>
 				<div
-					class="wrapper w-full space-y-6"
+					class="wrapper w-full space-y-12"
 					v-if="filteredProducts.length > 0"
 				>
 					<ProductCard
@@ -190,12 +191,12 @@
 					/>
 				</div>
 				<div class="container xl:container-xl" v-else-if="products.length > 0">
-					<h1 class="text-secondary text-center">Ничего не найдено.</h1>
+					<h3 class="text-secondary text-center">Ничего не найдено.</h3>
 				</div>
 				<div class="container xl:container-xl" v-else>
-					<h1 class="text-secondary text-center">
+					<h3 class="text-secondary text-center">
 						Произошла ошибка или список товаров пуст.
-					</h1>
+					</h3>
 				</div>
 				<CustomDivider />
 			</div>
@@ -482,9 +483,9 @@
 				<Icon name="eos-icons:bubble-loading" size="64" />
 			</div> -->
 			<div class="container xl:container-xl" v-else>
-				<h1 class="text-secondary text-center">
+				<h3 class="text-secondary text-center">
 					Произошла ошибка или список товаров пуст.
-				</h1>
+				</h3>
 			</div>
 		</section>
 		<NewsletterSubscribingSection />
