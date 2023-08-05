@@ -18,6 +18,14 @@
 	})
 
 	const supabaseAuth = useSupabaseAuthClient()
+	const user = useSupabaseUser()
+	const route = useRoute()
+
+	if (user.value) {
+		navigateTo({
+			path: route.query['to'] ? route.query['to'] : '/',
+		})
+	}
 
 	let loading = ref(false)
 	let email = ref('')
@@ -67,12 +75,14 @@
 						<div class="space-y-6">
 							<input
 								class="px-4 p-2 shadow-inner rounded-full"
+								required
 								type="email"
 								placeholder="email"
 								v-model="email"
 							/>
 							<input
 								class="px-4 p-2 shadow-inner rounded-full"
+								required
 								type="password"
 								placeholder="password"
 								v-model="password"
@@ -80,7 +90,7 @@
 						</div>
 						<div>
 							<input
-								class="button w-full px-4 p-2 font-normal text-white text-lg bg-primary2 rounded-full"
+								class="button button-primary2 w-full px-4 p-2 font-normal text-white text-lg bg-primary2 rounded-full"
 								type="submit"
 								:value="loading ? '🔃' : 'Войти'"
 								:disabled="loading"
@@ -95,6 +105,7 @@
 						<div class="space-y-6">
 							<input
 								class="px-4 p-2 shadow-inner rounded-full"
+								required
 								type="email"
 								placeholder="email"
 								v-model="email"
@@ -108,7 +119,8 @@
 						</div>
 						<div>
 							<input
-								class="button w-full px-4 p-2 font-normal text-white text-lg bg-primary2 rounded-full"
+								class="button button-primary2 w-full px-4 p-2 font-normal text-white text-lg bg-primary2 rounded-full"
+								required
 								type="submit"
 								:value="loading ? '🔃' : 'Зарегистрироваться'"
 								:disabled="loading"

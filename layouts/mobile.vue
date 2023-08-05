@@ -77,12 +77,12 @@
 						<div class="wrapper">
 							<ul class="ml-3 space-y-4 text-2xl">
 								<li>
-									<NuxtLink to="/shop">Главная</NuxtLink>
+									<NuxtLink to="/">Главная</NuxtLink>
 								</li>
 							</ul>
 						</div>
 					</div>
-					<NuxtLink to="/shop">
+					<NuxtLink to="/">
 						<nuxt-picture class="w-full" src="/img/logo-07.svg"></nuxt-picture>
 					</NuxtLink>
 					<div class="flex flex-nowrap">

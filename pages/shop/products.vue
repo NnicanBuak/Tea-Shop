@@ -199,7 +199,7 @@
 				</div>
 				<CustomDivider />
 			</div>
-			<div class="wrapper w-full space-y-14" v-else>
+			<div class="wrapper w-full space-y-14" v-else-if="products.length > 0">
 				<div class="wrapper space-y-8">
 					<h2 class="font-serif text-center" href="#Новинки">Новинки</h2>
 
@@ -252,7 +252,7 @@
 							<span class="sr-only">Loading...</span>
 						</div>
 					</div>
-					<div class="space-y-12 mt-10" v-else-if="products.length > 0">
+					<div class="space-y-12 mt-10">
 						<ProductCard
 							v-for="product in productsBySectionNew"
 							:key="product.id"
@@ -269,11 +269,6 @@
 							:description="product.description"
 							:search="search"
 						/>
-					</div>
-					<div class="container xl:container-xl" v-else>
-						<h1 class="text-secondary text-center">
-							Произошла ошибка или список товаров пуст.
-						</h1>
 					</div>
 					<CustomDivider />
 				</div>
@@ -329,7 +324,7 @@
 							<span class="sr-only">Loading...</span>
 						</div>
 					</div>
-					<div class="space-y-12 mt-10" v-else-if="products.length > 0">
+					<div class="space-y-12 mt-10">
 						<ProductCard
 							v-for="product in productsBySectionPromotion"
 							:key="product.id"
@@ -346,11 +341,6 @@
 							:description="product.description"
 							:search="search"
 						/>
-					</div>
-					<div class="container xl:container-xl" v-else>
-						<h1 class="text-secondary text-center">
-							Произошла ошибка или список товаров пуст.
-						</h1>
 					</div>
 					<CustomDivider />
 				</div>
@@ -408,7 +398,7 @@
 							<span class="sr-only">Loading...</span>
 						</div>
 					</div>
-					<div class="space-y-12 mt-10" v-else-if="products.length > 0">
+					<div class="space-y-12 mt-10">
 						<ProductCard
 							v-for="product in products"
 							:key="product.id"
@@ -426,13 +416,19 @@
 							:search="search"
 						/>
 					</div>
-					<div class="container xl:container-xl" v-else>
-						<h1 class="text-secondary text-center">
-							Произошла ошибка или список товаров пуст.
-						</h1>
-					</div>
 					<CustomDivider />
 				</div>
+			</div>
+			<div
+				class="container xl:container-xl grid place-items-center"
+				v-else-if="isProductsFetching"
+			>
+				<Icon name="eos-icons:bubble-loading" size="64" />
+			</div>
+			<div class="container xl:container-xl" v-else>
+				<h1 class="text-secondary text-center">
+					Произошла ошибка или список товаров пуст.
+				</h1>
 			</div>
 		</section>
 		<NewsletterSubscribingSection />
