@@ -142,8 +142,7 @@
 		},
 		methods: {
 			handleProductSelecting() {
-				if (this.inStock)
-					navigateTo({ path: '/shop/products', query: { id: this.id } })
+				if (this.inStock) navigateTo({ path: '/shop/products/' + this.id })
 			},
 		},
 	}

@@ -25,7 +25,6 @@
 	})
 
 	const windowScroll = useWindowScroll()
-	const route = useRoute()
 	const supabase = useSupabaseClient()
 
 	const products = ref([])
@@ -61,13 +60,13 @@
 		isProductsFetching.value = false
 	}
 
-	const setSelectedProduct = () => {
-		if (route.params.id) {
-			selectedProduct.value =
-				products.value.find((product) => product.id === route.params.id) ||
-				undefined
-		}
-	}
+	// const setSelectedProduct = () => {
+	// 	if (route.params.id) {
+	// 		selectedProduct.value =
+	// 			products.value.find((product) => product.id === route.params.id) ||
+	// 			undefined
+	// 	}
+	// }
 
 	// const productsRef = ref([])
 	// const filteredProductsRef = ref([])
@@ -83,24 +82,24 @@
 	// 	}
 	// }
 
-	watch(route.params.id, async (newValue) => {
-		setSelectedProduct()
-	})
+	// watch(route.params.id, async (newValue) => {
+	// 	setSelectedProduct()
+	// })
 
-	watchEffect(() => {
-		if (selectedProduct.value) {
-			selectedProduct.value.isExpanded = false
-			setTimeout(() => {
-				selectedProduct.value.isExpanded = true
+	// watchEffect(() => {
+	// 	if (selectedProduct.value) {
+	// 		selectedProduct.value.isExpanded = false
+	// 		setTimeout(() => {
+	// 			selectedProduct.value.isExpanded = true
 
-				products.value.forEach((product) => {
-					if (product.id !== selectedProduct.value.id) {
-						product.isExpanded = false
-					}
-				})
-			}, 1000)
-		}
-	})
+	// 			products.value.forEach((product) => {
+	// 				if (product.id !== selectedProduct.value.id) {
+	// 					product.isExpanded = false
+	// 				}
+	// 			})
+	// 		}, 1000)
+	// 	}
+	// })
 
 	const category = ref('')
 	const search = ref('')
@@ -141,7 +140,7 @@
 		if (isSearchFocused.value) window.scrollTo({ top: 200, behavior: 'smooth' })
 	}
 
-	setSelectedProduct()
+	// setSelectedProduct()
 	fetchProducts()
 </script>
 

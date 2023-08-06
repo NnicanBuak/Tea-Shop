@@ -3,7 +3,7 @@
 		error: Object,
 	})
 
-	const handleError = () => clearError({ redirect: '/shop' })
+	const handleError = () => clearError({ redirect: '/' })
 </script>
 
 <template>
