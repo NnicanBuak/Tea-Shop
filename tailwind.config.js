@@ -4,7 +4,7 @@ export default {
 		container: {
 			center: true,
 			padding: {
-				DEFAULT: 'calc(10vw)',
+				DEFAULT: 'calc(16vw)',
 				lg: '50px',
 				xl: '0px',
 			},
@@ -34,7 +34,10 @@ export default {
 				DEFAULT: {
 					css: {
 						color: theme('colors.secondary'),
-						hr: { marginTop: '1rem', marginBottom: '3rem' },
+						hr: {
+							marginTop: '1rem',
+							marginBottom: '3rem',
+						},
 					},
 				},
 			}),

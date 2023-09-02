@@ -175,7 +175,7 @@
 			></div>
 			<div class="wrapper space-y-6">
 				<h2 class="font-serif text-center">Как мы это делаем?</h2>
-				<nuxt-img class="h-40 w-48 mx-auto rounded-full" src="/img/bg.png" />
+				<nuxt-img class="h-40 w-40 mx-auto rounded-full" src="/img/bg.png" />
 				<h3 class="mb-2 font-serif text-center max-md:text-xl text-[#333]">
 					Главный секрет приготовления
 				</h3>
@@ -207,7 +207,7 @@
 				</div>
 				<Transition name="fade-out">
 					<p
-						class="w-fit mt-4 self-end font-sans font-sm border-b-4 border-secondary leading-none"
+						class="w-fit mt-4 self-end font-sans text-sm border-b-2 border-secondary leading-none"
 						v-show="!isArticleOpen"
 						@click="isArticleOpen = true"
 					>

@@ -82,7 +82,7 @@
 	// 	}
 	// }
 
-	// watch(route.params.id, async (newValue) => {
+	// watch(route.params.id,  (newValue) => {
 	// 	setSelectedProduct()
 	// })
 
@@ -165,10 +165,13 @@
 			class="container xl:container-xl grid grid-cols-1 gap-4 place-items-center"
 		>
 			<div class="wrapper space-y-14" v-if="search || category">
+				<h2 class="font-serif text-center" href="#Поиск" v-if="!category">
+					Поиск
+				</h2>
 				<h2 class="font-serif text-center" :href="'#' + category">
 					{{ category }}
 				</h2>
-				<h2 class="font-serif text-center" href="#Поиск">Поиск</h2>
+
 				<div
 					class="wrapper w-full space-y-12"
 					v-if="filteredProducts.length > 0"
@@ -215,9 +218,9 @@
 								<div
 									class="wrapper flex flex-col h-[450px] font-bold text-2xl text-gray-200 leading-none overflow-hidden border-2 rounded-xl"
 								>
-									<div class="basis-2/5 grid place-items-center bg-gray-300">
+									<div class="basis-2/5 grid place-items-center bg-gray-200">
 										<svg
-											class="w-12 h-12 text-gray-200"
+											class="w-12 h-12 text-gray-100"
 											xmlns="http://www.w3.org/2000/svg"
 											aria-hidden="true"
 											fill="currentColor"
@@ -287,9 +290,9 @@
 								<div
 									class="wrapper flex flex-col h-[450px] font-bold text-2xl text-gray-200 leading-none overflow-hidden border-2 rounded-xl"
 								>
-									<div class="basis-2/5 grid place-items-center bg-gray-300">
+									<div class="basis-2/5 grid place-items-center bg-gray-200">
 										<svg
-											class="w-12 h-12 text-gray-200"
+											class="w-12 h-12 text-gray-100"
 											xmlns="http://www.w3.org/2000/svg"
 											aria-hidden="true"
 											fill="currentColor"
@@ -363,9 +366,9 @@
 								<div
 									class="wrapper flex flex-col h-[500px] font-bold text-2xl text-gray-200 leading-none overflow-hidden border-2 rounded-xl"
 								>
-									<div class="basis-2/5 grid place-items-center bg-gray-300">
+									<div class="basis-2/5 grid place-items-center bg-gray-200">
 										<svg
-											class="w-12 h-12 text-gray-200"
+											class="w-12 h-12 text-gray-100"
 											xmlns="http://www.w3.org/2000/svg"
 											aria-hidden="true"
 											fill="currentColor"
@@ -412,9 +415,9 @@
 								<div
 									class="wrapper flex flex-col h-[500px] font-bold text-2xl text-gray-200 leading-none overflow-hidden border-2 rounded-xl"
 								>
-									<div class="basis-2/5 grid place-items-center bg-gray-300">
+									<div class="basis-2/5 grid place-items-center bg-gray-200">
 										<svg
-											class="w-12 h-12 text-gray-200"
+											class="w-12 h-12 text-gray-100"
 											xmlns="http://www.w3.org/2000/svg"
 											aria-hidden="true"
 											fill="currentColor"

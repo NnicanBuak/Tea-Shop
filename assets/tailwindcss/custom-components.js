@@ -5,7 +5,7 @@ module.exports = plugin(function ({ addComponents }) {
 			'@apply relative overflow-clip p-6 bg-primary shadow-xl rounded-xl': {},
 		},
 		'.button': {
-			'@apply py-2 px-6 flex justify-center items-center leading-none rounded-full':
+			'@apply min-h-[40px] py-2 px-6 flex justify-center items-center leading-none rounded-full':
 				{},
 		},
 		'.button-primary': {

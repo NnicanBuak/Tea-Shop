@@ -21,7 +21,7 @@
 		<!-- <CustomCursor /> -->
 		<Transition name="long-fade">
 			<div
-				class="z-20 fixed h-screen w-screen p-20 grid place-content-center gap-16 grid-rows-2 bg-black bg-opacity-70"
+				class="z-50 fixed h-screen w-screen p-20 grid place-content-center gap-16 grid-rows-2 bg-black bg-opacity-70"
 				v-show="isScreenOrientationLandscape"
 			>
 				<Icon

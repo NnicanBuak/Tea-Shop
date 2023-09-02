@@ -79,11 +79,6 @@
 				</div>
 			</div>
 		</div>
-		<div
-			class="-z-10 fixed inset-0 h-screen w-screen"
-			v-show="isSearchFocus"
-			@click="$refs.search.blur()"
-		></div>
 	</form>
 </template>
 

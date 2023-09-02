@@ -4,7 +4,7 @@
 			<div class="wrapper text-left">
 				<h1 class="pb-1 font-serif text-gray-400 text-xl">Сайт</h1>
 				<ul class="text-md space-y-3">
-					<li><NuxtLink to="/shop">Магазин</NuxtLink></li>
+					<li><NuxtLink to="/">Магазин</NuxtLink></li>
 					<li><NuxtLink to="/other/sales">Скидки</NuxtLink></li>
 					<li><NuxtLink to="/other/about">О нас</NuxtLink></li>
 					<li><NuxtLink to="/other/contacts">Контакты</NuxtLink></li>
@@ -48,7 +48,7 @@
 			<nuxt-picture
 				src="/img/logo-10.svg"
 				alt=""
-				@click="navigateTo('/shop')"
+				@click="navigateTo('/')"
 			></nuxt-picture>
 		</div>
 		<h4 class="font-bold text-center">

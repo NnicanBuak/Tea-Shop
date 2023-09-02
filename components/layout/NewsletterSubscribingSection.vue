@@ -2,8 +2,6 @@
 	const form = { email: '' }
 
 	const handleSubmit = (e) => {
-		e.preventDefault()
-
 		navigateTo({ path: '/newsletter', query: { email: form.email } })
 	}
 </script>
@@ -19,14 +17,14 @@
 		<h2>Подпишись на&nbsp;рассылку</h2>
 		<form class="mt-8 space-y-4">
 			<input
-				class="px-4 p-2 shadow-inner rounded-full"
+				class="button"
 				v-model="form.email"
 				type="email"
 				placeholder="Ваш email"
 				required
 			/>
 			<button
-				class="px-4 p-2 text-white bg-primary2 rounded-full"
+				class="button button-primary2"
 				type="button"
 				@click="handleSubmit($event)"
 			>
