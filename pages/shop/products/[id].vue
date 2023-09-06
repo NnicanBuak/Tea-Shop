@@ -158,7 +158,7 @@
 							<button
 								class="flex-grow text-primary disabled:text-gray-300 h-full"
 								@mousedown="selectedProductAmount += 1"
-								:disabled="selectedProductAmount >= product?.value.on_aviable"
+								:disabled="selectedProductAmount >= product?.value?.on_aviable"
 							>
 								<Icon name="material-symbols:add-rounded" size="18"></Icon>
 							</button>
