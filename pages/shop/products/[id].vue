@@ -24,6 +24,8 @@
 		},
 	})
 
+	import placeholderProduct from "/data/test_product.json";
+
 	const { id } = useRoute().params
 	const supabase = useSupabaseClient()
 	const isDescriptionOpen = ref(false)
@@ -57,8 +59,12 @@
 		if (!error) {
 			product.value = data[0]
 		} else {
-			console.error('[Supabase] ' + error.message)
+			console.error(error.message)
 			product.value = null
+		}
+
+		if (id === placeholderProduct.id) {
+			product.value = placeholderProduct
 		}
 
 		isProductFetching.value = false
@@ -97,7 +103,7 @@
 				<nuxt-img
 					class="h-[350px] w-[250px] shadow-xl rounded-xl"
 					v-else
-					:src="product?.image_url"
+					:src="product?.image_url ? product?.image_url : '/img/pattern-02.png'"
 					sizes="sm:250px xl:500px"
 				/>
 				<div

@@ -24,6 +24,8 @@
 		},
 	})
 
+	import placeholderProduct from "/data/test_product.json";
+
 	const windowScroll = useWindowScroll()
 	const supabase = useSupabaseClient()
 
@@ -34,6 +36,7 @@
 	const isSearchFocused = ref(null)
 
 	const isProductsFetching = ref(false)
+	const isProductsFetchingFailed = ref(false)
 
 	const fetchProducts = async () => {
 		if (isProductsFetching.value) {
@@ -53,8 +56,11 @@
 				return product.section === 'Акции'
 			})
 		} else {
-			console.error('[Supabase] ' + error.message)
-			products.value = []
+			console.error(error.message)
+			isProductsFetchingFailed.value = true
+			if (placeholderProduct && typeof placeholderProduct === 'object') {
+				products.value = [placeholderProduct]
+			}
 		}
 
 		isProductsFetching.value = false
@@ -163,6 +169,37 @@
 		</section>
 		<section
 			class="container xl:container-xl grid grid-cols-1 gap-4 place-items-center"
+			v-if="isProductsFetchingFailed"
+		>
+			<div
+				id="toast-warning"
+				class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow"
+				role="alert"
+			>
+				<div
+					class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200"
+				>
+					<svg
+						class="w-5 h-5"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="currentColor"
+						viewBox="0 0 20 20"
+					>
+						<path
+							d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"
+						/>
+					</svg>
+					<span class="sr-only">Warning icon</span>
+				</div>
+				<div class="ms-3 text-sm font-normal">
+					Представленные товары являются заполнителями и не относятся к базе
+					данных
+				</div>
+			</div>
+		</section>
+		<section
+			class="container xl:container-xl grid grid-cols-1 gap-4 place-items-center"
 		>
 			<div class="wrapper space-y-14" v-if="search || category">
 				<h2 class="font-serif text-center" href="#Поиск" v-if="!category">
@@ -171,7 +208,6 @@
 				<h2 class="font-serif text-center" :href="'#' + category">
 					{{ category }}
 				</h2>
-
 				<div
 					class="wrapper w-full space-y-12"
 					v-if="filteredProducts.length > 0"
@@ -195,10 +231,14 @@
 				<div class="container xl:container-xl" v-else-if="products.length > 0">
 					<h3 class="text-secondary text-center">Ничего не найдено.</h3>
 				</div>
+				<div
+					class="container xl:container-xl"
+					v-else-if="isProductsFetchingFailed"
+				>
+					<h3 class="text-secondary text-center">Произошла ошибка.</h3>
+				</div>
 				<div class="container xl:container-xl" v-else>
-					<h3 class="text-secondary text-center">
-						Произошла ошибка или список товаров пуст.
-					</h3>
+					<h3 class="text-secondary text-center">Список товаров пуст.</h3>
 				</div>
 				<CustomDivider />
 			</div>
@@ -207,7 +247,7 @@
 				v-else-if="products.length > 0 || isProductsFetching"
 			>
 				<div class="wrapper w-full space-y-14">
-					<div class="wrapper only:mt-14 space-y-8">
+					<div class="wrapper only:mt-14 space-y-8" v-if="productsBySectionNew.length > 0">
 						<h2 class="font-serif text-center" href="#Новинки">Новинки</h2>
 
 						<div v-if="isProductsFetching">
@@ -279,7 +319,7 @@
 						</div>
 						<CustomDivider />
 					</div>
-					<div class="wrapper only:mt-14 space-y-8">
+					<div class="wrapper only:mt-14 space-y-8" v-if="productsBySectionPromotion.length > 0">
 						<h2 class="mt-16 font-serif text-center" href="#Акции">Акции</h2>
 
 						<div class="wrapper" v-if="isProductsFetching">
@@ -484,10 +524,14 @@
 			>
 				<Icon name="eos-icons:bubble-loading" size="64" />
 			</div> -->
+			<div
+				class="container xl:container-xl"
+				v-else-if="isProductsFetchingFailed"
+			>
+				<h3 class="text-secondary text-center">Произошла ошибка.</h3>
+			</div>
 			<div class="container xl:container-xl" v-else>
-				<h3 class="text-secondary text-center">
-					Произошла ошибка или список товаров пуст.
-				</h3>
+				<h3 class="text-secondary text-center">Список товаров пуст.</h3>
 			</div>
 		</section>
 		<NewsletterSubscribingSection />

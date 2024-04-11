@@ -28,7 +28,7 @@
 				.from('profiles')
 				.select('avatar_url')
 				.eq('id', user.value.id)
-			if (error) console.error('[Supabase] ' + error)
+			if (error) console.error(error)
 			else return { data }
 		}
 		return {}
