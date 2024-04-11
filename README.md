@@ -55,7 +55,7 @@ npm run preview
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
 ## .env
-> в репозитории есть файл (`preview.env`)[/preview.env], нужно в названии оставить только `.env`
+> в репозитории есть файл [`preview.env`](/preview.env), нужно в названии оставить только `.env`
 
 ```env
 SUPABASE_URL=
