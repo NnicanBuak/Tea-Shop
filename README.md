@@ -1,63 +1,22 @@
-> # Вёрстка расчитана только на мобильную версию, целью было лишь протестировать возможности Nuxt и Vue
+<p align="center">
+  <img src="public/img/logo-10.svg" alt="Соцветие — интернет-магазин чая" width="420">
+</p>
 
-## Особенности
-- SSR web-интерфейс
-- Vue
-- Хранение данных о товарах и пользователях в Supabase
-- Библиотека стилей Tailwind
+<h1 align="center">Tea-Shop</h1>
+<p align="center">Фронтенд интернет-магазина чая на Vue и Nuxt 3</p>
 
-## Возможности
-- Формирование страниц статей из обычных markdown файлов
-- Аутентификация
-- Поиск среди товаров
+## О проекте
 
-# Запуск проекта после скачивания репозитория
+Разрабатывал клиентскую часть интернет-магазина для компании, выполнявшей заказ клиента. Получил готовый дизайн и отвечал за его реализацию в приложении: от страниц каталога и карточек товаров до интеграции с данными и контентом. По ходу работы перевёл проект с Vue на Nuxt 3 с серверным рендерингом.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Что реализовал
 
-## Setup
+- Страницы магазина, каталог товаров, карточки, поиск по названию и фильтрацию по категориям.
+- Интеграцию с Supabase для получения товаров, регистрации и входа пользователей, работы с профилями.
+- Контентные страницы из Markdown через Nuxt Content.
+- PWA с манифестом и кешированием изображений.
+- Интерфейс по предоставленному дизайну с самостоятельной проработкой деталей при реализации.
 
-Make sure to install the dependencies:
+## Технологии
 
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server (для простого просмотра нужен этот сценарий)
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## .env
-> в репозитории есть файл [`preview.env`](/preview.env), нужно в названии оставить только `.env`
-
-```env
-SUPABASE_URL=
-SUPABASE_KEY=
-```
+**Vue · Nuxt 3 · JavaScript · Supabase · Nuxt Content · Tailwind CSS · PWA**
