@@ -19,4 +19,4 @@
 
 ## Технологии
 
-**Vue · Nuxt 3 · JavaScript · Supabase · Nuxt Content · Tailwind CSS · PWA**
+**Vue · Nuxt 3 · JavaScript · Supabase · Nuxt Content · Tailwindcss**
